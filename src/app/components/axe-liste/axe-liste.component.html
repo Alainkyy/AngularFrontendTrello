@@ -1,0 +1,17 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th>Id Axe</th>
+        <th>Nom Axe</th>
+        <th>Nombre de Specialite</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let axe of axes">
+        <td>{{ axe.IdAxe }}</td>
+        <td>{{ axe.NomAxe }}</td>
+        <td>{{ axe.NbSpecialite }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
