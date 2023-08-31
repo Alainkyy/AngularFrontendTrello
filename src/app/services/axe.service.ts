@@ -8,19 +8,11 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AxeService {
-
-  /*private url = environment.apiURL;
+  private url = environment.apiURL;
 
   constructor(private http : HttpClient) { }
 
   public getAxe() : Observable<Axe[]>{
-    return this.http.get<Axe[]>(`${environment.apiURL}/Axe`);
-  }*/
-    constructor() { }
-  
-    public getAxe() : Axe[]{
-      let axe = new Axe(0, "Nouvelles Technologies", 5);
-  
-      return [axe];
-    }
+    return this.http.get<Axe[]>(`${environment.apiURL}Axe/liste`);
+  }
 }

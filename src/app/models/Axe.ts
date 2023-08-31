@@ -1,7 +1,7 @@
 export class Axe {
   constructor(
-    public IdAxe: number,
-    public NomAxe: string,
-    public NbSpecialite: number
+    public idAxe: number,
+    public nomAxe: string,
+    public nbSpecialite: number
   ) {}
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Axe } from './models/Axe';
 import { AxeService } from './services/axe.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,18 +9,18 @@ import { AxeService } from './services/axe.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = "Paroles d'Aventure";
+  title = "Trello Like";
   axes: Axe[] = [];
 
-  /*constructor(private axeService: AxeService) {
-    this.axeService
-      .getAxe()
-      .subscribe((result : Axe[]) => (this.axes = result));
-    }*/
-
-    constructor(private axeService: AxeService) {
-      this.axes = this.axeService.getAxe();
-        console.log(this.axes);
-      }
-  
+    constructor(
+      private axeService: AxeService,
+      private router: Router // Ajoutez cette ligne
+    ) {
+      this.axeService.getAxe().subscribe((result: Axe[]) => {
+        this.axes = result;
+      });
+    }
 }
+ 
+
+  

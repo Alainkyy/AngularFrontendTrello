@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AxeService } from 'src/app/services/axe.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Axe } from '../../models/Axe';
 
 @Component({
   selector: 'app-axe-liste',
@@ -7,19 +9,29 @@ import { AxeService } from 'src/app/services/axe.service';
   styleUrls: ['./axe-liste.component.css']
 })
 export class AxeListeComponent implements OnInit {
-  items: any[] = [];
+  axes: any[] = [];
 
-  constructor(private axeService: AxeService) { }
+  constructor(
+    private axeService: AxeService,
+    private route: ActivatedRoute,
+    private router: Router,
+    //private sharedService: SharedService,
+    private cd: ChangeDetectorRef
+  ) {}
 
-  ngOnInit(): void {
-    this.axeService.getAxe().subscribe(
-      (data) => {
-        console.log('API Response:', data); // Ajoutez cette ligne pour afficher la réponse de l'API dans la console
-        this.items = data; // Mettez à jour le tableau avec les données reçues
-      },
-      (error) => {
-        console.error('API Error:', error); // Ajoutez cette ligne pour afficher les erreurs de l'API dans la console
-      }
-    );
-  }
+ngOnInit(): void {
+  this.route.queryParamMap.subscribe(params => {
+      this.afficherTousLesAxes();
+  })};
+
+  afficherTousLesAxes() {
+    this.axeService.getAxe().subscribe((result: any[]) => {
+      this.axes = result.map(axeData => new Axe(
+        axeData.idAxe,
+        axeData.nomAxe,
+        axeData.nbSpecialite
+      ));
+      console.log('Liste des axes:', this.axes);
+  });
+}
 }
