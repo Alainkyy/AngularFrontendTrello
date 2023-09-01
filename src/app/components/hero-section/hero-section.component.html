@@ -7,25 +7,26 @@
     <img src="https://i.ibb.co/k0Yd94P/hero-pink.png" alt="background-banner" id="hero-pink" />
     <img src="https://i.ibb.co/DYpzjS1/hero-orange.png" alt="background-banner" id="hero-orange" />
     <div class="hero-text">
-      <h4 class="h4_style">UNE EXPERTISE</h4>
-      <div>Des Formateurs experts sont à votre service pour une transmission des <br> compétences et techniques nécessaires pour une accélération de votre cursus professionnel.</div>
+      <div [style.white-space]="'pre-line'">{{ heroText }}</div>
     </div>
   </div>
   
   <div class="button-container">
-    <button (click)="changeHero('hero-orange')" [ngClass]="{ 'active': currentHero === 'hero-orange' }">
-      <div class="circle orange"></div> Orange
+    <button (click)="changeHero('hero-orange', 'var(--color-orange)')" [class.active]="currentHero === 'hero-orange'">
+      <div class="circle orange"></div> Un Process Offert
     </button>
-    <button (click)="changeHero('hero-blue')" [ngClass]="{ 'active': currentHero === 'hero-blue' }">
-      <div class="circle blue"></div> Blue
+    <button (click)="changeHero('hero-blue', 'var(--color-blue)')" [class.active]="currentHero === 'hero-blue'">
+      <div class="circle blue"></div> Un Job d'Avenir
     </button>
-    <button (click)="changeHero('hero-pink')" [ngClass]="{ 'active': currentHero === 'hero-pink' }">
-      <div class="circle pink"></div> Pink
+    <button (click)="changeHero('hero-pink', 'var(--color-pink)')" [class.active]="currentHero === 'hero-pink'">
+      <div class="circle pink"></div> Un Accompagnement
     </button>
-    <button (click)="changeHero('hero-green')" [ngClass]="{ 'active': currentHero === 'hero-green' }">
-      <div class="circle green"></div> Green
+    <button (click)="changeHero('hero-green', 'var(--color-green)')" [class.active]="currentHero === 'hero-green'">
+      <div class="circle green"></div> Une Expertise
     </button>
   </div>
+  
+  
   
   
   

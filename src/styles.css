@@ -3,3 +3,12 @@ body {
     background-color: #FDFDFD;
     margin: 0;
   }
+
+  :root {
+    --color-green: #409504;
+    --color-blue: #07968D;
+    --color-pink: #960A96;
+    --color-orange: #957009;
+  }
+  
+  

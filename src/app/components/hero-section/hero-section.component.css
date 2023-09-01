@@ -1,3 +1,10 @@
+:root {
+  --color-green: #409504;
+  --color-blue: #07968D;
+  --color-pink: #960A96;
+  --color-orange: #957009;
+}
+
 .hero-section {
     position: relative;
     width: 100%;
@@ -24,61 +31,73 @@
 .hero-text {
   position: absolute;
   overflow: hidden;
-  top: 60%;
-  left: 100px; /* Ajustez la valeur en fonction de l'emplacement souhaité */
+  top: 55%;
+  left: 200px; /* Ajustez la valeur en fonction de l'emplacement souhaité */
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.7); 
   color : white;
   padding: 10px;
   border-radius: 10px; /* Bords arrondis */
+  font-size: 24px;
 }
 
-.h4_style {
-font-size: 1.5rem;
-	font-weight: 700;
-	line-height: 1.25;
-    text-align: center;
-    justify-content: center;
-  }
-
-  .image-container {
-    text-align: center;
+.image-container {
+  text-align: center;
 }
 
 .image-container img {
-    max-width: 100%;
-    display: none;
+  max-width: 100%;
+  display: none;
 }
 
 .button-container {
+  display: flex;
+  flex-direction: row; /* Afficher les boutons côte à côte */
+  align-items: center; /* Aligner les éléments verticalement au centre */
+  justify-content: center; /* Centrer les boutons horizontalement */
   background-color: black;
-    text-align: center;
+  padding: 10px;
 }
 
-.button-container button {
-    margin: 5px;
-    padding: 10px 80px;
-    background-color: #000;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+button {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  background-color: black; /* Doit etre black*/
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 50px; /* Ajoute un espacement à droite de chaque bouton */
+  margin-left: 50px; /* Ajoute un espacement à gauche de chaque bouton */
+  border-radius: 10px; /* bords arrondis*/ 
+  transition: background-color 0.3s; /* Animation de transition de la couleur de fond */
+}
+
+/* Styles pour le survol */
+.button-container button:hover {
+  background-color: #4D4C4D; /* Prend la couleur du bouton au survol */
+}
+
+/* Styles pour le clic (actif) */
+.button-container button:active {
+  background-color: #4D4C4D; /* Prend la couleur du bouton au clic */
 }
 
 .circle {
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  margin-right: 10px; /* Espace entre le cercle et le texte du bouton */
+  margin-right: 5px; /* Espace entre le cercle et le texte du bouton */
+  background-color: transparent; /* Par défaut, le cercle est transparent */
 }
 
-/* Définissez ici les couleurs des cercles en fonction des classes des boutons */
-.circle.orange { background-color: orange; }
-.circle.blue { background-color: blue; }
-.circle.pink { background-color: pink; }
-.circle.green { background-color: green; }
+.circle.orange { background-color: #409504; }
+.circle.blue { background-color: #409504; }
+.circle.pink { background-color: #409504; }
+.circle.green { background-color: #409504; }
 
 /* Style pour le bouton actif */
-button.active {
-  font-weight: bold; /* Exemple : rendre le texte en gras pour le bouton actif */
+button.active .circle {
+  background-color: inherit; /* Le cercle prend la couleur du texte du bouton actif */
 }
