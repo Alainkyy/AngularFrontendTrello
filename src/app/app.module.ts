@@ -8,11 +8,13 @@ import { AxeListeComponent } from './components/axe-liste/axe-liste.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderSectionComponent } from './components/header-section/header-section.component';
 import { FooterSectionComponent } from './components/footer-section/footer-section.component';
+import { SpecialitePageComponent } from './components/specialite-page/specialite-page.component';
+import { HeroSectionComponent } from './components/hero-section/hero-section.component';
 
 
 const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
- // { path: 'home', component: HomepageComponent },
+  { path: 'specialitePage', component: SpecialitePageComponent },
   { path: 'liste', component: AxeListeComponent },
   // { path: 'ajouter', component: AjoutLivreComponent },
  //  { path: 'modifier', component: ModifierLivreComponent },
@@ -25,7 +27,9 @@ const routes: Routes = [
     AppComponent,
     AxeListeComponent,
     HeaderSectionComponent,
-    FooterSectionComponent
+    FooterSectionComponent,
+    SpecialitePageComponent,
+    HeroSectionComponent
   ],
   imports: [
     BrowserModule,

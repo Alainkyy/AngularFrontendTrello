@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<body>
+  <div class="hero-section">
+    <img src="https://i.ibb.co/T0YS5JR/hero-green.png" alt="background-banner" id="hero-green" />
+    <img src="https://i.ibb.co/0c2258r/hero-blue.png" alt="background-banner" id="hero-blue" />
+    <img src="https://i.ibb.co/k0Yd94P/hero-pink.png" alt="background-banner" id="hero-pink" />
+    <img src="https://i.ibb.co/DYpzjS1/hero-orange.png" alt="background-banner" id="hero-orange" />
+    <div class="hero-text">
+      <h4 class="h4_style">UNE EXPERTISE</h4>
+      <div>Des Formateurs experts sont à votre service pour une transmission des <br> compétences et techniques nécessaires pour une accélération de votre cursus professionnel.</div>
+    </div>
+  </div>
+  
+  <div class="button-container">
+    <button (click)="changeHero('hero-orange')" [ngClass]="{ 'active': currentHero === 'hero-orange' }">
+      <div class="circle orange"></div> Orange
+    </button>
+    <button (click)="changeHero('hero-blue')" [ngClass]="{ 'active': currentHero === 'hero-blue' }">
+      <div class="circle blue"></div> Blue
+    </button>
+    <button (click)="changeHero('hero-pink')" [ngClass]="{ 'active': currentHero === 'hero-pink' }">
+      <div class="circle pink"></div> Pink
+    </button>
+    <button (click)="changeHero('hero-green')" [ngClass]="{ 'active': currentHero === 'hero-green' }">
+      <div class="circle green"></div> Green
+    </button>
+  </div>
+  
+  
+  
+
+    <script>
+      function changeHero(imageId) {
+          // Masquer toutes les images du hero
+          document.getElementById('hero-green').style.display = 'none';
+          document.getElementById('hero-blue').style.display = 'none';
+          document.getElementById('hero-pink').style.display = 'none';
+          document.getElementById('hero-orange').style.display = 'none';
+
+          // Afficher l'image correspondant au bouton cliqué
+          document.getElementById(imageId).style.display = 'block';
+      }
+    </script>
+</body>
+</html>

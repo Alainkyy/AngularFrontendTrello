@@ -1,0 +1,119 @@
+.main {
+	margin-top: 3rem;
+}
+
+.widget {
+	width: 100%;
+	max-width: 909px;
+	border-radius: 8px;
+	box-shadow: 0 15px 30px 0 rgba(0,0,0, 0.1);
+	background-color: #fff;
+	padding: 2.5rem;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2rem;
+	font-size: 1.125rem;
+}
+
+.widget > * + * {
+	margin-top: 1.25em;
+}
+
+.widget h2 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	line-height: 1.25;
+    text-align: center;
+    justify-content: center;
+}
+
+.widget code {
+	display: inline-block;
+	padding: 0.125em 0.25em;
+	border-radius: 2px;
+	background-color: #bee5d3;
+}
+
+.widget strong {
+	font-weight: 700;
+}
+
+.articleA {
+    color: orange;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-section {
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: 25px;
+    position: sticky;
+  }
+
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .button-container p {
+    margin-bottom: 10px; /* Ajouter un espace sous le titre */
+  }
+
+  .round-button {
+    width: 180px;
+    height: 180px;
+    background-color: #6ebe05;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-shadow: inset 17px 13px 4px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 25px;
+    
+  }
+  
+  .round-button img {
+    width: 400px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 50%;
+    margin-top: 10px;
+  }
+  
+  .round-button p {
+    margin-top: -10px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .round-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #409504;
+  }
+  
+  .style_p_3 {
+    font-size: 2rem;
+    color: #ffffff;
+    font-family: 'MedievalSharp', cursive;
+  }
+
+  .style_p_4 {
+    font-size: 2rem;
+    color: #ffffff;
+    font-family: 'MedievalSharp', cursive;
+    margin-top: 20px;
+  }
