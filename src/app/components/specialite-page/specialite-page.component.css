@@ -4,7 +4,7 @@
 
 .widget {
 	width: 100%;
-	max-width: 909px;
+	max-width: 1035px;
 	border-radius: 8px;
 	box-shadow: 0 15px 30px 0 rgba(0,0,0, 0.1);
 	background-color: #fff;
@@ -15,11 +15,24 @@
 	font-size: 1.125rem;
 }
 
+.widget2 {
+	width: 100%;
+	max-width: 909px;
+	border-radius: 8px;
+	box-shadow: 0 15px 30px 0 rgba(0,0,0, 0.1);
+	background-color: #fff;
+	padding: 2.5rem;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2rem;
+	font-size: 1.125rem;
+} 
+
 .widget > * + * {
 	margin-top: 1.25em;
 }
 
-.widget h2 {
+.TITRE_WIDGET {
 	font-size: 1.5rem;
 	font-weight: 700;
 	line-height: 1.25;
@@ -117,3 +130,72 @@
     font-family: 'MedievalSharp', cursive;
     margin-top: 20px;
   }
+
+  /* Styles pour la première section de texte */
+.text-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.text-column {
+  width: 48%; /* Répartit l'espace en deux colonnes */
+}
+
+.main-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* Styles pour la liste de spécialisations */
+.specializations {
+  list-style: none;
+  padding-left: 0;
+}
+
+.specialization-title {
+  font-weight: bold;
+}
+
+.download-link {
+  text-decoration: underline;
+}
+
+/* Styles pour les sous-spécialités */
+.sub-specializations {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+/* Styles pour le lien "Voir toutes les spécialités de ce métier" */
+.specializations-link {
+  text-decoration: underline;
+}
+
+/* Styles pour la deuxième section de texte */
+.title-description {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.profile-image {
+  max-width: 80%; /* Pour que l'image ne dépasse pas la largeur du conteneur */
+  max-height: 500px; /* Limite la hauteur de l'image */
+  width: auto; /* Adapte la largeur de l'image en fonction de sa hauteur */
+  height: auto; /* Adapte la hauteur de l'image en fonction de sa largeur */
+}
