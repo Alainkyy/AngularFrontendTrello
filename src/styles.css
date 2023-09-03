@@ -12,3 +12,30 @@ body {
   }
   
   
+  /* NIK MOK L'IMAGE RETRECIS LBABAK*/ 
+.text-column img {
+  width: 100%;
+  max-width: 730px;
+  height: auto;
+  max-height: 500px;
+  display: block;
+  margin: 0 auto;
+}
+
+.widget2 img {
+width: 100%;
+max-width: 730px;
+height: auto;
+max-height: 500px;
+display: block;
+margin: 0 auto;
+}
+
+.text-section img {
+width: 100%;
+max-width: 730px;
+height: auto;
+max-height: 500px;
+display: block;
+margin: 0 auto;
+}

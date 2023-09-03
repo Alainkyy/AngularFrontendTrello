@@ -80,7 +80,7 @@ export class SpecialitePageComponent {
           <div class="text-section">
             <h2 class="main-title">Nacer Djarabi</h2>
             <p class="title-description">Responsable Pôle Métier et Assistance à la Maitrise d’Ouvrage</p>
-            <p><img src="https://24presse.com/wp-content/uploads/2022/07/nacer_djarabi-1024x633.jpg" style="max-width: 100%; height: auto; display: block; margin: 0 auto;"/></p>   
+            <p><img src="https://24presse.com/wp-content/uploads/2022/07/nacer_djarabi-1024x633.jpg" style="width: 730px;height: 500px;"/></p>   
           </div>
         `;
         break;
@@ -153,7 +153,7 @@ export class SpecialitePageComponent {
           <p>Responsable Pôle décisionnel, Architecture SI</p>
         </div>
         <div class="text-column">
-          <p><img src="https://static.lpnt.fr/images/2020/03/04/20117447lpw-20217834-article-jpg_7022039_1250x625.jpg" style="max-width: 100%; height: auto; display: block; margin: 0 auto;"/></p>
+          <p><img src="https://static.lpnt.fr/images/2020/03/04/20117447lpw-20217834-article-jpg_7022039_1250x625.jpg" style="width: 730px;height: 500px;"/></p>
         </div>
       </div>
       
@@ -216,7 +216,7 @@ export class SpecialitePageComponent {
             <p>Consultant-expert Nouvelle Technologie et Business Intelligence.</p>
           </div>
           <div class="text-column">
-            <p><img src="https://images.midilibre.fr/api/v1/images/view/5e7e0e17d286c22378003315/hd/image.png?v=1" style="max-width: 100%; height: auto; display: block; margin: 0 auto;"/></p>
+            <p><img src="https://images.midilibre.fr/api/v1/images/view/5e7e0e17d286c22378003315/hd/image.png?v=1" style="width: 730px;height: 500px;"/></p>
           </div>
         </div>  
         `;
@@ -258,7 +258,7 @@ export class SpecialitePageComponent {
             <p>INGENIEUR D’ETUDES ET DEVELOPPEMENT / FORMATEUR PL/SQL-SQL-UNIX INFORMATICA, DATASTAGE</p>
           </div>
           <div class="text-column">
-          <p style="text-align: center;"><img src="https://villageemploi.info/wp-content/uploads/2021/06/image-1.png" style="max-width: 733px; height: 120px; display: block; margin: 0 auto;"/></p>
+          <p><img src="https://villageemploi.info/wp-content/uploads/2021/06/image-1.png" style="width: 730px;height: 500px;"/></p>
           </div>
         </div>
       `;
