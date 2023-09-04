@@ -3,7 +3,6 @@ export class Specialite {
       public IdSpecialite: number,
       public NomSpecialite: string,
       public IdAxe: number,
-      public NbNiveau: number
     ) {}
   }
   

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { Cours } from './models/Cours';
+import { CoursService } from './services/cours.service';
+
 
 @Component({
   selector: 'app-root',
@@ -7,6 +10,9 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title = 'Trello Like';
+  cours: Cours[] = [];
+
   isLoginVisible = false;
 
   constructor(private router: Router) {

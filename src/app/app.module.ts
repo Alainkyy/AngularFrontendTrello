@@ -12,6 +12,7 @@ import { SpecialitePageComponent } from './components/specialite-page/specialite
 import { HeroSectionComponent } from './components/hero-section/hero-section.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+import { CarteComponent } from './components/carte/carte.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'specialitePage', component: SpecialitePageComponent },
   { path: 'liste', component: AxeListeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'listeCours', component: CarteComponent },
 
 ];
 
@@ -32,7 +34,8 @@ const routes: Routes = [
     SpecialitePageComponent,
     HeroSectionComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    CarteComponent
   ],
   imports: [
     BrowserModule,

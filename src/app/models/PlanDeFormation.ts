@@ -4,7 +4,6 @@ export class PlanDeFormation {
       public IdConsultant: number,
       public IdAxe: number,
       public IdSpecialite: number,
-      public IdNiveau: number,
       public IdCours: number,
       public DateDebut: Date
     ) {}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1 class="style_p_3"> Liste des Cours </h1>
+<div class="table_container">
+  <table class="boostrap4_table_head_dark_striped_rounded_with_shadow">
+    <thead>
+      <tr>
+        <th>IdCours</th>
+        <th>NomCours</th>
+        <th>LienVersCours</th>
+        <th>VideoVersCours</th>
+        <th>Exercice</th>
+        <th>Avancement</th>
+        <th>DateDebutCours</th>
+        <th>DateFinCours</th>
+        <th>Commentaire</th>
+        <th>IdSpecialite</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cours of cours">
+        <td>{{ cours.idCours }}</td>
+        <td>{{ cours.nomCours }}</td>
+        <td>{{ cours.lienVersCours }}</td>
+        <td>{{ cours.videoVersCours }}</td>
+        <td>{{ cours.exercice }}</td>
+        <td>{{ cours.avancement }}</td>
+        <td>{{ cours.dateDebutCours }}</td>
+        <td>{{ cours.dateFinCours }}</td>
+        <td>{{ cours.commentaire }}</td>
+        <td>{{ cours.idSpecialite }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <button routerLink="/home">Retour</button>
+</body>
+</html>

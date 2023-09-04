@@ -1,15 +1,15 @@
 export class Cours {
     constructor(
-      public IdCours: number,
-      public NomCours: string,
-      public IdNiveau: number,
-      public LienVersCours: string,
-      public VideoVersCours: string,
-      public Exercice: string,
-      public Avancement: number,
-      public DateDebutCours: Date,
-      public DateFinCours: Date,
-      public Commentaire: string
+      public idCours: number,
+      public nomCours: string,
+      public lienVersCours: string,
+      public videoVersCours: string,
+      public exercice: string,
+      public avancement: number,
+      public dateDebutCours: Date,
+      public dateFinCours: Date,
+      public commentaire: string,
+      public idSpecialite:number
     ) {}
   }
   
