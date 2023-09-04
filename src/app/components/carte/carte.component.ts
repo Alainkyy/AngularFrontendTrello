@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CoursService } from 'src/app/services/cours.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cours } from '../../models/Cours';
-// import {DragDropModule} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-carte',
@@ -11,7 +11,10 @@ import { Cours } from '../../models/Cours';
 })
 export class CarteComponent implements OnInit {
   title = 'Trello Like';
+ 
+
   cours: Cours[] = [];
+  done: Cours[] = [];
 
   constructor(
     private coursService: CoursService,
@@ -43,5 +46,16 @@ ngOnInit(): void {
       ));
       console.log('Liste des cours:', this.cours);
   });
+}
+
+drop(event: CdkDragDrop<Cours[]>) {
+  if (event.previousContainer === event.container) {
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  } else {
+    transferArrayItem(event.previousContainer.data,
+                      event.container.data,
+                      event.previousIndex,
+                      event.currentIndex);
+  }
 }
 }
