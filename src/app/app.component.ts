@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { Axe } from './models/Axe';
-import { AxeService } from './services/axe.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,18 +7,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = "Trello Like";
-  axes: Axe[] = [];
+  isLoginVisible = false;
 
-    constructor(
-      private axeService: AxeService,
-      private router: Router // Ajoutez cette ligne
-    ) {
-      this.axeService.getAxe().subscribe((result: Axe[]) => {
-        this.axes = result;
-      });
-    }
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.isLoginVisible = false;
+      } else if (event instanceof NavigationEnd) {
+        this.isLoginVisible = true;
+      }
+    });
+  }
 }
- 
 
   

@@ -10,16 +10,15 @@ import { HeaderSectionComponent } from './components/header-section/header-secti
 import { FooterSectionComponent } from './components/footer-section/footer-section.component';
 import { SpecialitePageComponent } from './components/specialite-page/specialite-page.component';
 import { HeroSectionComponent } from './components/hero-section/hero-section.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'specialitePage', component: SpecialitePageComponent },
   { path: 'liste', component: AxeListeComponent },
-  // { path: 'ajouter', component: AjoutLivreComponent },
- //  { path: 'modifier', component: ModifierLivreComponent },
- // { path: 'supprimer', component: SupprimerLivreComponent },
-  // ... autres routes
+  { path: 'login', component: LoginComponent },
+
 ];
 
 @NgModule({
@@ -29,7 +28,8 @@ const routes: Routes = [
     HeaderSectionComponent,
     FooterSectionComponent,
     SpecialitePageComponent,
-    HeroSectionComponent
+    HeroSectionComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
