@@ -1,10 +1,8 @@
 <!-- HOME -->
-<app-header-section *ngIf="!isLoginVisible"></app-header-section>
-<app-hero-section *ngIf="!isLoginVisible"></app-hero-section>
-<app-specialite-page *ngIf="!isLoginVisible"></app-specialite-page>
+<app-home *ngIf="isLoginVisible"></app-home>
 
 <!-- Navigation-->
 <router-outlet></router-outlet>
 
 <!-- Footer -->
-<app-footer-section *ngIf="!isLoginVisible"></app-footer-section>
+<app-footer-section></app-footer-section>

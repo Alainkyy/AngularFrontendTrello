@@ -11,10 +11,11 @@ import { FooterSectionComponent } from './components/footer-section/footer-secti
 import { SpecialitePageComponent } from './components/specialite-page/specialite-page.component';
 import { HeroSectionComponent } from './components/hero-section/hero-section.component';
 import { LoginComponent } from './components/login/login.component';
-
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'specialitePage', component: SpecialitePageComponent },
   { path: 'liste', component: AxeListeComponent },
   { path: 'login', component: LoginComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
+
   declarations: [
     AppComponent,
     AxeListeComponent,
@@ -29,7 +31,8 @@ const routes: Routes = [
     FooterSectionComponent,
     SpecialitePageComponent,
     HeroSectionComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
