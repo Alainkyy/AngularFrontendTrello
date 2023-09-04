@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-section',
@@ -6,6 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./header-section.component.css']
 })
 export class HeaderSectionComponent {
-  constructor() { }
+  isLoginVisible = false;
+
+  constructor(private router: Router) { }
+
+  onAuthClick() {
+    this.router.navigate(['/login']);
+    this.isLoginVisible = true;
+  }
+
   ngOnInit() {}
 }
