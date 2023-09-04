@@ -13,12 +13,13 @@ import { HeroSectionComponent } from './components/hero-section/hero-section.com
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { CarteComponent } from './components/carte/carte.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'specialitePage', component: SpecialitePageComponent },
-  { path: 'liste', component: AxeListeComponent },
+  { path: 'listeAxe', component: AxeListeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'listeCours', component: CarteComponent },
 
@@ -42,6 +43,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    DragDropModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CoursService } from 'src/app/services/cours.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cours } from '../../models/Cours';
+// import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-carte',

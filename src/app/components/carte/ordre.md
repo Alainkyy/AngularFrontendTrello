@@ -1,6 +1,3 @@
-Affichage des Cartes :
-
-    Définissez les données des cartes directement dans votre composant frontend. Par exemple, stockez-les dans un tableau ou un objet.
 
 Affichage des Cartes Terminées :
 

@@ -10,9 +10,6 @@ import { CoursService } from './services/cours.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Trello Like';
-  cours: Cours[] = [];
-
   isLoginVisible = false;
 
   constructor(private router: Router) {
