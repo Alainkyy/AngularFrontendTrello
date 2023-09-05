@@ -1,31 +1,44 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Consultant } from '../../models/Consultant';
+import { LoginService } from 'src/app/services/login.service';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  userData = {
-    username: 'Alain',
-    password: '1234'
-  };
+export class LoginComponent implements OnInit {
+  consultants: any[] = [];
 
-  errorMessage = ''; // Message d'erreur
-  constructor(private router: Router) { }
+  constructor(
+    private loginService: LoginService,
+    private route: ActivatedRoute,
+    private router: Router,
+    //private sharedService: SharedService,
+    private cd: ChangeDetectorRef
+  ) {}
 
-  onSubmit() {
-    const username = this.userData.username;
-    const password = this.userData.password;
-  
-    if (username === 'Alain' && password === '1234') {
-      console.log('Success');
-      this.router.navigate(['/home']);
-    } else {
-      console.log('Fail');
-      this.errorMessage = 'Veuillez réessayer, utilisateur ou mot de passe incorrect !'; 
-    }
-  }
+ngOnInit(): void {
+  this.route.queryParamMap.subscribe(params => {
+      this.afficherTousLesConsultants();
+  })};
+
+  afficherTousLesConsultants() {
+    this.loginService.getConsultant().subscribe((result: any[]) => {
+      this.consultants = result.map(ConsultantData => new Consultant(
+        ConsultantData.idConsultant,
+        ConsultantData.nomConsultant,
+        ConsultantData.codeConsultant,
+        ConsultantData.statutConsultant,
+        ConsultantData.mDPConsultant,
+        ConsultantData.idAxe,
+        ConsultantData.idSpecialite,
+        ConsultantData.score
+      ));
+      console.log('Liste des consultants:', this.consultants);
+  });
 }
-
+}

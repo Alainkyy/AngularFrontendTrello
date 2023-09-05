@@ -1,13 +1,13 @@
 export class Consultant {
     constructor(
-      public IdConsultant: number,
-      public NomConsultant: string,
-      public CodeConsultant: string,
-      public StatutConsultant: string,
-      public MDPConsultant: string,
-      public IdAxe: number,
-      public IdSpecialite: number,
-      public Score: number
+      public idConsultant: number,
+      public nomConsultant: string,
+      public codeConsultant: string,
+      public statutConsultant: string,
+      public mDPConsultant: string,
+      public idAxe: number,
+      public idSpecialite: number,
+      public score: number
     ) {}
   }
   
