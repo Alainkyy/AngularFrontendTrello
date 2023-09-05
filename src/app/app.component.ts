@@ -1,8 +1,4 @@
 import { Component } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { Cours } from './models/Cours';
-import { CoursService } from './services/cours.service';
-
 
 @Component({
   selector: 'app-root',
@@ -10,17 +6,5 @@ import { CoursService } from './services/cours.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  isLoginVisible = false;
-
-  constructor(private router: Router) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        this.isLoginVisible = false;
-      } else if (event instanceof NavigationEnd) {
-        this.isLoginVisible = true;
-      }
-    });
-  }
+  title = 'Trello Like';
 }
-
-  
