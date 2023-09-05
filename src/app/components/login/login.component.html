@@ -1,39 +1,19 @@
 <!DOCTYPE html>
-<html lang="fr">
- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<head>
+      <title>Connexion</title>
 </head>
 <body>
-  <app-header-section></app-header-section>
-  <h1 class="style_p_3"> Liste des Consultants </h1>
-<div class="table_container">
-  <table class="boostrap4_table_head_dark_striped_rounded_with_shadow">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Nom</th>
-        <th>Code</th>
-        <th>Statut</th>
-        <th>Mot de passe</th>
-        <th>Id Axe</th>
-        <th>Id Specialite</th>
-        <th>Score</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let consultant of consultants">
-        <td>{{ consultant.idConsultant }}</td>
-        <td>{{ consultant.nomConsultant }}</td>
-        <td>{{ consultant.codeConsultant }}</td>
-        <td>{{ consultant.statutConsultant }}</td>
-        <td>{{ consultant.mDPConsultant }}</td>
-        <td>{{ consultant.idAxe }}</td>
-        <td>{{ consultant.idSpecialite }}</td>
-        <td>{{ consultant.score }}</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
+    <h2>Connexion</h2>
+    <form (ngSubmit)="onLoginSubmit()" #loginForm="ngForm">
+
+        <label for="codeConsultant">Nom d'utilisateur :</label>
+        <input type="text" class="form-control mb-2" id="codeConsultant" name="codeConsultant" required [(ngModel)]="username" placeholder="Entrer le nom d'utilisateur"><br><br>
+
+        <label for="mDPConsultant">Mot de passe :</label>
+        <input type="password" class="form-control mb-2" id="mDPConsultant" name="mDPConsultant" required [(ngModel)]="password" placeholder="Entrer Mot de passe"><br><br>
+
+        <button type="submit">Authentification</button>
+    </form>
 </body>
 </html>
