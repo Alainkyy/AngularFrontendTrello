@@ -51,7 +51,10 @@
         [cdkDropListData]="cours"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let cours of cours" cdkDrag>{{cours}}</div>
+        <div class="example-box" *ngFor="let coursItem of cours" cdkDrag>
+          {{ coursItem.nomCours }}
+          <!-- Affichez ici d'autres propriétés du cours si nécessaire -->
+        </div>
       </div>
     </div>
   
@@ -63,10 +66,14 @@
         [cdkDropListData]="done"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+        <div class="example-box" *ngFor="let item of done" cdkDrag>
+          {{ item.nomCours }}
+          <!-- Affichez ici d'autres propriétés de la carte "done" si nécessaire -->
+        </div>
       </div>
     </div>
   </div>
+
   
   
 </body>
