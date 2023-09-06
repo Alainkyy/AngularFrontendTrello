@@ -8,26 +8,15 @@ Plus tard :
 S'occuper de l'affichage administrateur (All details Cours consultant)
 
 A faire :
-Premiere connexion :
-Rajouté un champ dans la table Consultant : PremiereConnexion de type Boolean
-Par default premierconx = true;
-si premiereconx = true alors /api/selection
-Selection étant une nouvelle interface qui vas permettre de choisir son axe PUIS sa specialite
-Une fois qu'on a choisis alors premiereconx = false et on y accede plus jamais EVER EVER ! 
-Cela vas faire un PUT sur le consultant car IdSpecialité seras null en antendant
-
-Backend :
-Rendre IdSpecialite nullable
-
-SQL requete : mettre " " dans chacune des IdSpecialite de Consultant
 
 Faire en priorité !
-Interface modification update Consultant, c'est l'admin qui choisis d'abord Axe, puis specialite du consultant
-Chaque Axe a plusieurs specialité 
+Interface modification viéw Consultant
 LA BD EST DEJA FAITES
 
-Une fois que le consultant a choisis sa specialité : 
-Il accede a Cours
+zézzion avancémént toiz zaffiché chéz formatéur & tétail auzzi
+
+affichagé troitz par zézzion au nivéau téz accéz
+
 Dans cours seront affiché les cours filtré par la spécialité ! 
 Donc je dois faire un service pour recuperer la specialité selectionné ou dans la BD par Consultant
 

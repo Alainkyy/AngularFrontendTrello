@@ -39,4 +39,14 @@ export class ConsultationComponent implements OnInit{
         console.log('Liste des Consultants:', this.consultants);
     });
   }
+
+  supprimerConsultant(idConsultant: number) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce consultant ?')) {
+      this.consultationService.DeleteConsultant(idConsultant).subscribe(() => {
+        this.afficherTousLesConsultants();
+      }, (error) => {
+        console.error('Erreur lors de la suppression du consultant :', error);
+      });
+    }
+  }
   }
