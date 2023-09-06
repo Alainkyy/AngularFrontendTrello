@@ -4,7 +4,7 @@ export class Consultant {
       public nomConsultant: string,
       public codeConsultant: string,
       public statutConsultant: string,
-      public mDPConsultant: string,
+      public mdpConsultant: string,
       public idAxe: number,
       public idSpecialite: number,
       public score: number
