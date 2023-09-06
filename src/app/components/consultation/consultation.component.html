@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <app-header-section></app-header-section>
+  <h1 class="style_p_3"> Liste des Consultants </h1>
+<div class="table_container">
+  <table class="boostrap4_table_head_dark_striped_rounded_with_shadow">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nom</th>
+        <th>Code</th>
+        <th>Statut </th>
+        <th>Mdp</th>
+        <th>Axe</th>
+        <th>Specialite </th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let consultant of consultants">
+        <td>{{ consultant.idConsultant }}</td>
+        <td>{{ consultant.nomConsultant }}</td>
+        <td>{{ consultant.codeConsultant }}</td>
+        <td>{{ consultant.statutConsultant }}</td>
+        <td>{{ consultant.mdpConsultant }}</td>
+        <td>{{ consultant.idAxe }}</td>
+        <td>{{ consultant.idSpecialite }}</td>
+        <td>{{ consultant.score }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</body>
+</html>

@@ -16,7 +16,11 @@ import { CarteComponent } from './components/carte/carte.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { MatButtonModule } from '@angular/material/button';  
+import { MatButtonModule } from '@angular/material/button';
+import { ConsultationComponent } from './components/consultation/consultation.component';
+import { AddConsultationComponent } from './components/consultation/add-consultation/add-consultation.component';
+import { EditConsultationComponent } from './components/consultation/edit-consultation/edit-consultation.component';
+import { ViewConsultationComponent } from './components/consultation/view-consultation/view-consultation.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -25,6 +29,10 @@ const routes: Routes = [
   { path: 'listeAxe', component: AxeListeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'listeCours', component: CarteComponent },
+  { path: 'listeConsultant', component: ConsultationComponent },
+  { path: 'viewConsultant/:idConsultant', component: ViewConsultationComponent },
+  { path: 'addConsultant', component: AddConsultationComponent },
+  { path: 'editConsultant/:idConsultant', component: EditConsultationComponent } 
 
 ];
 
@@ -39,7 +47,11 @@ const routes: Routes = [
     HeroSectionComponent,
     LoginComponent,
     HomeComponent,
-    CarteComponent
+    CarteComponent,
+    ConsultationComponent,
+    AddConsultationComponent,
+    EditConsultationComponent,
+    ViewConsultationComponent
   ],
   imports: [
     BrowserModule,
