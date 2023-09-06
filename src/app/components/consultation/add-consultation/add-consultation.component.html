@@ -1,1 +1,35 @@
-<p>add-consultation works!</p>
+<div class="container">
+    <h2>Ajouter un consultant</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nomConsultant">Nom du consultant:</label>
+        <input type="text" class="form-control" id="nomConsultant" [(ngModel)]="consultantToAdd.nomConsultant" name="nomConsultant" required>
+      </div>
+      <div class="form-group">
+        <label for="codeConsultant">Code du consultant:</label>
+        <input type="text" class="form-control" id="codeConsultant" [(ngModel)]="consultantToAdd.codeConsultant" name="codeConsultant" required>
+      </div>
+      <div class="form-group">
+        <label for="statutConsultant">Statut du consultant:</label>
+        <input type="text" class="form-control" id="statutConsultant" [(ngModel)]="consultantToAdd.statutConsultant" name="statutConsultant" required>
+      </div>
+      <div class="form-group">
+        <label for="mdpConsultant">Mot de passe du consultant:</label>
+        <input type="password" class="form-control" id="mdpConsultant" [(ngModel)]="consultantToAdd.mdpConsultant" name="mdpConsultant" required>
+      </div>
+      <div class="form-group">
+        <label for="idAxe">ID de l'axe:</label>
+        <input type="number" class="form-control" id="idAxe" [(ngModel)]="consultantToAdd.idAxe" name="idAxe" required>
+      </div>
+      <div class="form-group">
+        <label for="idSpecialite">ID de la spécialité:</label>
+        <input type="number" class="form-control" id="idSpecialite" [(ngModel)]="consultantToAdd.idSpecialite" name="idSpecialite" required>
+      </div>
+      <div class="form-group">
+        <label for="score">Score:</label>
+        <input type="number" class="form-control" id="score" [(ngModel)]="consultantToAdd.score" name="score" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+  </div>
+  
