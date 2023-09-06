@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit, AfterViewInit  } from '@angular/c
 import { Consultant } from '../../models/Consultant';
 import { LoginService } from 'src/app/services/login.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { noop } from 'rxjs';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit  {
   consultants: Consultant[] = [];
   username: string = ''; 
   password: string = ''; 
+  public n : number = 0;
 
   constructor(
     private loginService: LoginService,
@@ -30,16 +32,18 @@ export class LoginComponent implements OnInit  {
         console.log('CodeConsultant de la ligne', i + 1, ':', currentRow.codeConsultant);
         console.log('MDPConsultant de la ligne', i + 1, ':', currentRow.mdpConsultant !== undefined ? currentRow.mdpConsultant : 'Valeur non définie ou nulle');
       }
-      
+      this.n = data.length;
     });
   }
   
   onLoginSubmit(): void {
     if (this.username && this.password) {
-      const Consultant = this.consultants[0]; // Supposons que vous utilisez la première ligne de la table
-      if (this.username === Consultant.codeConsultant && this.password === Consultant.mdpConsultant) {
+      const consultant = this.consultants.find(consultant => consultant.codeConsultant === this.username && consultant.mdpConsultant === this.password);
+  
+      if (consultant) {
         console.log('Success');
-        this.router.navigate(['/home']); 
+        this.loginService.setCodeConsultantConnecte(consultant.codeConsultant);
+        this.router.navigate(['/home']);
       } else {
         console.log('Fail');
       }
