@@ -11,11 +11,12 @@
 		<div class="header-logo">
 			<img src="https://i.ibb.co/ZSG10Yt/logo-removebg-preview.png" alt="logo"/>
             <div class="text-logo">Village de l'emploi</div>
-            <button class="log" (click)="onAuthClick()">Authentification</button>
+			<button class="log" *ngIf="connectedAs" (click)="deconnexion()">Déconnexion</button>
+  			<button class="log" *ngIf="!connectedAs" (click)="onAuthClick()">Authentification</button>
 			
 		</div>
 		<nav class="header-navigation">
-			<!--<a routerLink="/specialitePage">Nos Spécialités</a>-->
+			<p class="ConnectedAsCss" *ngIf="connectedAs">Session : {{ connectedAs }}</p>
 			<a routerLink="/home">Accueil</a>
 			<a routerLink="/listeCours">Cours</a>
 			<a routerLink="/listeAxe">Axe</a>

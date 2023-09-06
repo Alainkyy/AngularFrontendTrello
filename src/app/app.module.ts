@@ -14,6 +14,9 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { CarteComponent } from './components/carte/carte.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';  
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -30,7 +33,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     AxeListeComponent,
-    HeaderSectionComponent,
+    HeaderSectionComponent, 
     FooterSectionComponent,
     SpecialitePageComponent,
     HeroSectionComponent,
@@ -43,6 +46,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatButtonModule, 
+    MatSnackBarModule,
     DragDropModule,
     RouterModule.forRoot(routes)
   ],

@@ -54,6 +54,7 @@ body {
 .header-navigation {
 	display: flex;
 	flex-wrap: wrap;
+	align-items: center;
 }
 
 .header-navigation a,
@@ -132,3 +133,21 @@ button {
 		display: none;
 	}
 }
+
+.ConnectedAsCss {
+border: 1px solid #000; 
+padding: 10px; 
+color: red; 
+display: inline-block; 
+border-radius: 5px;
+font-size: 14px;
+}
+
+.custom-snackbar {
+	background-color: #006400; /* Couleur de fond verte foncée */
+	color: white; /* Couleur du texte en blanc */
+	min-width: 150px; /* Largeur minimale du snackbar */
+	text-align: center; /* Centrez le texte */
+	border-radius: 4px; /* Coins arrondis */
+  }
+  

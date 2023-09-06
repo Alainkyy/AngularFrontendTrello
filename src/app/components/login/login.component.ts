@@ -42,10 +42,13 @@ export class LoginComponent implements OnInit  {
   
       if (consultant) {
         console.log('Success');
-        this.loginService.setCodeConsultantConnecte(consultant.codeConsultant);
+        this.loginService.indiceConnexion = true;
+        this.loginService.setNomConsultantConnecte(consultant.nomConsultant); 
         this.router.navigate(['/home']);
       } else {
         console.log('Fail');
+        this.loginService.indiceConnexion = false;
+        this.loginService.openFailureSnackBar();
       }
     } else {
       console.log('Veuillez remplir les champs username et password.');
