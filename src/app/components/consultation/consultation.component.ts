@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ConsultationService } from 'src/app/services/consultation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Consultant } from '../../models/Consultant';
+import { forkJoin } from 'rxjs';
 
 import { Axe } from '../../models/Axe';
 import { Specialite } from '../../models/Specialite';
@@ -27,14 +28,28 @@ export class ConsultationComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+    this.axeService.getAxe().subscribe((result: any[]) => {
+      this.axes = result.map(axeData => new Axe(
+        axeData.idAxe,
+        axeData.nomAxe,
+        axeData.nbSpecialite
+      ));
+      console.log('Liste des axes:', this.axes);
+  });
+
+    this.axeService.getSpecialite().subscribe((result: any[]) => {
+    this.specialites = result.map(specialiteData => new Specialite(
+      specialiteData.idSpecialite,
+      specialiteData.nomSpecialite,
+      specialiteData.idAxe
+    ));
+  console.log('Liste des Specialités:', this.specialites);
+});
     this.route.queryParamMap.subscribe(params => {
         this.afficherTousLesConsultants();
     })};
 
-
     afficherTousLesConsultants() {
-      this.chargerTousLesAxes();
-      this.chargerToutesLesSpecialites();
     
       this.consultationService.GetConsultant().subscribe((result: any[]) => {
         this.consultants = result.map(consultantData => {
@@ -58,28 +73,6 @@ export class ConsultationComponent implements OnInit{
         console.log('Liste des Consultants:', this.consultants);
       });
     }
-
-  public chargerTousLesAxes() {
-    this.axeService.getAxe().subscribe((result: any[]) => {
-      this.axes = result.map(axeData => new Axe(
-        axeData.idAxe,
-        axeData.nomAxe,
-        axeData.nbSpecialite
-      ));
-      console.log('Liste des axes:', this.axes);
-  });
-}
-
-public chargerToutesLesSpecialites() {
-  this.axeService.getSpecialite().subscribe((result: any[]) => {
-    this.specialites = result.map(specialiteData => new Specialite(
-      specialiteData.idSpecialite,
-      specialiteData.nomSpecialite,
-      specialiteData.idAxe
-    ));
-    console.log('Liste des Specialités:', this.specialites);
-});
-}
 
   supprimerConsultant(idConsultant: number) {
     if (confirm('Êtes-vous sûr de vouloir supprimer ce consultant ?')) {
