@@ -13,6 +13,7 @@ export class HeaderSectionComponent implements OnInit {
   connectedAs: string | null = null; //nomConsultant
   connectedAs2: string | null = null; //statutConsultant
   connectedAs3: number | null = null; //idSpecialite du Consultant
+  connectedAs4: string | null = null; //codeConsultant
   isAdmin: boolean = false;
   isFormation: boolean = false;
 
@@ -31,6 +32,7 @@ export class HeaderSectionComponent implements OnInit {
     this.connectedAs = this.loginService.getNomConsultantConnecte();
     this.connectedAs2 = this.loginService.getStatutConsultantConnecte();
     this.connectedAs3 = this.loginService.getIdSpecialiteConsultantConnecte();
+    this.connectedAs4 = this.loginService.getCodeConsultantConnecte();
 
     this.isAdmin = this.connectedAs2 === 'Admin';
     this.isFormation = this.connectedAs2 === 'Formation';

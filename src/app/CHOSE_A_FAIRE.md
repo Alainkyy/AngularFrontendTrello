@@ -19,10 +19,11 @@ Donc je dois faire un service pour recuperer la specialité selectionné ou dans
 
     Récupérez l'ID de la spécialité du consultant connecté. FAIT
     Récupérez la liste complète des cours. FAIT
-    Utilisez l'ID de spécialité du consultant pour filtrer la liste des cours.
-    Affichez la liste filtrée des cours dans votre interface utilisateur.
+    Utilisez l'ID de spécialité du consultant pour filtrer la liste des cours. FAIT
+    Affichez la liste filtrée des cours dans votre interface utilisateur. FAIT DU PREMIER COUP SA MERE ! 
 
 
 
+Mettre en place le localStorage
 
  

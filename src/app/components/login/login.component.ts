@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit  {
   
       if (consultant) {
         console.log('Success');
-        
+
         // Recupere le nomConsultant
         this.loginService.indiceConnexion = true;
         this.loginService.setNomConsultantConnecte(consultant.nomConsultant);
@@ -48,6 +48,10 @@ export class LoginComponent implements OnInit  {
         // Recupere le idSpecialite
         const idSpecialite = consultant.idSpecialite;
         this.loginService.setIdSpecialiteConsultantConnecte(consultant.idSpecialite); 
+
+        // Recupere le codeConsultant
+        const codeConsultant = consultant.codeConsultant;
+        this.loginService.setCodeConsultantConnecte(consultant.codeConsultant); 
 
         this.router.navigate(['/home']);
       } else {

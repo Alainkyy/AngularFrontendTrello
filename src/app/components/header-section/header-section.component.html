@@ -17,6 +17,7 @@
 		</div>
 		<nav class="header-navigation">
 			<p class="ConnectedAsCss" *ngIf="connectedAs">Session : {{ connectedAs }}</p><!-- Recupere le nomConsultant-->
+			<!-- <p class="ConnectedAsCss" *ngIf="connectedAs4">{{ connectedAs4 }}</p> Recupere le codeConsultant-->
 			<a routerLink="/home">Accueil</a>
 			<a routerLink="/listeCours" *ngIf="connectedAs2 === 'Formation'">Cours</a> <!-- Recupere le statutConsultant -->
 			<!-- <a routerLink="/listeAxe">Axe</a> -->

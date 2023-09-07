@@ -26,65 +26,66 @@ export class LoginService {
     private snackBar: MatSnackBar
     ) { }
 
+    public getConsultant() : Observable<Consultant[]>{
+      return this.http.get<Consultant[]>(`${environment.apiURL}Consultant/liste`);
+    }
+    
 // nomConsultant
-  setNomConsultantConnecte(nom: string): void {
+public setNomConsultantConnecte(nom: string): void {
     this.nomConsultantConnecte = nom;
   }
 
-  getNomConsultantConnecte(): string | null {
+  public getNomConsultantConnecte(): string | null {
     return this.nomConsultantConnecte;
     this.indiceConnexion = true;
   }
 // statutConsultant
-  setStatutConsultantConnecte(statut: string): void {
+public setStatutConsultantConnecte(statut: string): void {
     this.statutConsultantConnecte = statut;
   }
 
-  getStatutConsultantConnecte(): string | null {
+  public getStatutConsultantConnecte(): string | null {
     this.indiceConnexion = true;
     return this.statutConsultantConnecte;
   }
 // codeConsultant
-  setCodeConsultantConnecte(code: string): void {
-    this.codeConsultantConnecte = code;
-  }
+public setCodeConsultantConnecte(code: string): void {
+  this.codeConsultantConnecte = code;
+}
 
-  getCodeConsultantConnecte(): string | null {
-    return this.codeConsultantConnecte;
-  }
+public getCodeConsultantConnecte(): string | null {
+  return this.codeConsultantConnecte;
+}
 // idSpecialite
-  setIdSpecialiteConsultantConnecte(idSpe: number): void {
+public setIdSpecialiteConsultantConnecte(idSpe: number): void {
     this.idSpecialiteConsultantConnecte = idSpe;
   }
 
-  getIdSpecialiteConsultantConnecte(): number | null {
+  public getIdSpecialiteConsultantConnecte(): number | null {
     return this.idSpecialiteConsultantConnecte;
   }
 
-  deconnexion(): void {
+  public deconnexion(): void {
     this.indiceConnexion = false;
     this.isAdmin = false;
     this.isFormation = false;
     this.router.navigate(['/home']);
   }
 
-  resetStatus(): void {
+  public resetStatus(): void {
     this.isAdmin = false;
     this.isFormation = false;
   }
 
-  public getConsultant() : Observable<Consultant[]>{
-    return this.http.get<Consultant[]>(`${environment.apiURL}Consultant/liste`);
-  }
-
-  openSuccessSnackBar(){
+  public openSuccessSnackBar(){
     this.snackBar.open("Deconnexion Reussis", "OK", {
       duration: 3000,
       panelClass: ['green-snackbar', 'login-snackbar'],
       verticalPosition: 'top',
      });
-    }//Snackbar that opens with failure background
-    openFailureSnackBar(){
+    }
+
+    public openFailureSnackBar(){
     this.snackBar.open("Nom d'utilisateur ou Mot de Passe Incorrect", "Veuillez Réessayer !", {
       duration: 3000,
       panelClass: ['red-snackbar','login-snackbar'],
