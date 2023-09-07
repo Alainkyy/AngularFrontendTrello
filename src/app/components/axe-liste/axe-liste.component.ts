@@ -15,7 +15,6 @@ export class AxeListeComponent implements OnInit {
     private axeService: AxeService,
     private route: ActivatedRoute,
     private router: Router,
-    //private sharedService: SharedService,
     private cd: ChangeDetectorRef
   ) {}
 
