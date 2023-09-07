@@ -27,8 +27,18 @@
         </select>
       </div>      
       <div class="form-group">
-        <label for="idSpecialite">ID de la spécialité:</label>
-        <input type="number" class="form-control" id="idSpecialite" [(ngModel)]="consultantToAdd.idSpecialite" name="idSpecialite" required>
+        <label for="idSpecialite">Sélectionner la Spécialité:</label>
+        <select class="form-control" id="idSpecialite" [(ngModel)]="consultantToAdd.idSpecialite" name="idSpecialite" required>
+          <option *ngIf="consultantToAdd.idAxe == 1" value="1">JAVA</option>
+          <option *ngIf="consultantToAdd.idAxe == 1" value="2">NET</option>
+          <option *ngIf="consultantToAdd.idAxe == 1" value="3">Python</option>
+          <option *ngIf="consultantToAdd.idAxe == 2" value="4">Data Analytics</option>
+          <option *ngIf="consultantToAdd.idAxe == 2" value="5">Data Visualization</option>
+          <option *ngIf="consultantToAdd.idAxe == 3" value="6">Database Administration</option>
+          <option *ngIf="consultantToAdd.idAxe == 3" value="7">Data Governance</option>
+          <option *ngIf="consultantToAdd.idAxe == 4" value="8">Financial Analysis</option>
+
+        </select>
       </div>
       <div class="form-group">
         <label for="score">Score:</label>
