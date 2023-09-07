@@ -33,8 +33,8 @@ export class ConsultationComponent implements OnInit{
 
 
     afficherTousLesConsultants() {
-      this.afficherTousLesAxes();
-      this.afficherToutesLesSpecialites();
+      this.chargerTousLesAxes();
+      this.chargerToutesLesSpecialites();
     
       this.consultationService.GetConsultant().subscribe((result: any[]) => {
         this.consultants = result.map(consultantData => {
@@ -59,7 +59,7 @@ export class ConsultationComponent implements OnInit{
       });
     }
 
-  public afficherTousLesAxes() {
+  public chargerTousLesAxes() {
     this.axeService.getAxe().subscribe((result: any[]) => {
       this.axes = result.map(axeData => new Axe(
         axeData.idAxe,
@@ -70,7 +70,7 @@ export class ConsultationComponent implements OnInit{
   });
 }
 
-public afficherToutesLesSpecialites() {
+public chargerToutesLesSpecialites() {
   this.axeService.getSpecialite().subscribe((result: any[]) => {
     this.specialites = result.map(specialiteData => new Specialite(
       specialiteData.idSpecialite,

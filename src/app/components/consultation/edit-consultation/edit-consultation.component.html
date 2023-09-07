@@ -22,12 +22,26 @@
         <input type="password" class="form-control" id="mdpConsultant" [(ngModel)]="consultantToEdit.mdpConsultant" name="mdpConsultant" required>
       </div>
       <div class="form-group">
-        <label for="idAxe">ID de l'axe:</label>
-        <input type="number" class="form-control" id="idAxe" [(ngModel)]="consultantToEdit.idAxe" name="idAxe" required>
-      </div>
+        <label for="idAxe">Selectionner l'Axe</label>
+        <select class="form-control" id="idAxe" [(ngModel)]="consultantToEdit.idAxe" name="idAxe" required>
+          <option value="1">Nouvelles Technologies</option>
+          <option value="2">Business Intelligence</option>
+          <option value="3">Data Management</option>
+          <option value="4">Finance</option>
+        </select>
+      </div>      
       <div class="form-group">
-        <label for="idSpecialite">ID de la spécialité:</label>
-        <input type="number" class="form-control" id="idSpecialite" [(ngModel)]="consultantToEdit.idSpecialite" name="idSpecialite" required>
+        <label for="idSpecialite">Sélectionner la Spécialité:</label>
+        <select class="form-control" id="idSpecialite" [(ngModel)]="consultantToEdit.idSpecialite" name="idSpecialite" required>
+          <option *ngIf="consultantToEdit.idAxe == 1" value="1">JAVA</option>
+          <option *ngIf="consultantToEdit.idAxe == 1" value="2">NET</option>
+          <option *ngIf="consultantToEdit.idAxe == 1" value="3">Python</option>
+          <option *ngIf="consultantToEdit.idAxe == 2" value="4">Data Analytics</option>
+          <option *ngIf="consultantToEdit.idAxe == 2" value="5">Data Visualization</option>
+          <option *ngIf="consultantToEdit.idAxe == 3" value="6">Database Administration</option>
+          <option *ngIf="consultantToEdit.idAxe == 3" value="7">Data Governance</option>
+          <option *ngIf="consultantToEdit.idAxe == 4" value="8">Financial Analysis</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="score">Score:</label>
