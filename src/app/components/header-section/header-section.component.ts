@@ -10,8 +10,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class HeaderSectionComponent implements OnInit {
   isLoginVisible = false;
-  connectedAs: string | null = null;
-  connectedAs2: string | null = null;
+  connectedAs: string | null = null; //nomConsultant
+  connectedAs2: string | null = null; //statutConsultant
+  connectedAs3: number | null = null; //idSpecialite du Consultant
   isAdmin: boolean = false;
   isFormation: boolean = false;
 
@@ -29,6 +30,7 @@ export class HeaderSectionComponent implements OnInit {
   ngOnInit(): void {
     this.connectedAs = this.loginService.getNomConsultantConnecte();
     this.connectedAs2 = this.loginService.getStatutConsultantConnecte();
+    this.connectedAs3 = this.loginService.getIdSpecialiteConsultantConnecte();
 
     this.isAdmin = this.connectedAs2 === 'Admin';
     this.isFormation = this.connectedAs2 === 'Formation';

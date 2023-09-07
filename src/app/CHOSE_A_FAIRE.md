@@ -7,15 +7,9 @@ Rajouter Variable pour savoir si un cours est en cours ou done (un boolean : fin
 Plus tard :
 S'occuper de l'affichage administrateur (All details Cours consultant)
 
-A faire :
-
-Faire en priorité !
-Interface modification viéw Consultant
-LA BD EST DEJA FAITES
 
 zézzion avancémént toiz zaffiché chéz formatéur & tétail auzzi
 
-affichagé troitz par zézzion au nivéau téz accéz
 
 Dans cours seront affiché les cours filtré par la spécialité ! 
 Donc je dois faire un service pour recuperer la specialité selectionné ou dans la BD par Consultant
@@ -23,7 +17,10 @@ Donc je dois faire un service pour recuperer la specialité selectionné ou dans
 
 
 
-
+    Récupérez l'ID de la spécialité du consultant connecté. FAIT
+    Récupérez la liste complète des cours. FAIT
+    Utilisez l'ID de spécialité du consultant pour filtrer la liste des cours.
+    Affichez la liste filtrée des cours dans votre interface utilisateur.
 
 
 

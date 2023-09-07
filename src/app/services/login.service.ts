@@ -14,6 +14,7 @@ export class LoginService {
   private codeConsultantConnecte: string | null = null;
   private nomConsultantConnecte: string | null = null;
   private statutConsultantConnecte: string | null = null;
+  private idSpecialiteConsultantConnecte: number | null = null;
   indiceConnexion: boolean = false;
   isAdmin: boolean = false;
   isFormation: boolean = false;
@@ -25,6 +26,7 @@ export class LoginService {
     private snackBar: MatSnackBar
     ) { }
 
+// nomConsultant
   setNomConsultantConnecte(nom: string): void {
     this.nomConsultantConnecte = nom;
   }
@@ -33,7 +35,7 @@ export class LoginService {
     return this.nomConsultantConnecte;
     this.indiceConnexion = true;
   }
-
+// statutConsultant
   setStatutConsultantConnecte(statut: string): void {
     this.statutConsultantConnecte = statut;
   }
@@ -42,13 +44,21 @@ export class LoginService {
     this.indiceConnexion = true;
     return this.statutConsultantConnecte;
   }
-
+// codeConsultant
   setCodeConsultantConnecte(code: string): void {
     this.codeConsultantConnecte = code;
   }
 
   getCodeConsultantConnecte(): string | null {
     return this.codeConsultantConnecte;
+  }
+// idSpecialite
+  setIdSpecialiteConsultantConnecte(idSpe: number): void {
+    this.idSpecialiteConsultantConnecte = idSpe;
+  }
+
+  getIdSpecialiteConsultantConnecte(): number | null {
+    return this.idSpecialiteConsultantConnecte;
   }
 
   deconnexion(): void {

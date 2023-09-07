@@ -16,11 +16,11 @@
 			
 		</div>
 		<nav class="header-navigation">
-			<p class="ConnectedAsCss" *ngIf="connectedAs">Session : {{ connectedAs }}</p>
+			<p class="ConnectedAsCss" *ngIf="connectedAs">Session : {{ connectedAs }}</p><!-- Recupere le nomConsultant-->
 			<a routerLink="/home">Accueil</a>
-			<a routerLink="/listeCours" *ngIf="connectedAs2 === 'Formation'">Cours</a>
+			<a routerLink="/listeCours" *ngIf="connectedAs2 === 'Formation'">Cours</a> <!-- Recupere le statutConsultant -->
 			<!-- <a routerLink="/listeAxe">Axe</a> -->
-			<a routerLink="/listeConsultant" *ngIf="connectedAs2 === 'Admin'">Consultant</a>
+			<a routerLink="/listeConsultant" *ngIf="connectedAs2 === 'Admin'">Consultant</a> <!-- Recupere le statutConsultant -->
 			<a href="#">Bouton</a>
 			<a href="#">Bouton</a>
 			<button>Menu</button>
