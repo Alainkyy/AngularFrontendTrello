@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class LoginService {
   private url = environment.apiURL;
   private codeConsultantConnecte: string | null = null;
   private nomConsultantConnecte: string | null = null;
+  private statutConsultantConnecte: string | null = null;
   indiceConnexion: boolean = false;
 
   constructor(
@@ -29,6 +30,15 @@ export class LoginService {
   getNomConsultantConnecte(): string | null {
     return this.nomConsultantConnecte;
     this.indiceConnexion = true;
+  }
+
+  setStatutConsultantConnecte(statut: string): void {
+    this.statutConsultantConnecte = statut;
+  }
+
+  getStatutConsultantConnecte(): string | null {
+    this.indiceConnexion = true;
+    return this.statutConsultantConnecte;
   }
 
   setCodeConsultantConnecte(code: string): void {

@@ -15,7 +15,10 @@
       </div>
       <div class="form-group">
         <label for="statutConsultant">Statut du consultant:</label>
-        <input type="text" class="form-control" id="statutConsultant" [(ngModel)]="consultantToEdit.statutConsultant" name="statutConsultant" required>
+        <select class="form-control" id="statutConsultant" [(ngModel)]="consultantToEdit.statutConsultant" name="statutConsultant" required>
+          <option>Formation</option>
+          <option>Admin</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="mdpConsultant">Mot de passe du consultant:</label>

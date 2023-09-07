@@ -11,6 +11,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class HeaderSectionComponent implements OnInit {
   isLoginVisible = false;
   connectedAs: string | null = null;
+  connectedAs2: string | null = null;
 
   constructor(
     private loginService: LoginService,
@@ -24,6 +25,7 @@ export class HeaderSectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.connectedAs = this.loginService.getNomConsultantConnecte();
+    this.connectedAs2 = this.loginService.getStatutConsultantConnecte();
   }
 
   deconnexion(): void {
