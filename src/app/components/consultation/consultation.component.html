@@ -11,10 +11,6 @@
   <table class="boostrap4_table_head_dark_striped_rounded_with_shadow">
     <thead>
       <tr>
-        <a routerLink="/addConsultant">Ajouter</a>
-      </tr>
-      
-      <tr>
         <th>Id</th>
         <th>Nom</th>
         <th>Code</th>
@@ -23,6 +19,9 @@
         <th>Axe</th>
         <th>Specialite </th>
         <th>Score</th>
+        <th> </th>
+        <th><button routerLink="/addConsultant" class="btn-add">Ajouter</button></th>
+        <th> </th>
       </tr>
     </thead>
     <tbody>
@@ -35,11 +34,9 @@
         <td>{{ consultant.idAxe }}</td>
         <td>{{ consultant.idSpecialite }}</td>
         <td>{{ consultant.score }}</td>
-        <td><button (click)="supprimerConsultant(consultant.idConsultant)">Supprimer</button></td>
-        <td>
-          <button (click)="modifierConsultant(consultant.idConsultant)">Modifier</button>
-        </td>
-        
+        <td><button (click)="supprimerConsultant(consultant.idConsultant)" class="btn-delete">Supprimer</button></td>
+        <td><button (click)="modifierConsultant(consultant.idConsultant)" class="btn-update">Modifier</button></td>
+        <td><button class="btn-view">Details AF</button></td>
       </tr>
     </tbody>
   </table>

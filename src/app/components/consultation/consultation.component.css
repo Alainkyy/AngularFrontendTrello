@@ -8,8 +8,8 @@ table.boostrap4_table_head_dark_striped_rounded_with_shadow {
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 1rem;
-    background-color: #e3e1ff; /*  FOND TABLEAU 1/2 */
-    box-shadow: #8470f5 0px 5px 15px; /* couleur OMBRE */
+    background-color: #D4F0FA; /*  FOND TABLEAU 1/2 */
+    box-shadow: #D4F0FA 0px 5px 15px; /* couleur OMBRE */
     border-radius: 10px;
 }
 
@@ -18,12 +18,12 @@ table.boostrap4_table_head_dark_striped_rounded_with_shadow thead th {
     line-height: 1.5;
     border-collapse: collapse;
     box-sizing: border-box;
-    text-align: inherit;
+    text-align: center;
     padding: .75rem;
     vertical-align: bottom;
     border-bottom: 2px solid #dee2e6;
     color: #ffffff; /*  Couleur police en tete */
-    background: #7d5bf8; /* Couleur en tete*/
+    background: #57C4EB; /* Couleur en tete*/
     border-color: #000000; /* Couleur bordure*/
 }
 
@@ -32,7 +32,7 @@ table.boostrap4_table_head_dark_striped_rounded_with_shadow td {
     font-weight: 400;
     line-height: 1.5;
     color: #212529; /* Couleur POLICE */
-    text-align: left;
+    text-align: center;
     border-collapse: collapse;
     box-sizing: border-box;
     padding: .75rem;
@@ -40,7 +40,7 @@ table.boostrap4_table_head_dark_striped_rounded_with_shadow td {
 }
 
 table.boostrap4_table_head_dark_striped_rounded_with_shadow tbody tr:nth-of-type(odd) {
-    background-color: #faf7ff; /* FOND TABLEAU 2/2 */
+    background-color: #ffffff; /* FOND TABLEAU 2/2 */
 }
 
 table.boostrap4_table_head_dark_striped_rounded_with_shadow th:first-of-type {
@@ -49,6 +49,7 @@ table.boostrap4_table_head_dark_striped_rounded_with_shadow th:first-of-type {
 
 table.boostrap4_table_head_dark_striped_rounded_with_shadow th:last-of-type {
     border-top-right-radius: 10px;
+    text-align: center;
 }
 
 table.boostrap4_table_head_dark_striped_rounded_with_shadow tr:last-of-type td:first-of-type {
@@ -77,6 +78,69 @@ body {
     font-size: 2rem;
     color: #ffffff;
     font-family: 'MedievalSharp', cursive;
-    text-align: center; /* Centrer horizontalement */
-    margin-top: 2%; /* Margin top de 10% */
+    text-align: center; 
+    margin-top: 2%; 
+  }
+
+  .btn-add {
+    background-color: #007bff; 
+    color: #fff; 
+    border: none; 
+    padding: 8px 16px; 
+    border-radius: 4px;
+    cursor: pointer; 
+    text-decoration: none; 
+    justify-content: center;
+    box-sizing: content-box;
+    text-align: center;
+    width: auto;
+    margin: auto;
+  }
+  
+  .btn-add:hover {
+    background-color: #0056b3; 
+  }
+  
+  
+  .btn-delete {
+    background-color: #F19937;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .btn-delete:hover {
+    background-color: #c82333;
+  }
+  
+
+  .btn-update {
+    background-color: #C94B91;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .btn-update:hover {
+    background-color: #592240;
+  }
+
+  .btn-view {
+    background-color: #6BB346;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .btn-view:hover {
+    background-color: #233B17;
   }

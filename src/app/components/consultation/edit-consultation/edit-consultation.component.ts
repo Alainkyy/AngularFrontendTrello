@@ -36,7 +36,6 @@ export class EditConsultationComponent implements OnInit {
     const idConsultantFromUrl = this.route.snapshot.paramMap.get('idConsultant');
     const idConsultant = idConsultantFromUrl !== null ? +idConsultantFromUrl : null;
   
-    // Assurez-vous d'avoir chargé la liste des consultants ici (peut-être depuis votre service)
     this.consultationService.GetConsultant().subscribe(
       (result: any[]) => {
         this.consultants = result.map(consultantData => new Consultant(
@@ -51,11 +50,9 @@ export class EditConsultationComponent implements OnInit {
         ));
   
         if (idConsultant !== null) {
-          // Trouvez le consultant correspondant à l'ID de l'URL
           const consultantFound = this.consultants.find(c => c.idConsultant === idConsultant);
   
           if (consultantFound) {
-            // Mettez à jour les propriétés du modèle consultantToEdit
             this.consultantToEdit = consultantFound;
           } else {
             console.error('Consultant non trouvé pour l\'ID spécifié.');
