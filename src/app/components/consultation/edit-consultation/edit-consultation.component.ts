@@ -10,6 +10,7 @@ import { Consultant } from '../../../models/Consultant';
 })
 export class EditConsultationComponent implements OnInit {
   public consultantToEdit: Consultant = new Consultant();
+  public consultants: Consultant[] = [];
 
   constructor(
     private consultationService: ConsultationService,
@@ -19,18 +20,56 @@ export class EditConsultationComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeConsultantIdFromUrl();
+    this.initializeConsultantDetailsFromUrl();
   }
 
   private initializeConsultantIdFromUrl() {
     const idConsultant = this.route.snapshot.paramMap.get('idConsultant');
-
     if (idConsultant !== null) {
-
       this.consultantToEdit.idConsultant = +idConsultant;
     } else {
       console.error('ID du consultant non trouvé dans l\'URL.');
     }
   }
+
+  private initializeConsultantDetailsFromUrl() {
+    const idConsultantFromUrl = this.route.snapshot.paramMap.get('idConsultant');
+    const idConsultant = idConsultantFromUrl !== null ? +idConsultantFromUrl : null;
+  
+    // Assurez-vous d'avoir chargé la liste des consultants ici (peut-être depuis votre service)
+    this.consultationService.GetConsultant().subscribe(
+      (result: any[]) => {
+        this.consultants = result.map(consultantData => new Consultant(
+          consultantData.idConsultant,
+          consultantData.nomConsultant,
+          consultantData.codeConsultant,
+          consultantData.statutConsultant,
+          consultantData.mdpConsultant,
+          consultantData.idAxe,
+          consultantData.idSpecialite,
+          consultantData.score
+        ));
+  
+        if (idConsultant !== null) {
+          // Trouvez le consultant correspondant à l'ID de l'URL
+          const consultantFound = this.consultants.find(c => c.idConsultant === idConsultant);
+  
+          if (consultantFound) {
+            // Mettez à jour les propriétés du modèle consultantToEdit
+            this.consultantToEdit = consultantFound;
+          } else {
+            console.error('Consultant non trouvé pour l\'ID spécifié.');
+          }
+        } else {
+          console.error('ID du consultant non trouvé dans l\'URL.');
+        }
+      },
+      (error) => {
+        console.error('Erreur lors du chargement des consultants :', error);
+      }
+    );
+  }
+  
 
   onModif() {
     this.consultationService.PutConsultant(this.consultantToEdit).subscribe(
