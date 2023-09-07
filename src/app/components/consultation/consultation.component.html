@@ -36,6 +36,10 @@
         <td>{{ consultant.idSpecialite }}</td>
         <td>{{ consultant.score }}</td>
         <td><button (click)="supprimerConsultant(consultant.idConsultant)">Supprimer</button></td>
+        <td>
+          <button (click)="modifierConsultant(consultant.idConsultant)">Modifier</button>
+        </td>
+        
       </tr>
     </tbody>
   </table>

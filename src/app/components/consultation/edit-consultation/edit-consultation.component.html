@@ -1,1 +1,39 @@
-<p>edit-consultation works!</p>
+<div class="container">
+    <h2>Modifier un consultant</h2>
+    <form (ngSubmit)="onModif()">
+        <div class="form-group">
+            <label for="idConsultant">ID du consultant:</label>
+            <input type="text" class="form-control" id="idConsultant" [(ngModel)]="consultantToEdit.idConsultant" name="idConsultant" readonly>
+          </div>          
+      <div class="form-group">
+        <label for="nomConsultant">Nom du consultant:</label>
+        <input type="text" class="form-control" id="nomConsultant" [(ngModel)]="consultantToEdit.nomConsultant" name="nomConsultant" required>
+      </div>
+      <div class="form-group">
+        <label for="codeConsultant">Code du consultant:</label>
+        <input type="text" class="form-control" id="codeConsultant" [(ngModel)]="consultantToEdit.codeConsultant" name="codeConsultant" required>
+      </div>
+      <div class="form-group">
+        <label for="statutConsultant">Statut du consultant:</label>
+        <input type="text" class="form-control" id="statutConsultant" [(ngModel)]="consultantToEdit.statutConsultant" name="statutConsultant" required>
+      </div>
+      <div class="form-group">
+        <label for="mdpConsultant">Mot de passe du consultant:</label>
+        <input type="password" class="form-control" id="mdpConsultant" [(ngModel)]="consultantToEdit.mdpConsultant" name="mdpConsultant" required>
+      </div>
+      <div class="form-group">
+        <label for="idAxe">ID de l'axe:</label>
+        <input type="number" class="form-control" id="idAxe" [(ngModel)]="consultantToEdit.idAxe" name="idAxe" required>
+      </div>
+      <div class="form-group">
+        <label for="idSpecialite">ID de la spécialité:</label>
+        <input type="number" class="form-control" id="idSpecialite" [(ngModel)]="consultantToEdit.idSpecialite" name="idSpecialite" required>
+      </div>
+      <div class="form-group">
+        <label for="score">Score:</label>
+        <input type="number" class="form-control" id="score" [(ngModel)]="consultantToEdit.score" name="score" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Modifier</button>
+    </form>
+    <button routerLink="/listeConsultant">Retour</button>
+  </div>

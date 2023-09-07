@@ -49,4 +49,8 @@ export class ConsultationComponent implements OnInit{
       });
     }
   }
+
+  modifierConsultant(idConsultant: number) {
+    this.router.navigate(['/editConsultant', idConsultant]);
+  }
   }
