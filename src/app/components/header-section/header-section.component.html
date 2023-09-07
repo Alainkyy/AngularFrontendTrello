@@ -17,12 +17,12 @@
 		</div>
 		<nav class="header-navigation">
 			<p class="ConnectedAsCss" *ngIf="connectedAs">Session : {{ connectedAs }}</p>
-			<p *ngIf="connectedAs2"> -> {{ connectedAs2 }}</p>
 			<a routerLink="/home">Accueil</a>
-			<a routerLink="/listeCours">Cours</a>
+			<a routerLink="/listeCours" *ngIf="connectedAs2 === 'Formation'">Cours</a>
 			<!-- <a routerLink="/listeAxe">Axe</a> -->
-			<a routerLink="/listeConsultant">Consultant</a>
-			<!--<a href="#">Bouton4</a> -->
+			<a routerLink="/listeConsultant" *ngIf="connectedAs2 === 'Admin'">Consultant</a>
+			<a href="#">Bouton</a>
+			<a href="#">Bouton</a>
 			<button>Menu</button>
 		</nav>
 	</div>

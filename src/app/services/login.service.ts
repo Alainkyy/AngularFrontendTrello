@@ -15,6 +15,8 @@ export class LoginService {
   private nomConsultantConnecte: string | null = null;
   private statutConsultantConnecte: string | null = null;
   indiceConnexion: boolean = false;
+  isAdmin: boolean = false;
+  isFormation: boolean = false;
 
   constructor(
     private http : HttpClient,
@@ -51,7 +53,14 @@ export class LoginService {
 
   deconnexion(): void {
     this.indiceConnexion = false;
+    this.isAdmin = false;
+    this.isFormation = false;
     this.router.navigate(['/home']);
+  }
+
+  resetStatus(): void {
+    this.isAdmin = false;
+    this.isFormation = false;
   }
 
   public getConsultant() : Observable<Consultant[]>{
