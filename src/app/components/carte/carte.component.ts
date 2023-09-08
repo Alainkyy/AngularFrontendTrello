@@ -80,8 +80,7 @@ drop(event: CdkDragDrop<Cours[]>) {
 }
 
 calculateScore() {
-  const totalCours = this.totalcours.length +1 ; // Le nombre total de cours dans "Vos Cours"
-  console.log(totalCours);
+  const totalCours = this.totalcours.length + this.done.length + this.actif.length ; // Le nombre total de cours dans "Vos Cours"
   const finishedCours = this.done.length; // Le nombre de cours dans "Finis"
   this.score = (finishedCours / totalCours) * 100;
 }
