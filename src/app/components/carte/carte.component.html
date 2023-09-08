@@ -37,7 +37,8 @@
 
   
     <div class="example-container">
-      <h2 class ="style_h2">Finis ({{ score.toFixed(1) }}%)</h2>
+      <h2 class ="style_h2">Finis ({{ score }}%)</h2>
+      <!-- <h2 class ="style_h2">Finis ({{ score.toFixed(1) }}%)</h2> -->
         <div cdkDropList [cdkDropListData]="done" class="listeDdFinisCss" (cdkDropListDropped)="drop($event)" #listeDdFinis (cdkDropListDropped)="calculateScore()">
           <div class="example-box" *ngFor="let coursItem of done" cdkDrag (cdkDragEnded)="calculateScore()">
             <h3>{{ coursItem.nomCours }}</h3>
