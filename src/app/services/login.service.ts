@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +27,7 @@ export class LoginService {
     private http : HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar,
-    private localStorageService: LocalStorageService
+    private snackBar: MatSnackBar
     ) { }
 
     public getConsultant() : Observable<Consultant[]>{

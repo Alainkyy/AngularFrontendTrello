@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CoursService } from 'src/app/services/cours.service';
 import { LoginService } from 'src/app/services/login.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cours } from '../../models/Cours';
 import { Consultant } from '../../models/Consultant';
@@ -32,7 +31,6 @@ export class CarteComponent implements OnInit {
   constructor(
     private coursService: CoursService,
     private loginService: LoginService,
-    private localStorageService: LocalStorageService,
     private editConsultationComponent: EditConsultationComponent,
     private route: ActivatedRoute,
     private router: Router,
