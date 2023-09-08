@@ -5,7 +5,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cours } from '../../models/Cours';
 import { Consultant } from '../../models/Consultant';
-import { CardState } from '../../models/CardState';
+import { CarteEtat } from '../../models/CarteEtat';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { EditConsultationComponent } from "C:/Users/kleyf/source/repos/AngularFrontend/AngularFrontendTrello/src/app/components/consultation/edit-consultation/edit-consultation.component";
 import { ConsultationService } from '../../services/consultation.service';
@@ -25,7 +25,7 @@ export class CarteComponent implements OnInit {
   totalcours: Cours[] = [];
   actif: Cours[] = [];
   done: Cours[] = [];
-  cardStates: CardState[] = [];
+  cardStates: CarteEtat[] = [];
   score: number = 0;
   public consultants: Consultant[] = [];
 
