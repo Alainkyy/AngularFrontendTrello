@@ -27,6 +27,7 @@ export class CarteComponent implements OnInit {
   done: Cours[] = [];
   cardStates: CardState[] = [];
   score: number = 0;
+  public consultants: Consultant[] = [];
 
   constructor(
     private coursService: CoursService,
@@ -106,17 +107,29 @@ calculateScore() {
   const finishedCours = this.done.length; // Le nombre de cours dans "Finis"
   this.score = Math.floor((finishedCours / totalCours) * 100);
 
-  this.connectedAs5 = this.score;
+  // Obtenez la liste de tous les consultants
+this.editConsultationComponent.consultationService.GetConsultant().subscribe(
+  (consultants: Consultant[]) => {
+    // Recherchez le consultant spécifique par son ID
+    var consultantToUpdate = consultants.find((consultant) => consultant.idConsultant === this.connectedAs6);
 
-  // Mettez à jour le score du consultant en appelant la méthode PutScoreConsultant avec l'ID dans l'URL
-  this.editConsultationComponent.consultationService.PutScoreConsultant(this.connectedAs6, this.connectedAs5).subscribe(
-    (updatedConsultant: Consultant) => {
-      console.log('Score du Consultant mis à jour avec succès :', updatedConsultant);
-    },
-    (error) => {
-      console.error('Erreur lors de la mise à jour du score du consultant :', error);
+    if (consultantToUpdate) {
+      // Modifiez le score du consultant
+      consultantToUpdate.score = this.score;
+
+      // Mettez à jour le consultant spécifique en appelant la méthode PutConsultant avec le consultant modifié
+      this.editConsultationComponent.consultationService.PutConsultant(consultantToUpdate).subscribe(
+        (updatedConsultant: Consultant) => {
+          console.log('Score du Consultant mis à jour avec succès :', updatedConsultant);
+        },
+        (error) => {
+          console.error('Erreur lors de la mise à jour du score du consultant :', error);
+        }
+      );
+    } else {
+      console.error('Consultant non trouvé avec l\'ID spécifié.');
     }
-  );
+  }
+);
 }
-
 }

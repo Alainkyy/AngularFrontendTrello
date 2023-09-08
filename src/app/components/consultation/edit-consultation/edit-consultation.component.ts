@@ -23,7 +23,7 @@ export class EditConsultationComponent implements OnInit {
     this.initializeConsultantDetailsFromUrl();
   }
 
-  private initializeConsultantIdFromUrl() {
+  public initializeConsultantIdFromUrl() {
     const idConsultant = this.route.snapshot.paramMap.get('idConsultant');
     if (idConsultant !== null) {
       this.consultantToEdit.idConsultant = +idConsultant;
@@ -32,7 +32,7 @@ export class EditConsultationComponent implements OnInit {
     }
   }
 
-  private initializeConsultantDetailsFromUrl() {
+  public initializeConsultantDetailsFromUrl() {
     const idConsultantFromUrl = this.route.snapshot.paramMap.get('idConsultant');
     const idConsultant = idConsultantFromUrl !== null ? +idConsultantFromUrl : null;
   
