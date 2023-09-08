@@ -1,39 +1,34 @@
-A faire :
-Faire une variable qui vas stocker le pourcentage de l'avancement en fonction de la specialité exemple : 10 cours dans une spécialité donc 1 cours = 10%
-Afficher la boite de cours ameliorer le design
-Quand un cours est passé dans la liste done => avancement s'incremente en fonction du nbcours
-Rajouter Variable pour savoir si un cours est en cours ou done (un boolean : finished)
+CarteEtat est fait model + service
 
-Plus tard :
-S'occuper de l'affichage administrateur (All details Cours consultant)
+Quand on s'authentifie et qu'on click sur cours alors on charge le tableau CarteEtat
+0 - Recuperer CarteEtat filtré par connectedAs6 (IdConsultantConnecté)
+1 - Charger 0 dans le ngOnInit()
 
+CarteEtat doit recuperer idConsultantConnecte donc connectedAs6
+2 - CarteEtat.IdConsultant = this.connectedAs6
 
-zézzion avancémént toiz zaffiché chéz formatéur & tétail auzzi
+A chaque deplacement de carte, de la meme facon que calculateScore est appelé on vas mettre dans calculateScore
+le remplissage de la table CarteEtat de sorte que chaque deplacement sois enregistré dans la table. 
 
+3 :
+    - Recuperer cours.idCours qui est déplacé et le mettre dans CarteEtat.IdCours
 
-Dans cours seront affiché les cours filtré par la spécialité ! 
-Donc je dois faire un service pour recuperer la specialité selectionné ou dans la BD par Consultant
+    - Si listeDdCours contient CarteEtat.IdCours alors CarteEtat.IsVosCours = true, CarteEtat.IsActif = false, CarteEtat.IsFinis = false
+    - Si listeDdActif contient CarteEtat.IdCours alors CarteEtat.IsVosCours = false, CarteEtat.IsActif = true, CarteEtat.IsFinis = false
+    - Si listeDdFinis contient CarteEtat.IdCours alors CarteEtat.IsVosCours = false, CarteEtat.IsActif = false, CarteEtat.IsFinis = true
 
-
-
-
-    Récupérez l'ID de la spécialité du consultant connecté. FAIT
-    Récupérez la liste complète des cours. FAIT
-    Utilisez l'ID de spécialité du consultant pour filtrer la liste des cours. FAIT
-    Affichez la liste filtrée des cours dans votre interface utilisateur. FAIT DU PREMIER COUP SA MERE ! 
+A la fin de calculateScore rajouté 
+4 - CarteEtat.ScoreEtat = consultantToUpdate.score
 
 
 
-Mettre en place le localStorage
+5 - Filtre par IdConsultant dans CarteEtat pour charger uniquement les modifications du consultant connecté (connectedAs6)
 
-Et si le code etait bon et c'etait le ngOnInit qui intialise pas la sauvegarde ? 
-Non ca sauvegarde n'importe comment systematiquement, il faut que la classe CarteState 
-- recupere l'id du cours quand on Drag un cours 
-- recupere la localisation apres un Drag du cours pour voir si cardDone true or false
 
-- Enregistre ces données dans la table CardState e
 
-- Recupere ces donnée au chargement de la page par session
-- Affecte chaque idCours a sa place (En cours / Done )
+A Faire Autre :
+Sur la liste Consultant affiché chez les "Admin" rajouté un filtre sur Axe
+Rajouté un trie sur Score
 
- 
+En cours : 
+Recuperer l'idCours du cours deplacé 

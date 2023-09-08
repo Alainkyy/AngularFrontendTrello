@@ -17,6 +17,7 @@ import { ConsultationService } from '../../services/consultation.service';
 })
 export class CarteComponent implements OnInit {
   title = 'Trello Like';
+  carteEtats: CarteEtat[] = [];
   connectedAs4: string | null = null; //codeConsultant
   connectedAs3: number | null = null; //idSpecialite du Consultant
   connectedAs5: number | null = null; //score du Consultant
@@ -26,7 +27,24 @@ export class CarteComponent implements OnInit {
   done: Cours[] = [];
   cardStates: CarteEtat[] = [];
   score: number = 0;
+  IdCarte: number = 0;
+  idCoursMoved : number = 0;
+  IdCours : number = 0;
+  IdConsultant : number = 0;
+  ScoreEtat : number = 0;
+  isVosCours : boolean = false;
+  isActif : boolean = false;
+  isFinis : boolean = false;
   public consultants: Consultant[] = [];
+  public carteEtatToAdd: CarteEtat = new CarteEtat(
+    this.IdCarte, 
+    this.IdCours, 
+    this.isVosCours, 
+    this.isActif, 
+    this.isFinis, 
+    this.IdConsultant, 
+    this.ScoreEtat
+    );
 
   constructor(
     private coursService: CoursService,
@@ -65,12 +83,30 @@ ngOnInit(): void {
 
   // Recupere le score du Consultant connecté
   if (this.connectedAs6 !== null) {
+    this.afficherTousLesEtatsFiltre(this.connectedAs6);
   } else {
     console.log("L'idConsultant est null.");
   }
+
 }
 
-afficherTousLesCoursFiltre(idSpecialite: number) {
+public afficherTousLesEtatsFiltre(connectedAs6: number) {
+  this.coursService.GetCarteEtat().subscribe((result: any[]) => {
+    this.carteEtats = result
+      .filter(carteEtatData => carteEtatData.IdConsultant === connectedAs6)
+      .map(carteEtatData => new CarteEtat(
+        carteEtatData.IdCarte,
+        carteEtatData.IdCours,
+        carteEtatData.IsVosCours,
+        carteEtatData.IsActif,
+        carteEtatData.IsFinis,
+        carteEtatData.IdConsultant,
+        carteEtatData.ScoreEtat
+      ));
+  });
+}
+
+public afficherTousLesCoursFiltre(idSpecialite: number) {
   this.coursService.getCours().subscribe((result: any[]) => {
     this.totalcours = result
       .filter(coursData => coursData.idSpecialite === idSpecialite)
@@ -98,6 +134,8 @@ drop(event: CdkDragDrop<Cours[]>) {
                       event.previousIndex,
                       event.currentIndex);
   }
+
+  this.idCoursMoved = event.previousContainer.data[event.currentIndex]['idCours']
 }
 
 calculateScore() {
@@ -106,7 +144,7 @@ calculateScore() {
   this.score = Math.floor((finishedCours / totalCours) * 100);
 
   // Obtenez la liste de tous les consultants
-this.editConsultationComponent.consultationService.GetConsultant().subscribe(
+  this.editConsultationComponent.consultationService.GetConsultant().subscribe(
   (consultants: Consultant[]) => {
     // Recherchez le consultant spécifique par son ID
     var consultantToUpdate = consultants.find((consultant) => consultant.idConsultant === this.connectedAs6);
@@ -129,5 +167,26 @@ this.editConsultationComponent.consultationService.GetConsultant().subscribe(
     }
   }
 );
+
+console.log("L'id du Cours deplacé est : ", this.idCoursMoved);
+this.coursService.PostCarteEtat(this.carteEtatToAdd).subscribe(
+  (addedCarteEtat: CarteEtat) => {
+    console.log('Consultant ajouté avec succès :', addedCarteEtat);
+    this.carteEtatToAdd = new CarteEtat(
+      this.IdCarte,
+      this.idCoursMoved,
+      this.isVosCours,
+      this.isActif,
+      this.isFinis,
+      this.connectedAs6,
+      this.score 
+    );
+    console.log('Valeurs de carteEtat :', addedCarteEtat);
+  },
+  (error) => {
+    console.error('Erreur lors de l\'enregistrement de la carte :', error);
+  }
+);
+
 }
 }
