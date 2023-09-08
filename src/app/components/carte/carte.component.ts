@@ -17,10 +17,11 @@ export class CarteComponent implements OnInit {
   title = 'Trello Like';
   connectedAs4: string | null = null; //codeConsultant
   connectedAs3: number | null = null; //idSpecialite du Consultant
-  cours: Cours[] = [];
+  totalcours: Cours[] = [];
   actif: Cours[] = [];
   done: Cours[] = [];
   cardStates: CardState[] = [];
+  score: number = 0;
 
   constructor(
     private coursService: CoursService,
@@ -50,7 +51,7 @@ ngOnInit(): void {
 
 afficherTousLesCoursFiltre(idSpecialite: number) {
   this.coursService.getCours().subscribe((result: any[]) => {
-    this.cours = result
+    this.totalcours = result
       .filter(coursData => coursData.idSpecialite === idSpecialite)
       .map(coursData => new Cours(
         coursData.idCours,
@@ -77,4 +78,13 @@ drop(event: CdkDragDrop<Cours[]>) {
                       event.currentIndex);
   }
 }
+
+calculateScore() {
+  const totalCours = this.totalcours.length +1 ; // Le nombre total de cours dans "Vos Cours"
+  console.log(totalCours);
+  const finishedCours = this.done.length; // Le nombre de cours dans "Finis"
+  this.score = (finishedCours / totalCours) * 100;
+}
+
+
 }

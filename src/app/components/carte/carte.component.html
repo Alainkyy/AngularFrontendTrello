@@ -11,8 +11,8 @@
 
     <div class="example-container">
       <h2 class ="style_h2">Liste des Cours</h2>
-        <div cdkDropList [cdkDropListData]="cours" class="listeDdCoursCss" (cdkDropListDropped)="drop($event)" #listeDdCours>
-          <div class="example-box" *ngFor="let coursItem of cours" cdkDrag>
+        <div cdkDropList [cdkDropListData]="totalcours" class="listeDdCoursCss" (cdkDropListDropped)="drop($event)" #listeDdCours>
+          <div class="example-box" *ngFor="let coursItem of totalcours" cdkDrag>
             <h3>{{ coursItem.nomCours }}</h3>
             <p>Lien vers le cours : {{ coursItem.lienVersCours }}</p>
             <p>Vidéo vers le cours : {{ coursItem.videoVersCours }}</p>
@@ -37,8 +37,8 @@
 
   
     <div class="example-container">
-      <h2 class ="style_h2">Finis</h2>
-        <div cdkDropList [cdkDropListData]="done" class="listeDdFinisCss" (cdkDropListDropped)="drop($event)" #listeDdFinis>
+      <h2 class ="style_h2">Finis ({{ score.toFixed(1) }}%)</h2>
+        <div cdkDropList [cdkDropListData]="done" class="listeDdFinisCss" (cdkDropListDropped)="drop($event)" #listeDdFinis (cdkDropListDropped)="calculateScore()">
           <div class="example-box" *ngFor="let coursItem of done" cdkDrag>
             <h3>{{ coursItem.nomCours }}</h3>
           </div>
