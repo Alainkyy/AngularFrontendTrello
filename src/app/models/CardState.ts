@@ -1,6 +1,8 @@
 export class CardState {
     constructor(
-      public cardId: number,
-      public cardDone: boolean,
+      public idCours: number,
+      public isVosCours: boolean,
+      public isActif: boolean,
+      public isFinis: boolean,
     ) {}
   }

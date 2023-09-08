@@ -13,7 +13,7 @@ export class EditConsultationComponent implements OnInit {
   public consultants: Consultant[] = [];
 
   constructor(
-    private consultationService: ConsultationService,
+    public consultationService: ConsultationService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -68,7 +68,7 @@ export class EditConsultationComponent implements OnInit {
   }
   
 
-  onModif() {
+ public onModif() {
     this.consultationService.PutConsultant(this.consultantToEdit).subscribe(
       (updatedConsultant: Consultant) => {
         console.log('Consultant modifié avec succès :', updatedConsultant);

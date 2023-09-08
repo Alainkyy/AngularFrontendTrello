@@ -24,6 +24,10 @@ export class ConsultationService {
     return this.http.put<Consultant>(`${environment.apiURL}Consultant/modifier/${consultant.idConsultant}`, consultant);
   }
 
+  PutScoreConsultant(idConsultant: number, newScore: number): Observable<Consultant> {
+    return this.http.put<Consultant>(`${environment.apiURL}Consultant/modifier/${idConsultant}`, idConsultant);
+  }
+
   public DeleteConsultant(idConsultant: number): Observable<void> {
     return this.http.delete<void>(`${environment.apiURL}Consultant/supprimer/${idConsultant}`);
   }

@@ -7,7 +7,7 @@ import { CardState } from '../models/CardState'
 export class LocalStorageService {
   constructor() {}
 
-  setItem(key: string, value: any): void {
+  /*setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
@@ -40,5 +40,5 @@ export class LocalStorageService {
   
   clear(): void {
     localStorage.clear();
-  }
+  }*/
 }

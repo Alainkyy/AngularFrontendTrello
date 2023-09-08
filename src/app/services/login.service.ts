@@ -12,10 +12,14 @@ import { LocalStorageService } from './local-storage.service';
 })
 export class LoginService {
   private url = environment.apiURL;
+
   private codeConsultantConnecte: string | null = null;
   private nomConsultantConnecte: string | null = null;
   private statutConsultantConnecte: string | null = null;
   private idSpecialiteConsultantConnecte: number | null = null;
+  private scoreConsultantConnecte: number | null = null;
+  private idConsultantConsultantConnecte: number | null = null;
+  
   indiceConnexion: boolean = false;
   isAdmin: boolean = false;
   isFormation: boolean = false;
@@ -54,7 +58,7 @@ public setStatutConsultantConnecte(statut: string): void {
 public setCodeConsultantConnecte(code: string): void {
   this.codeConsultantConnecte = code;
 
-  this.localStorageService.setItem('codeConsultant', code);
+  //this.localStorageService.setItem('codeConsultant', code);
 }
 
 public getCodeConsultantConnecte(): string | null {
@@ -68,6 +72,25 @@ public setIdSpecialiteConsultantConnecte(idSpe: number): void {
   public getIdSpecialiteConsultantConnecte(): number | null {
     return this.idSpecialiteConsultantConnecte;
   }
+
+  // Score
+public setScoreConsultantConnecte(score: number): void {
+  this.scoreConsultantConnecte = score;
+}
+
+public getScoreConsultantConnecte(): number | null {
+  return this.scoreConsultantConnecte;
+}
+
+ // idConsultant
+ public setIdConsultantConsultantConnecte(idConsultant: number): void {
+  this.idConsultantConsultantConnecte = idConsultant;
+}
+
+public getIdConsultantConsultantConnecte(): number | null {
+  return this.idConsultantConsultantConnecte;
+}
+
 
   public deconnexion(): void {
     this.indiceConnexion = false;

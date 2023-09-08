@@ -7,16 +7,21 @@ import { Cours } from '../../models/Cours';
 import { Consultant } from '../../models/Consultant';
 import { CardState } from '../../models/CardState';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { EditConsultationComponent } from "C:/Users/kleyf/source/repos/AngularFrontend/AngularFrontendTrello/src/app/components/consultation/edit-consultation/edit-consultation.component";
+import { ConsultationService } from '../../services/consultation.service';
 
 @Component({
   selector: 'app-carte',
   templateUrl: './carte.component.html',
-  styleUrls: ['./carte.component.css']
+  styleUrls: ['./carte.component.css'],
+  providers: [EditConsultationComponent],
 })
 export class CarteComponent implements OnInit {
   title = 'Trello Like';
   connectedAs4: string | null = null; //codeConsultant
   connectedAs3: number | null = null; //idSpecialite du Consultant
+  connectedAs5: number | null = null; //score du Consultant
+  connectedAs6: any | null = null; //idConsultant du Consultant
   totalcours: Cours[] = [];
   actif: Cours[] = [];
   done: Cours[] = [];
@@ -27,6 +32,7 @@ export class CarteComponent implements OnInit {
     private coursService: CoursService,
     private loginService: LoginService,
     private localStorageService: LocalStorageService,
+    private editConsultationComponent: EditConsultationComponent,
     private route: ActivatedRoute,
     private router: Router,
     private cd: ChangeDetectorRef
@@ -35,17 +41,33 @@ export class CarteComponent implements OnInit {
 ngOnInit(): void {
   this.connectedAs4 = this.loginService.getCodeConsultantConnecte();
   this.connectedAs3 = this.loginService.getIdSpecialiteConsultantConnecte();
+  this.connectedAs5 = this.loginService.getScoreConsultantConnecte();
+  this.connectedAs6 = this.loginService.getIdConsultantConsultantConnecte();
 
+  // Recupere l'idSpecialite du Consultant connecté
   if (this.connectedAs3 !== null) {
     this.afficherTousLesCoursFiltre(this.connectedAs3);
   } else {
     console.log("L'ID de spécialité est null.");
   }
 
+  // Recupere le codeConsultant du Consultant connecté
   if (this.connectedAs4 !== null) {
     console.log("Code Consultant :",this.connectedAs4);
   } else {
     console.log("Le CodeConsultant est null.");
+  }
+
+  // Recupere le score du Consultant connecté
+  if (this.connectedAs5 !== null) {
+  } else {
+    console.log("Le Score est null.");
+  }
+
+  // Recupere le score du Consultant connecté
+  if (this.connectedAs6 !== null) {
+  } else {
+    console.log("L'idConsultant est null.");
   }
 }
 
@@ -80,10 +102,21 @@ drop(event: CdkDragDrop<Cours[]>) {
 }
 
 calculateScore() {
-  const totalCours = this.totalcours.length + this.done.length + this.actif.length ; // Le nombre total de cours dans "Vos Cours"
+  const totalCours = this.totalcours.length + this.done.length + this.actif.length; // Le nombre total de cours dans "Vos Cours"
   const finishedCours = this.done.length; // Le nombre de cours dans "Finis"
   this.score = (finishedCours / totalCours) * 100;
-}
 
+  this.connectedAs5 = this.score;
+
+  // Mettez à jour le score du consultant en appelant la méthode PutScoreConsultant avec l'ID dans l'URL
+  this.editConsultationComponent.consultationService.PutScoreConsultant(this.connectedAs6, this.connectedAs5).subscribe(
+    (updatedConsultant: Consultant) => {
+      console.log('Score du Consultant mis à jour avec succès :', updatedConsultant);
+    },
+    (error) => {
+      console.error('Erreur lors de la mise à jour du score du consultant :', error);
+    }
+  );
+}
 
 }

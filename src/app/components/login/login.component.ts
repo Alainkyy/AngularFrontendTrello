@@ -53,6 +53,14 @@ export class LoginComponent implements OnInit  {
         const codeConsultant = consultant.codeConsultant;
         this.loginService.setCodeConsultantConnecte(consultant.codeConsultant); 
 
+        // Recupere le score du Consultant
+        const score = consultant.score;
+        this.loginService.setScoreConsultantConnecte(consultant.score); 
+
+        // Recupere l'idConsultant du Consultant
+        const idConsultant = consultant.idConsultant;
+        this.loginService.setIdConsultantConsultantConnecte(consultant.idConsultant); 
+
         this.router.navigate(['/home']);
       } else {
         console.log('Fail');
