@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CardState } from '../models/CardState'
 
 @Injectable({
   providedIn: 'root',
@@ -6,23 +7,37 @@ import { Injectable } from '@angular/core';
 export class LocalStorageService {
   constructor() {}
 
-  // Méthode pour stocker l'état des cartes dans le localStorage
-  setCardState(codeConsultant: string, cardState: any): void {
-    localStorage.setItem(`cardState_${codeConsultant}`, JSON.stringify(cardState));
+  setItem(key: string, value: any): void {
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
-  // Méthode pour récupérer l'état des cartes depuis le localStorage
-  getCardState(codeConsultant: string): any | null {
-    const cardState = localStorage.getItem(`cardState_${codeConsultant}`);
-    return cardState ? JSON.parse(cardState) : null;
+  getItem<T>(key: string): T | null {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
   }
 
-  // Méthode pour supprimer l'état des cartes du localStorage
-  removeCardState(codeConsultant: string): void {
-    localStorage.removeItem(`cardState_${codeConsultant}`);
+  removeItem(key: string): void {
+    localStorage.removeItem(key);
   }
 
-  // Méthode pour vider complètement le localStorage
+  setCardState(codeConsultant: string, cardStates: CardState[]): void {
+    localStorage.setItem(`cardState_${codeConsultant}`, JSON.stringify(cardStates));
+  }
+  
+  getCardState(codeConsultant: string): CardState | null {
+    const localCardState = this.getItem<CardState>(`cardState_${codeConsultant}`);
+    return localCardState;
+  }
+  
+  updateLocalCardState(codeConsultant: string, cardState: CardState): void {
+    // Mettez à jour l'état local des cartes
+    const localCardState: CardState = this.getItem<CardState>(`cardState_${codeConsultant}`) || new CardState(0, false);
+    localCardState.cardDone = cardState.cardDone;
+  
+    // Mettez à jour le localStorage
+    this.setItem(`cardState_${codeConsultant}`, localCardState);
+  }
+  
   clear(): void {
     localStorage.clear();
   }

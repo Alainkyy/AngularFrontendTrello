@@ -5,6 +5,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cours } from '../../models/Cours';
 import { Consultant } from '../../models/Consultant';
+import { CardState } from '../../models/CardState';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
@@ -17,7 +18,9 @@ export class CarteComponent implements OnInit {
   connectedAs4: string | null = null; //codeConsultant
   connectedAs3: number | null = null; //idSpecialite du Consultant
   cours: Cours[] = [];
+  actif: Cours[] = [];
   done: Cours[] = [];
+  cardStates: CardState[] = [];
 
   constructor(
     private coursService: CoursService,

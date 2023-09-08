@@ -25,5 +25,14 @@ Donc je dois faire un service pour recuperer la specialité selectionné ou dans
 
 
 Mettre en place le localStorage
+Et si le code etait bon et c'etait le ngOnInit qui intialise pas la sauvegarde ? 
+Non ca sauvegarde n'importe comment systematiquement, il faut que la classe CarteState 
+- recupere l'id du cours quand on Drag un cours 
+- recupere la localisation apres un Drag du cours pour voir si cardDone true or false
+
+- Enregistre ces données dans la table CardState e
+
+- Recupere ces donnée au chargement de la page par session
+- Affecte chaque idCours a sa place (En cours / Done )
 
  

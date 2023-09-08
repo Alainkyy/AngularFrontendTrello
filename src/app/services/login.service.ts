@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +24,14 @@ export class LoginService {
     private http : HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private localStorageService: LocalStorageService
     ) { }
 
     public getConsultant() : Observable<Consultant[]>{
       return this.http.get<Consultant[]>(`${environment.apiURL}Consultant/liste`);
     }
-    
+
 // nomConsultant
 public setNomConsultantConnecte(nom: string): void {
     this.nomConsultantConnecte = nom;
@@ -51,6 +53,8 @@ public setStatutConsultantConnecte(statut: string): void {
 // codeConsultant
 public setCodeConsultantConnecte(code: string): void {
   this.codeConsultantConnecte = code;
+
+  this.localStorageService.setItem('codeConsultant', code);
 }
 
 public getCodeConsultantConnecte(): string | null {

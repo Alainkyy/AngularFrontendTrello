@@ -15,6 +15,10 @@ body {
     margin-top: 2%; /* Margin top de 10% */
   }
 
+  .style_h2{
+    text-align: center;
+  }
+
   .example-container {
     width: 400px;
     max-width: 100%;
@@ -26,7 +30,7 @@ body {
   .example-list {
     border: solid 1px #ccc;
     min-height: 60px;
-    background: white;
+    background: inherit;
     border-radius: 4px;
     overflow: hidden;
     display: block;
@@ -42,7 +46,7 @@ body {
     justify-content: space-between;
     box-sizing: border-box;
     cursor: move;
-    background: white;
+    background: inherit;
     font-size: 14px;
   }
   
@@ -69,4 +73,35 @@ body {
   .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   }
-  
+
+/* Couleur de fond pour la premiere liste */
+.listeDdCoursCss {
+  border: solid 1px #ccc;
+  min-height: 60px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+  background-color: #FCEAD7;
+}
+
+/* Couleur de fond pour la deuxième liste */
+.listeDdActifCss {
+  border: solid 1px #ccc;
+  min-height: 60px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+  background-color: #C1E9F8;
+}
+
+/* Couleur de fond pour la troisieme liste */
+.listeDdFinisCss {
+  border: solid 1px #ccc;
+  min-height: 60px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+  background-color: #D1E7C5;
+}
+
+

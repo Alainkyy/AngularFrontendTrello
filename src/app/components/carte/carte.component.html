@@ -6,41 +6,43 @@
 </head>
 <body>
   <app-header-section></app-header-section>
+
   <div cdkDropListGroup>
+
     <div class="example-container">
-      <h2>Vos Cours</h2>
-  
-      <div
-        cdkDropList
-        [cdkDropListData]="cours"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let coursItem of cours" cdkDrag>
-          <h3>{{ coursItem.nomCours }}</h3>
-          <p>Lien vers le cours : {{ coursItem.lienVersCours }}</p>
-          <p>Vidéo vers le cours : {{ coursItem.videoVersCours }}</p>
-          <p>Exercice : {{ coursItem.exercice }}</p>
-          <p>Commentaire : {{ coursItem.commentaire }}</p>
+      <h2 class ="style_h2">Liste des Cours</h2>
+        <div cdkDropList [cdkDropListData]="cours" class="listeDdCoursCss" (cdkDropListDropped)="drop($event)" #listeDdCours>
+          <div class="example-box" *ngFor="let coursItem of cours" cdkDrag>
+            <h3>{{ coursItem.nomCours }}</h3>
+            <p>Lien vers le cours : {{ coursItem.lienVersCours }}</p>
+            <p>Vidéo vers le cours : {{ coursItem.videoVersCours }}</p>
+            <p>Exercice : {{ coursItem.exercice }}</p>
+            <p>Commentaire : {{ coursItem.commentaire }}</p>
+          </div>
         </div>
-      </div>
     </div>
+
+    <div class="example-container">
+      <h2 class ="style_h2">Actif</h2>
+        <div cdkDropList [cdkDropListData]="actif" class="listeDdActifCss" (cdkDropListDropped)="drop($event)" #listeDdActif>
+          <div class="example-box" *ngFor="let coursItem of actif" cdkDrag>
+            <h3>{{ coursItem.nomCours }}</h3>
+            <p>Lien vers le cours : {{ coursItem.lienVersCours }}</p>
+            <p>Vidéo vers le cours : {{ coursItem.videoVersCours }}</p>
+            <p>Exercice : {{ coursItem.exercice }}</p>
+            <p>Commentaire : {{ coursItem.commentaire }}</p>
+          </div>
+        </div>
+    </div>
+
   
     <div class="example-container">
-      <h2>Done</h2>
-  
-      <div
-        cdkDropList
-        [cdkDropListData]="done"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of done" cdkDrag>
-          <h3>{{ item.nomCours }}</h3>
-          <p>Lien vers le cours : {{ item.lienVersCours }}</p>
-          <p>Vidéo vers le cours : {{ item.videoVersCours }}</p>
-          <p>Exercice : {{ item.exercice }}</p>
-          <p>Commentaire : {{ item.commentaire }}</p>
+      <h2 class ="style_h2">Finis</h2>
+        <div cdkDropList [cdkDropListData]="done" class="listeDdFinisCss" (cdkDropListDropped)="drop($event)" #listeDdFinis>
+          <div class="example-box" *ngFor="let coursItem of done" cdkDrag>
+            <h3>{{ coursItem.nomCours }}</h3>
+          </div>
         </div>
-      </div>
     </div>
   </div>
 </body>
