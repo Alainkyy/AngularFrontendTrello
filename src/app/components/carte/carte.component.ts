@@ -135,7 +135,7 @@ drop(event: CdkDragDrop<Cours[]>) {
                       event.currentIndex);
   }
 
-  this.idCoursMoved = event.previousContainer.data[event.currentIndex]['idCours']
+  this.idCoursMoved = event.container.data[event.currentIndex]['idCours']
 }
 
 calculateScore() {
@@ -169,6 +169,7 @@ calculateScore() {
 );
 
 console.log("L'id du Cours deplacé est : ", this.idCoursMoved);
+
 this.coursService.PostCarteEtat(this.carteEtatToAdd).subscribe(
   (addedCarteEtat: CarteEtat) => {
     console.log('Consultant ajouté avec succès :', addedCarteEtat);
