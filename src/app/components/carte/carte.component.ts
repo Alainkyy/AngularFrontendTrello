@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CoursService } from 'src/app/services/cours.service';
 import { LoginService } from 'src/app/services/login.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,13 +16,14 @@ import { ConsultationService } from '../../services/consultation.service';
   providers: [EditConsultationComponent],
 })
 export class CarteComponent implements OnInit {
+
   title = 'Trello Like';
   carteEtats: CarteEtat[] = [];
   connectedAs4: string | null = null; //codeConsultant
   connectedAs3: number | null = null; //idSpecialite du Consultant
   connectedAs5: number | null = null; //score du Consultant
   connectedAs6: any | null = null; //idConsultant du Consultant
-  totalcours: Cours[] = [];
+  listecours: Cours[] = [];
   actif: Cours[] = [];
   done: Cours[] = [];
   score: number = 0;
@@ -93,7 +94,7 @@ public afficherTousLesEtatsFiltre(connectedAs6: number) {
 
 public afficherTousLesCoursFiltre(idSpecialite: number) {
   this.coursService.getCours().subscribe((result: any[]) => {
-    this.totalcours = result
+    this.listecours = result
       .filter(coursData => coursData.idSpecialite === idSpecialite)
       .map(coursData => new Cours(
         coursData.idCours,
@@ -124,7 +125,7 @@ drop(event: CdkDragDrop<Cours[]>) {
 }
 
 calculateScore() {
-  const totalCours = this.totalcours.length + this.done.length + this.actif.length; // Le nombre total de cours dans "Vos Cours"
+  const totalCours = this.listecours.length + this.done.length + this.actif.length; // Le nombre total de cours dans "Vos Cours"
   const finishedCours = this.done.length; // Le nombre de cours dans "Finis"
   this.score = Math.floor((finishedCours / totalCours) * 100);
 
@@ -155,30 +156,59 @@ this.AjoutCarteEtat();
 
 }
 
-AjoutCarteEtat(){
-  
-this.carteEtatToAdd = new CarteEtat(
-  this.idCarte, // généré par le serveur
-  this.connectedAs6,
-  this.idCoursMoved,
-  undefined, //  null pour l'instant
-  undefined, // null pour l'instant
-  undefined, //  null pour l'instant
-  this.score
-);
-console.log('Valeurs de carte avant envoi :', this.carteEtatToAdd);
+AjoutCarteEtat() {
+  this.OuEstLeCours();
 
-this.coursService.PostCarteEtat(this.carteEtatToAdd).subscribe(
-  (carteEtatToAdd: CarteEtat) => {
-    console.log('Carte enregistrée :', carteEtatToAdd);
+  this.carteEtatToAdd = new CarteEtat(
+    this.idCarte,
+    this.connectedAs6,
+    this.idCoursMoved,
+    this.carteEtatToAdd.isVosCours,
+    this.carteEtatToAdd.isActif,
+    this.carteEtatToAdd.isFinis,
+    this.score
+  );
 
-    this.carteEtatToAdd = carteEtatToAdd;
+  console.log('Valeurs de carte avant envoi :', this.carteEtatToAdd);
 
-    console.log('Valeurs de carte après enregistrement :', this.carteEtatToAdd);
-  },
-  (error) => {
-    console.error('Erreur lors de l\'enregistrement de la carte :', error);
-    console.log('Valeurs de carte lors de l\'erreur :', this.carteEtatToAdd);
-  });
+  this.coursService.PostCarteEtat(this.carteEtatToAdd).subscribe(
+    (carteEtatToAdd: CarteEtat) => {
+
+      this.carteEtatToAdd = carteEtatToAdd;
+
+      console.log('Valeurs de carte après enregistrement :', this.carteEtatToAdd);
+    },
+    (error) => {
+      console.error('Erreur lors de l\'enregistrement de la carte :', error);
+      // console.log('Valeurs de carte lors de l\'erreur :', this.carteEtatToAdd);
+    }
+  );
 }
+
+OuEstLeCours(){
+  // Recherchez dans listecours
+var coursTrouveListeCours = this.listecours.find(cours => cours.idCours === this.idCoursMoved);
+
+// Recherchez dans actif
+var coursTrouveActif = this.actif.find(cours => cours.idCours === this.idCoursMoved);
+
+// Recherchez dans done
+var coursTrouveDone = this.done.find(cours => cours.idCours === this.idCoursMoved);
+
+// Maintenant, vous pouvez vérifier pour chaque liste
+if (coursTrouveListeCours) {
+  this.carteEtatToAdd.isVosCours = true;
+  this.carteEtatToAdd.isActif = false;
+  this.carteEtatToAdd.isFinis = false;
+} else if (coursTrouveActif) {
+  this.carteEtatToAdd.isVosCours = false;
+  this.carteEtatToAdd.isActif = true;
+  this.carteEtatToAdd.isFinis = false;
+} else if (coursTrouveDone) {
+  this.carteEtatToAdd.isVosCours = false;
+  this.carteEtatToAdd.isActif = false;
+  this.carteEtatToAdd.isFinis = true;
+}
+}
+
 }

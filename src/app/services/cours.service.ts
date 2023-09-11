@@ -39,7 +39,7 @@ export class CoursService {
       isFinis: carteEtat.isFinis,
       scoreEtat: carteEtat.scoreEtat,
     };
-   // return this.http.post<CarteEtat>(`${environment.apiURL}CarteEtat/ajouter`, CarteEtat);
+    
    return this.http.post<CarteEtat>(
     `${environment.apiURL}CarteEtat/ajouter`,
     carteEtatToAdd,
