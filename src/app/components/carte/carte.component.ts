@@ -25,10 +25,10 @@ export class CarteComponent implements OnInit {
   totalcours: Cours[] = [];
   actif: Cours[] = [];
   done: Cours[] = [];
-  cardStates: CarteEtat[] = [];
   score: number = 0;
   idCoursMoved : number = 0;
   public consultants: Consultant[] = [];
+  idCarte: number = 0;
   public carteEtatToAdd: CarteEtat = new CarteEtat();
     
   constructor(
@@ -128,17 +128,15 @@ calculateScore() {
   const finishedCours = this.done.length; // Le nombre de cours dans "Finis"
   this.score = Math.floor((finishedCours / totalCours) * 100);
 
-  // Obtenez la liste de tous les consultants
   this.editConsultationComponent.consultationService.GetConsultant().subscribe(
   (consultants: Consultant[]) => {
-    // Recherchez le consultant spécifique par son ID
+
     var consultantToUpdate = consultants.find((consultant) => consultant.idConsultant === this.connectedAs6);
 
     if (consultantToUpdate) {
-      // Modifiez le score du consultant
+      
       consultantToUpdate.score = this.score;
-
-      // Mettez à jour le consultant spécifique en appelant la méthode PutConsultant avec le consultant modifié
+      
       this.editConsultationComponent.consultationService.PutConsultant(consultantToUpdate).subscribe(
         (updatedConsultant: Consultant) => {
           console.log('Score du Consultant mis à jour avec succès :', updatedConsultant);
@@ -152,14 +150,20 @@ calculateScore() {
     }
   }
 );
+this.AjoutCarteEtat();
+// this.idCarte = this.idCarte + 1;
 
+}
+
+AjoutCarteEtat(){
+  
 this.carteEtatToAdd = new CarteEtat(
-  undefined, // Laissez IdCarte à null, car il sera généré par le serveur
+  this.idCarte, // généré par le serveur
   this.connectedAs6,
   this.idCoursMoved,
-  undefined, // Laissez isVosCours à null pour l'instant
-  undefined, // Laissez isActif à null pour l'instant
-  undefined, // Laissez isFinis à null pour l'instant
+  undefined, //  null pour l'instant
+  undefined, // null pour l'instant
+  undefined, //  null pour l'instant
   this.score
 );
 console.log('Valeurs de carte avant envoi :', this.carteEtatToAdd);
@@ -168,7 +172,6 @@ this.coursService.PostCarteEtat(this.carteEtatToAdd).subscribe(
   (carteEtatToAdd: CarteEtat) => {
     console.log('Carte enregistrée :', carteEtatToAdd);
 
-    // Mettez à jour carteEtatToAdd avec les valeurs retournées (si nécessaire)
     this.carteEtatToAdd = carteEtatToAdd;
 
     console.log('Valeurs de carte après enregistrement :', this.carteEtatToAdd);

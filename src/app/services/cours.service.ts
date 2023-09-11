@@ -22,6 +22,15 @@ export class CoursService {
   }
 
   public PostCarteEtat(carteEtat: CarteEtat): Observable<CarteEtat> {
+    const carteEtatToAdd = {
+      idCarte: carteEtat.idCarte,
+      idConsultant: carteEtat.idConsultant,
+      idCours: carteEtat.idCours,
+      isVosCours: carteEtat.isVosCours,
+      isActif: carteEtat.isActif,
+      isFinis: carteEtat.isFinis,
+      scoreEtat: carteEtat.scoreEtat,
+    };
     return this.http.post<CarteEtat>(`${environment.apiURL}CarteEtat/ajouter`, CarteEtat);
   }
 
