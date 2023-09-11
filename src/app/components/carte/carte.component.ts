@@ -27,25 +27,10 @@ export class CarteComponent implements OnInit {
   done: Cours[] = [];
   cardStates: CarteEtat[] = [];
   score: number = 0;
-  IdCarte: number = 0;
   idCoursMoved : number = 0;
-  IdCours : number = 0;
-  IdConsultant : number = 0;
-  ScoreEtat : number = 0;
-  isVosCours : boolean = false;
-  isActif : boolean = false;
-  isFinis : boolean = false;
   public consultants: Consultant[] = [];
-  public carteEtatToAdd: CarteEtat = new CarteEtat(
-    this.IdCarte, 
-    this.IdCours, 
-    this.isVosCours, 
-    this.isActif, 
-    this.isFinis, 
-    this.IdConsultant, 
-    this.ScoreEtat
-    );
-
+  public carteEtatToAdd: CarteEtat = new CarteEtat();
+    
   constructor(
     private coursService: CoursService,
     private loginService: LoginService,
@@ -95,13 +80,13 @@ public afficherTousLesEtatsFiltre(connectedAs6: number) {
     this.carteEtats = result
       .filter(carteEtatData => carteEtatData.IdConsultant === connectedAs6)
       .map(carteEtatData => new CarteEtat(
-        carteEtatData.IdCarte,
-        carteEtatData.IdCours,
-        carteEtatData.IsVosCours,
-        carteEtatData.IsActif,
-        carteEtatData.IsFinis,
-        carteEtatData.IdConsultant,
-        carteEtatData.ScoreEtat
+        carteEtatData.idCarte,
+        carteEtatData.idConsultant,
+        carteEtatData.idCours,
+        carteEtatData.isVosCours,
+        carteEtatData.isActif,
+        carteEtatData.isFinis,
+        carteEtatData.scoreEtat
       ));
   });
 }
@@ -168,26 +153,29 @@ calculateScore() {
   }
 );
 
-console.log("L'id du Cours deplacé est : ", this.idCoursMoved);
+this.carteEtatToAdd = new CarteEtat(
+  undefined, // Laissez IdCarte à null, car il sera généré par le serveur
+  this.connectedAs6,
+  this.idCoursMoved,
+  undefined, // Laissez isVosCours à null pour l'instant
+  undefined, // Laissez isActif à null pour l'instant
+  undefined, // Laissez isFinis à null pour l'instant
+  this.score
+);
+console.log('Valeurs de carte avant envoi :', this.carteEtatToAdd);
 
 this.coursService.PostCarteEtat(this.carteEtatToAdd).subscribe(
-  (addedCarteEtat: CarteEtat) => {
-    console.log('Consultant ajouté avec succès :', addedCarteEtat);
-    this.carteEtatToAdd = new CarteEtat(
-      this.IdCarte,
-      this.idCoursMoved,
-      this.isVosCours,
-      this.isActif,
-      this.isFinis,
-      this.connectedAs6,
-      this.score 
-    );
-    console.log('Valeurs de carteEtat :', addedCarteEtat);
+  (carteEtatToAdd: CarteEtat) => {
+    console.log('Carte enregistrée :', carteEtatToAdd);
+
+    // Mettez à jour carteEtatToAdd avec les valeurs retournées (si nécessaire)
+    this.carteEtatToAdd = carteEtatToAdd;
+
+    console.log('Valeurs de carte après enregistrement :', this.carteEtatToAdd);
   },
   (error) => {
     console.error('Erreur lors de l\'enregistrement de la carte :', error);
-  }
-);
-
+    console.log('Valeurs de carte lors de l\'erreur :', this.carteEtatToAdd);
+  });
 }
 }

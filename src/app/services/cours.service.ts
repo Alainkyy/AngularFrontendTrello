@@ -26,7 +26,7 @@ export class CoursService {
   }
 
   public PutCarteEtat(carteEtat: CarteEtat): Observable<CarteEtat> {
-    return this.http.put<CarteEtat>(`${environment.apiURL}CarteEtat/modifier/${carteEtat.IdCarte}`, carteEtat);
+    return this.http.put<CarteEtat>(`${environment.apiURL}CarteEtat/modifier/${carteEtat.idCarte}`, carteEtat);
   }
 
   public DeleteCarteEtat(idCarte: number): Observable<void> {
