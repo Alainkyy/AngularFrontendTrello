@@ -4,6 +4,7 @@ import { CarteEtat } from '../models/CarteEtat'
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,13 @@ export class CoursService {
   }
 
   public PostCarteEtat(carteEtat: CarteEtat): Observable<CarteEtat> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json', // Définir le type de média comme JSON
+      }),
+    };
+
     const carteEtatToAdd = {
       idCarte: carteEtat.idCarte,
       idConsultant: carteEtat.idConsultant,
@@ -31,7 +39,12 @@ export class CoursService {
       isFinis: carteEtat.isFinis,
       scoreEtat: carteEtat.scoreEtat,
     };
-    return this.http.post<CarteEtat>(`${environment.apiURL}CarteEtat/ajouter`, CarteEtat);
+   // return this.http.post<CarteEtat>(`${environment.apiURL}CarteEtat/ajouter`, CarteEtat);
+   return this.http.post<CarteEtat>(
+    `${environment.apiURL}CarteEtat/ajouter`,
+    carteEtatToAdd,
+    httpOptions // Utiliser les options HTTP pour spécifier le Content-Type
+  );
   }
 
   public PutCarteEtat(carteEtat: CarteEtat): Observable<CarteEtat> {
