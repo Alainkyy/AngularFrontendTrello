@@ -176,7 +176,14 @@ AjoutCarteEtat() {
 }
 
 EnregistrerModifications() {
+
+  const dernieresModifications: Map<number, CarteEtat> = new Map();
+
   for (const modification of this.modifications) {
+    dernieresModifications.set(modification.idCours, modification);
+  }
+
+  dernieresModifications.forEach((modification) => {
     this.coursService.PostCarteEtat(modification).subscribe(
       (carteEtatToAdd: CarteEtat) => {
         console.log('Valeurs de carte après enregistrement :', carteEtatToAdd);
@@ -186,7 +193,7 @@ EnregistrerModifications() {
         console.log('Valeurs de carte lors de l\'erreur :', modification);
       }
     );
-  }
+  });
   
   // Effacer toutes les modifications après enregistrement
   this.modifications = [];
@@ -202,7 +209,6 @@ var coursTrouveActif = this.actif.find(cours => cours.idCours === this.idCoursMo
 // Recherchez dans done
 var coursTrouveDone = this.done.find(cours => cours.idCours === this.idCoursMoved);
 
-// Maintenant, vous pouvez vérifier pour chaque liste
 if (coursTrouveListeCours) {
   this.carteEtatToAdd.isVosCours = true;
   this.carteEtatToAdd.isActif = false;
