@@ -31,6 +31,7 @@ export class CarteComponent implements OnInit {
   public consultants: Consultant[] = [];
   idCarte: number = 0;
   public carteEtatToAdd: CarteEtat = new CarteEtat();
+  modifications: CarteEtat[] = [];
     
   constructor(
     private coursService: CoursService,
@@ -152,8 +153,10 @@ calculateScore() {
   }
 );
 this.AjoutCarteEtat();
-// this.idCarte = this.idCarte + 1;
+}
 
+ajouterModification(carteEtat: CarteEtat) {
+  this.modifications.push(carteEtat);
 }
 
 AjoutCarteEtat() {
@@ -169,20 +172,24 @@ AjoutCarteEtat() {
     this.score
   );
 
-  console.log('Valeurs de carte avant envoi :', this.carteEtatToAdd);
+  this.ajouterModification(this.carteEtatToAdd);
+}
 
-  this.coursService.PostCarteEtat(this.carteEtatToAdd).subscribe(
-    (carteEtatToAdd: CarteEtat) => {
-
-      this.carteEtatToAdd = carteEtatToAdd;
-
-      console.log('Valeurs de carte après enregistrement :', this.carteEtatToAdd);
-    },
-    (error) => {
-      console.error('Erreur lors de l\'enregistrement de la carte :', error);
-      // console.log('Valeurs de carte lors de l\'erreur :', this.carteEtatToAdd);
-    }
-  );
+EnregistrerModifications() {
+  for (const modification of this.modifications) {
+    this.coursService.PostCarteEtat(modification).subscribe(
+      (carteEtatToAdd: CarteEtat) => {
+        console.log('Valeurs de carte après enregistrement :', carteEtatToAdd);
+      },
+      (error) => {
+        console.error('Erreur lors de l\'enregistrement de la carte :', error);
+        console.log('Valeurs de carte lors de l\'erreur :', modification);
+      }
+    );
+  }
+  
+  // Effacer toutes les modifications après enregistrement
+  this.modifications = [];
 }
 
 OuEstLeCours(){
