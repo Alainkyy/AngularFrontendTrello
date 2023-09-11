@@ -23,9 +23,11 @@ export class CarteComponent implements OnInit {
   connectedAs3: number | null = null; //idSpecialite du Consultant
   connectedAs5: number | null = null; //score du Consultant
   connectedAs6: any | null = null; //idConsultant du Consultant
+  ensembleDesCours : Cours [] = [];
   listecours: Cours[] = [];
   actif: Cours[] = [];
   done: Cours[] = [];
+  
   score: number = 0;
   idCoursMoved : number = 0;
   public consultants: Consultant[] = [];
@@ -68,29 +70,32 @@ ngOnInit(): void {
     console.log("Le Score est null.");
   }
 
-  // Recupere le score du Consultant connecté
+  // Recupere l'idConsultant du Consultant connecté
   if (this.connectedAs6 !== null) {
     this.afficherTousLesEtatsFiltre(this.connectedAs6);
   } else {
     console.log("L'idConsultant est null.");
   }
-
+  this.afficherTousLesEtatsFiltre(this.connectedAs6);
 }
 
-public afficherTousLesEtatsFiltre(connectedAs6: number) {
+afficherTousLesEtatsFiltre(connectedAs6: number) {
   this.coursService.GetCarteEtat().subscribe((result: any[]) => {
     this.carteEtats = result
-      .filter(carteEtatData => carteEtatData.IdConsultant === connectedAs6)
-      .map(carteEtatData => new CarteEtat(
-        carteEtatData.idCarte,
-        carteEtatData.idConsultant,
-        carteEtatData.idCours,
-        carteEtatData.isVosCours,
-        carteEtatData.isActif,
-        carteEtatData.isFinis,
-        carteEtatData.scoreEtat
-      ));
-  });
+    .filter(carteEtatData => carteEtatData.idConsultant === this.connectedAs6)
+    .map(carteEtatData => new CarteEtat(
+      carteEtatData.idCarte,
+      carteEtatData.idConsultant,
+      carteEtatData.idCours,
+      carteEtatData.isVosCours,
+      carteEtatData.isActif,
+      carteEtatData.isFinis,
+      carteEtatData.scoreEtat
+    ));
+    console.log('Liste des cartes:', this.carteEtats);
+
+    this.associerCoursAuxEtats();
+});
 }
 
 public afficherTousLesCoursFiltre(idSpecialite: number) {
@@ -112,6 +117,25 @@ public afficherTousLesCoursFiltre(idSpecialite: number) {
   });
 }
 
+associerCoursAuxEtats() {
+  const coursDistincts: Cours[] = this.listecours.concat(this.actif, this.done);
+
+  for (const carteEtat of this.carteEtats) {
+    const idCours = carteEtat.idCours;
+
+    const coursCorrespondant = coursDistincts.find(cours => cours.idCours === idCours);
+
+    if (coursCorrespondant) {
+      if (carteEtat.isFinis) {
+        this.done.push(coursCorrespondant);
+      } else if (carteEtat.isActif) {
+        this.actif.push(coursCorrespondant);
+      } else if (carteEtat.isVosCours) {
+        this.listecours.push(coursCorrespondant);
+      }}}
+}
+
+      
 drop(event: CdkDragDrop<Cours[]>) {
   if (event.previousContainer === event.container) {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -194,19 +218,14 @@ EnregistrerModifications() {
       }
     );
   });
-  
-  // Effacer toutes les modifications après enregistrement
   this.modifications = [];
 }
 
 OuEstLeCours(){
-  // Recherchez dans listecours
 var coursTrouveListeCours = this.listecours.find(cours => cours.idCours === this.idCoursMoved);
 
-// Recherchez dans actif
 var coursTrouveActif = this.actif.find(cours => cours.idCours === this.idCoursMoved);
 
-// Recherchez dans done
 var coursTrouveDone = this.done.find(cours => cours.idCours === this.idCoursMoved);
 
 if (coursTrouveListeCours) {
@@ -223,5 +242,4 @@ if (coursTrouveListeCours) {
   this.carteEtatToAdd.isFinis = true;
 }
 }
-
 }
