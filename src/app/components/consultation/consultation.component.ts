@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ConsultationService } from 'src/app/services/consultation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Consultant } from '../../models/Consultant';
@@ -8,6 +8,8 @@ import { Axe } from '../../models/Axe';
 import { Specialite } from '../../models/Specialite';
 import { AxeService } from 'src/app/services/axe.service';
 
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-consultation',

@@ -1,88 +1,10 @@
-table.boostrap4_table_head_dark_striped_rounded_with_shadow {
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    text-align: left;
-    box-sizing: border-box;
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 1rem;
-    background-color: #D4F0FA; /*  FOND TABLEAU 1/2 */
-    box-shadow: #D4F0FA 0px 5px 15px; /* couleur OMBRE */
-    border-radius: 10px;
-}
-
-table.boostrap4_table_head_dark_striped_rounded_with_shadow thead th {
-    font-size: 1rem;
-    line-height: 1.5;
-    border-collapse: collapse;
-    box-sizing: border-box;
-    text-align: center;
-    padding: .75rem;
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
-    color: #ffffff; /*  Couleur police en tete */
-    background: #57C4EB; /* Couleur en tete*/
-    border-color: #000000; /* Couleur bordure*/
-}
-
-table.boostrap4_table_head_dark_striped_rounded_with_shadow td {
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529; /* Couleur POLICE */
-    text-align: center;
-    border-collapse: collapse;
-    box-sizing: border-box;
-    padding: .75rem;
-    vertical-align: top;
-}
-
-table.boostrap4_table_head_dark_striped_rounded_with_shadow tbody tr:nth-of-type(odd) {
-    background-color: #ffffff; /* FOND TABLEAU 2/2 */
-}
-
-table.boostrap4_table_head_dark_striped_rounded_with_shadow th:first-of-type {
-    border-top-left-radius: 10px;
-}
-
-table.boostrap4_table_head_dark_striped_rounded_with_shadow th:last-of-type {
-    border-top-right-radius: 10px;
-    text-align: center;
-}
-
-table.boostrap4_table_head_dark_striped_rounded_with_shadow tr:last-of-type td:first-of-type {
-    border-bottom-left-radius: 10px;
-}
-
-table.boostrap4_table_head_dark_striped_rounded_with_shadow tr:last-of-type td:last-of-type {
-    border-bottom-right-radius: 10px;
-}
-
 .table_container {
-    max-width: 80vw;
+    max-width: 95vw;
     margin: 20px auto;
     margin-right: auto;
 }
 
-body {
-    font-family: sans-serif;
-}
-
-.center-column {
-    text-align: center;
-}
-
-.style_p_3 {
-    font-size: 2rem;
-    color: #ffffff;
-    font-family: 'MedievalSharp', cursive;
-    text-align: center; 
-    margin-top: 2%; 
-  }
-
-  .btn-add {
+.btn-add {
     background-color: #007bff; 
     color: #fff; 
     border: none; 
@@ -97,12 +19,12 @@ body {
     margin: auto;
   }
   
-  .btn-add:hover {
+.btn-add:hover {
     background-color: #0056b3; 
   }
   
   
-  .btn-delete {
+.btn-delete {
     background-color: #F19937;
     color: #fff;
     border: none;
@@ -112,12 +34,11 @@ body {
     text-decoration: none;
   }
   
-  .btn-delete:hover {
+.btn-delete:hover {
     background-color: #c82333;
   }
-  
 
-  .btn-update {
+.btn-update {
     background-color: #C94B91;
     color: #fff;
     border: none;
@@ -127,11 +48,11 @@ body {
     text-decoration: none;
   }
   
-  .btn-update:hover {
+.btn-update:hover {
     background-color: #592240;
   }
 
-  .btn-view {
+.btn-view {
     background-color: #6BB346;
     color: #fff;
     border: none;
@@ -141,6 +62,118 @@ body {
     text-decoration: none;
   }
   
-  .btn-view:hover {
+.btn-view:hover {
     background-color: #233B17;
   }
+
+.mat-paginator-style{
+  margin-top: 20px;
+}
+  .mat-accordion .mat-header-row {
+    padding-left: 1.5rem;
+    padding-right: 2rem;
+    border-bottom: none;
+   
+  }
+
+.mat-expansion-panel{
+  font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #faf7ff; /*  FOND TABLEAU 1/2 */
+    box-shadow: #024057 0px 5px 15px; /* couleur OMBRE */
+    border-radius: 10px;
+}
+
+.mat-expansion-panel mat-expansion-panel-header:nth-of-type(odd) {
+  background-color: #93dcf7; /* FOND TABLEAU 2/2 */
+}
+
+.mat-expansion-panel section:first-of-type {
+  border-top-left-radius: 10px;
+}
+
+.mat-expansion-panel section:last-of-type {
+  border-top-right-radius: 10px;
+}
+
+.mat-expansion-panel span:last-of-type span:first-of-type {
+  border-bottom-left-radius: 10px;
+}
+
+.mat-expansion-panel span:last-of-type span:last-of-type {
+  border-bottom-right-radius: 10px;
+}
+
+.mat-expansion-panel-header.mat-row {
+  border-bottom: none;
+}
+
+.style_p_3 {
+  font-size: 2rem;
+  color: black;
+  font-family: 'MedievalSharp', cursive;
+  text-align: center; /* Centrer horizontalement */
+  margin-top: 2%; /* Margin top de 10% */
+}
+
+:root {
+--mat-header-row-height : 56px;
+--mat-row-height: 48px;
+--mat-row-horizontal-padding: 24px;
+}
+
+/* Styliser le tableau */
+.mat-table {
+  display: block;
+  background-color: inherit;
+}
+
+/* Styliser la rangée d'en-tête */
+.mat-header-row {
+  min-height: --mat-header-row-height;
+}
+
+/* Styliser les rangées de données */
+.mat-row {
+  min-height: --mat-row-height;
+}
+
+/* Styliser les rangées (en-tête et données) */
+.mat-row,
+.mat-header-row {
+  display: flex;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  align-items: center;
+  padding: 0 --mat-row-horizontal-padding;
+  box-sizing: border-box;
+  position: relative; /* Ajouter une position relative pour utiliser ::after */
+}
+
+/* Ajouter une ligne de séparation après chaque rangée */
+.mat-row::after,
+.mat-header-row::after {
+  content: '';
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: black; /* Couleur de la ligne de séparation */
+}
+
+/* Styliser les cellules (en-tête et données) */
+.mat-cell,
+.mat-header-cell {
+  flex: 1;
+  overflow: hidden;
+  word-wrap: break-word;
+  justify-content: space-between;
+}

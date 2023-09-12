@@ -22,6 +22,11 @@ import { AddConsultationComponent } from './components/consultation/add-consulta
 import { EditConsultationComponent } from './components/consultation/edit-consultation/edit-consultation.component';
 import { ViewConsultationComponent } from './components/consultation/view-consultation/view-consultation.component';
 
+import {MatListModule} from '@angular/material/list'; 
+import {MatExpansionModule} from '@angular/material/expansion'; 
+import {MatSortModule} from '@angular/material/sort'; 
+import {MatPaginatorModule} from '@angular/material/paginator'; 
+
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -56,6 +61,10 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    MatListModule,
+    MatExpansionModule,
+    MatSortModule,
+    MatPaginatorModule,
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,

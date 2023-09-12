@@ -5,41 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+  
   <app-header-section></app-header-section>
-  <h1 class="style_p_3"> Liste des Consultants </h1>
+  
+  <mat-paginator #paginator class="mat-paginator-style"
+  [pageIndex]="0"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+></mat-paginator>
+
 <div class="table_container">
-  <table class="boostrap4_table_head_dark_striped_rounded_with_shadow">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Nom</th>
-        <th>Code</th>
-        <th>Statut </th>
-        <th>Mdp</th>
-        <th>Axe</th>
-        <th>Specialite </th>
-        <th>Score</th>
-        <th> </th>
-        <th><button routerLink="/addConsultant" class="btn-add">Ajouter</button></th>
-        <th> </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let consultant of consultants">
-        <td>{{ consultant.idConsultant }}</td>
-        <td>{{ consultant.nomConsultant }}</td>
-        <td>{{ consultant.codeConsultant }}</td>
-        <td>{{ consultant.statutConsultant }}</td>
-        <td>{{ consultant.mdpConsultant }}</td>
-        <td>{{ consultant.idAxe }}</td>
-        <td>{{ consultant.idSpecialite }}</td>
-        <td>{{ consultant.score }}</td>
-        <td><button (click)="supprimerConsultant(consultant.idConsultant)" class="btn-delete">Supprimer</button></td>
-        <td><button (click)="modifierConsultant(consultant.idConsultant)" class="btn-update">Modifier</button></td>
-        <td><button class="btn-view">Details</button></td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-</body>
+
+<mat-accordion displayMode="flat" background-color = "#57c4eb" multi class="mat-table">
+  <section matSort class="mat-elevation-z2 mat-header-row">
+    <span class="mat-header-cell" mat-sort-header="idConsultant">Id</span>
+    <span class="mat-header-cell" mat-sort-header="nomConsultant">Nom</span>
+    <span class="mat-header-cell" mat-sort-header="codeConsultant">Code</span>
+    <span class="mat-header-cell" mat-sort-header="mdpConsultant">Mdp</span>
+    <span class="mat-header-cell" mat-sort-header="idAxe">Axe</span>
+    <span class="mat-header-cell" mat-sort-header="idSpecialite">Specialite</span>
+    <span class="mat-header-cell" mat-sort-header="score">Score</span>
+    <span><button routerLink="/addConsultant" class="btn-add">Ajouter</button></span>
+  </section>
+
+  <mat-expansion-panel *ngFor="let consultant of consultants">
+    <mat-expansion-panel-header class="mat-row">
+      <span class="mat-cell">{{consultant.idConsultant}}</span>
+      <span class="mat-cell">{{consultant.nomConsultant}}</span>
+      <span class="mat-cell">{{consultant.codeConsultant}}</span>
+      <span class="mat-cell">{{consultant.statutConsultant}}</span>
+      <span class="mat-cell">{{consultant.mdpConsultant}}</span>
+      <span class="mat-cell">{{consultant.idAxe}}</span>
+      <span class="mat-cell">{{consultant.idSpecialite}}</span>
+      <span class="mat-cell">{{consultant.score}}</span>
+      <span><button (click)="supprimerConsultant(consultant.idConsultant)" class="btn-delete">Supprimer</button></span>
+      <span><button (click)="modifierConsultant(consultant.idConsultant)" class="btn-update">Modifier</button></span>
+    </mat-expansion-panel-header>
+  
+    <div><pre>{{consultant | json}}</pre></div>
+  </mat-expansion-panel>
+  
+</mat-accordion>
+</div>
+</body> 
 </html>
