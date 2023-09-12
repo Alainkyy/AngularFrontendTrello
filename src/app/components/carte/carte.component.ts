@@ -75,7 +75,7 @@ ngOnInit(): void {
   } else {
     console.log("L'idConsultant est null.");
   }
-  // this.afficherTousLesCours();
+  this.afficherTousLesCours();
   this.afficherTousLesEtatsFiltre(this.connectedAs6);
 }
 
@@ -101,8 +101,9 @@ afficherTousLesEtatsFiltre(connectedAs6: number) {
 
     console.log('Chargement des carteEtats:', this.carteEtats);
 
-    const coursAvecProprietesUniques = this.getUniqueCoursProperties(this.carteEtats);
+    const coursAvecProprietesUniques = this.getUniqueCoursProperties(this.carteEtats, this.infoCours);
     this.associerCoursAuxListes(coursAvecProprietesUniques);
+
 
     const totalCours = this.listecours.length + this.done.length + this.actif.length;
     const finishedCours = this.done.length;
@@ -111,7 +112,6 @@ afficherTousLesEtatsFiltre(connectedAs6: number) {
     return this.carteEtats;
   });
 }
-
 
 public afficherTousLesCoursFiltre(connectedAs3: number) {
   this.coursService.getCours().subscribe((result: any[]) => {
@@ -149,9 +149,16 @@ afficherTousLesCours() {
 });
 }
 
-// Créez une méthode pour obtenir les propriétés idCours, isVosCours, isActif, et isFinis uniques tout en excluant idCours = 0
-getUniqueCoursProperties(carteEtats: any[]): any[] {
+getUniqueCoursProperties(carteEtats: any[], cours: any[]): any[] {
   const coursAvecProprietesUniques: any[] = [];
+
+  // Créez un dictionnaire pour stocker les informations sur les cours
+  const coursInfo: { [key: number]: any } = {};
+
+  // Remplissez le dictionnaire avec les informations sur les cours
+  for (const coursData of cours) {
+    coursInfo[coursData.idCours] = coursData;
+  }
 
   // Groupez les cartes par ID de cours et trouvez le maximum pour chaque groupe
   const groupedByCours: { [key: number]: any[] } = {};
@@ -177,19 +184,28 @@ getUniqueCoursProperties(carteEtats: any[]): any[] {
         return maxCarte;
       });
 
+      // Récupérez les informations du cours à partir du dictionnaire
+      const coursInfoCours = coursInfo[Number(idCours)];
+
       coursAvecProprietesUniques.push({
         idCours: Number(idCours),
         isVosCours: carteMax.isVosCours,
         isActif: carteMax.isActif,
         isFinis: carteMax.isFinis,
+        // Jointure Here
+        nomCours: coursInfoCours.nomCours,
+        lienVersCours: coursInfoCours.lienVersCours,
+        commentaire: coursInfoCours.commentaire,
+        videoVersCours: coursInfoCours.videoVersCours,
+        dateDebutCours: coursInfoCours.dateDebutCours,
+        dateFinCours: coursInfoCours.dateFinCours,
       });
     }
   }
+
   console.log('Liste des cartes:', coursAvecProprietesUniques);
   return coursAvecProprietesUniques;
 }
-
-
 
 
 associerCoursAuxListes(coursAvecProprietesUniques: any[]) {
