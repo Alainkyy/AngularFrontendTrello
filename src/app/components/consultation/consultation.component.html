@@ -13,18 +13,18 @@
   [pageSize]="10"
   [pageSizeOptions]="[5, 10, 25, 100]"
 ></mat-paginator>
-
+<h1 class="style_p_3"> Liste des Consultants </h1>
 <div class="table_container">
 
 <mat-accordion displayMode="flat" background-color = "#57c4eb" multi class="mat-table">
   <section matSort class="mat-elevation-z2 mat-header-row">
-    <span class="mat-header-cell" mat-sort-header="idConsultant">Id</span>
-    <span class="mat-header-cell" mat-sort-header="nomConsultant">Nom</span>
-    <span class="mat-header-cell" mat-sort-header="codeConsultant">Code</span>
-    <span class="mat-header-cell" mat-sort-header="mdpConsultant">Mdp</span>
-    <span class="mat-header-cell" mat-sort-header="idAxe">Axe</span>
-    <span class="mat-header-cell" mat-sort-header="idSpecialite">Specialite</span>
-    <span class="mat-header-cell" mat-sort-header="score">Score</span>
+    <span class="mat-header-cell" mat-sort-header="consultant.idConsultant">Id</span>
+    <span class="mat-header-cell" mat-sort-header="consultant.nomConsultant">Nom</span>
+    <span class="mat-header-cell" mat-sort-header="consultant.codeConsultant">Code</span>
+    <span class="mat-header-cell" mat-sort-header="consultant.mdpConsultant">Mdp</span>
+    <span class="mat-header-cell" mat-sort-header="consultant.idAxe">Axe</span>
+    <span class="mat-header-cell" mat-sort-header="consultant.idSpecialite">Specialite</span>
+    <span class="mat-header-cell" mat-sort-header="consultant.score">Score</span>
     <span><button routerLink="/addConsultant" class="btn-add">Ajouter</button></span>
   </section>
 

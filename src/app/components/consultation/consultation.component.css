@@ -76,6 +76,19 @@
    
   }
 
+  .mat-mdc-paginator {
+    display: block;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    color: black;
+    background-color: #57c4eb;
+    font-family: var(--mat-paginator-container-text-font);
+    line-height: var(--mat-paginator-container-text-line-height);
+    font-size: var(--mat-paginator-container-text-size);
+    font-weight: var(--mat-paginator-container-text-weight);
+    letter-spacing: var(--mat-paginator-container-text-tracking);
+}
+
 .mat-expansion-panel{
   font-size: 1rem;
     font-weight: 400;
@@ -90,8 +103,9 @@
     border-radius: 10px;
 }
 
-.mat-expansion-panel mat-expansion-panel-header:nth-of-type(odd) {
-  background-color: #93dcf7; /* FOND TABLEAU 2/2 */
+
+.mat-expansion-panel:nth-child(odd) {
+  background-color: #93dcf7; /* Couleur pour les lignes impaires */
 }
 
 .mat-expansion-panel section:first-of-type {
@@ -110,7 +124,8 @@
   border-bottom-right-radius: 10px;
 }
 
-.mat-expansion-panel-header.mat-row {
+.mat-expansion-panel-header
+.mat-row {
   border-bottom: none;
 }
 
@@ -128,23 +143,19 @@
 --mat-row-horizontal-padding: 24px;
 }
 
-/* Styliser le tableau */
 .mat-table {
   display: block;
   background-color: inherit;
 }
 
-/* Styliser la rangée d'en-tête */
 .mat-header-row {
   min-height: --mat-header-row-height;
 }
 
-/* Styliser les rangées de données */
 .mat-row {
   min-height: --mat-row-height;
 }
 
-/* Styliser les rangées (en-tête et données) */
 .mat-row,
 .mat-header-row {
   display: flex;
@@ -153,23 +164,22 @@
   align-items: center;
   padding: 0 --mat-row-horizontal-padding;
   box-sizing: border-box;
-  position: relative; /* Ajouter une position relative pour utiliser ::after */
+  position: relative;
 }
 
-/* Ajouter une ligne de séparation après chaque rangée */
 .mat-row::after,
 .mat-header-row::after {
   content: '';
-  display: flex;
+  display: inline-block;
+  min-height: inherit;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: black; /* Couleur de la ligne de séparation */
+
 }
 
-/* Styliser les cellules (en-tête et données) */
 .mat-cell,
 .mat-header-cell {
   flex: 1;
