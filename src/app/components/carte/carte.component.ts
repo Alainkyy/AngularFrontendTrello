@@ -52,14 +52,14 @@ ngOnInit(): void {
 
   // Recupere l'idSpecialite du Consultant connecté
   if (this.connectedAs3 !== null) {
-    this.afficherTousLesCoursFiltre(this.connectedAs3);
+    // this.afficherTousLesCoursFiltre(this.connectedAs3);
   } else {
     console.log("L'ID de spécialité est null.");
   }
 
   // Recupere le codeConsultant du Consultant connecté
   if (this.connectedAs4 !== null) {
-    console.log("Code Consultant :",this.connectedAs4);
+   // console.log("Code Consultant :",this.connectedAs4);
   } else {
     console.log("Le CodeConsultant est null.");
   }
@@ -76,7 +76,7 @@ ngOnInit(): void {
     console.log("L'idConsultant est null.");
   }
   this.afficherTousLesEtatsFiltre(this.connectedAs6);
-  
+
 }
 
 afficherTousLesEtatsFiltre(connectedAs6: number) {
@@ -94,8 +94,14 @@ afficherTousLesEtatsFiltre(connectedAs6: number) {
     ));
     
     console.log('Chargement des carteEtats:', this.carteEtats);
+
     const coursAvecProprietesUniques = this.getUniqueCoursProperties(this.carteEtats);
     this.associerCoursAuxListes(coursAvecProprietesUniques);
+
+    const totalCours = this.listecours.length + this.done.length + this.actif.length;
+    const finishedCours = this.done.length;
+    this.score = totalCours !== 0 ? Math.floor((finishedCours / totalCours) * 100) : 0;
+
     return this.carteEtats;
   });
 }
