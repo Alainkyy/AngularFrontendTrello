@@ -32,3 +32,6 @@ Rajouté un trie sur Score
 
 En cours : 
 Recuperer l'idCours du cours deplacé 
+
+
+gestion Store ngrx

@@ -72,29 +72,31 @@ ngOnInit(): void {
 
   // Recupere l'idConsultant du Consultant connecté
   if (this.connectedAs6 !== null) {
-    this.afficherTousLesEtatsFiltre(this.connectedAs6);
   } else {
     console.log("L'idConsultant est null.");
   }
   this.afficherTousLesEtatsFiltre(this.connectedAs6);
+  
 }
 
 afficherTousLesEtatsFiltre(connectedAs6: number) {
   this.coursService.GetCarteEtat().subscribe((result: any[]) => {
     this.carteEtats = result
-    .filter(carteEtatData => carteEtatData.idConsultant === this.connectedAs6)
-    .map(carteEtatData => new CarteEtat(
-      carteEtatData.idCarte,
-      carteEtatData.idConsultant,
-      carteEtatData.idCours,
-      carteEtatData.isVosCours,
-      carteEtatData.isActif,
-      carteEtatData.isFinis,
-      carteEtatData.scoreEtat
+    .filter(carteEtats => carteEtats.idConsultant === this.connectedAs6)
+    .map(carteEtats => new CarteEtat(
+      carteEtats.idCarte,
+      carteEtats.idConsultant,
+      carteEtats.idCours,
+      carteEtats.isVosCours,
+      carteEtats.isActif,
+      carteEtats.isFinis,
+      carteEtats.scoreEtat
     ));
-    console.log('Liste des cartes:', this.carteEtats);
-
-    this.associerCoursAuxEtats();
+    
+    console.log('Chargement des carteEtats:', this.carteEtats);
+    this.getUniqueCoursProperties(this.carteEtats);
+    return this.carteEtats;
+   // this.associerCoursAuxEtats();
 });
 }
 
@@ -117,13 +119,57 @@ public afficherTousLesCoursFiltre(idSpecialite: number) {
   });
 }
 
+
+// Créez une méthode pour obtenir les propriétés idCours, isVosCours, isActif, et isFinis uniques tout en excluant idCours = 0
+getUniqueCoursProperties(carteEtats: any[]): any[] {
+  const coursAvecProprietesUniques: any[] = [];
+
+  // Groupez les cartes par ID de cours et trouvez le maximum pour chaque groupe
+  const groupedByCours: { [key: number]: any[] } = {};
+
+  for (const carteEtat of carteEtats) {
+    const idCours = carteEtat.idCours;
+    if (idCours !== 0) { // Excluez les lignes où idCours = 0
+      if (!groupedByCours[idCours]) {
+        groupedByCours[idCours] = [];
+      }
+      groupedByCours[idCours].push(carteEtat);
+    }
+  }
+
+  // Parcourez les groupes pour obtenir les propriétés uniques
+  for (const idCours in groupedByCours) {
+    if (groupedByCours.hasOwnProperty(idCours)) {
+      const cartesEtatGroupe = groupedByCours[idCours];
+      const carteMax = cartesEtatGroupe.reduce((maxCarte, carteEtat) => {
+        if (carteEtat.idCarte > maxCarte.idCarte) {
+          return carteEtat;
+        }
+        return maxCarte;
+      });
+
+      coursAvecProprietesUniques.push({
+        idCours: Number(idCours),
+        isVosCours: carteMax.isVosCours,
+        isActif: carteMax.isActif,
+        isFinis: carteMax.isFinis,
+      });
+    }
+  }
+  console.log('Liste des cartes:', coursAvecProprietesUniques);
+  return coursAvecProprietesUniques;
+}
+
+
+
+
 associerCoursAuxEtats() {
   const coursDistincts: Cours[] = this.listecours.concat(this.actif, this.done);
 
   for (const carteEtat of this.carteEtats) {
     const idCours = carteEtat.idCours;
 
-    const coursCorrespondant = coursDistincts.find(cours => cours.idCours === idCours);
+    const coursCorrespondant = coursDistincts.find(cours => cours.idCours === carteEtat.idCours);
 
     if (coursCorrespondant) {
       if (carteEtat.isFinis) {
