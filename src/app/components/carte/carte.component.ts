@@ -94,11 +94,12 @@ afficherTousLesEtatsFiltre(connectedAs6: number) {
     ));
     
     console.log('Chargement des carteEtats:', this.carteEtats);
-    this.getUniqueCoursProperties(this.carteEtats);
+    const coursAvecProprietesUniques = this.getUniqueCoursProperties(this.carteEtats);
+    this.associerCoursAuxListes(coursAvecProprietesUniques);
     return this.carteEtats;
-   // this.associerCoursAuxEtats();
-});
+  });
 }
+
 
 public afficherTousLesCoursFiltre(idSpecialite: number) {
   this.coursService.getCours().subscribe((result: any[]) => {
@@ -163,22 +164,19 @@ getUniqueCoursProperties(carteEtats: any[]): any[] {
 
 
 
-associerCoursAuxEtats() {
-  const coursDistincts: Cours[] = this.listecours.concat(this.actif, this.done);
+associerCoursAuxListes(coursAvecProprietesUniques: any[]) {
 
-  for (const carteEtat of this.carteEtats) {
-    const idCours = carteEtat.idCours;
-
-    const coursCorrespondant = coursDistincts.find(cours => cours.idCours === carteEtat.idCours);
-
-    if (coursCorrespondant) {
-      if (carteEtat.isFinis) {
-        this.done.push(coursCorrespondant);
-      } else if (carteEtat.isActif) {
-        this.actif.push(coursCorrespondant);
-      } else if (carteEtat.isVosCours) {
-        this.listecours.push(coursCorrespondant);
-      }}}
+  // Parcourez les cours uniques et placez-les dans les listes appropriées
+  for (const cours of coursAvecProprietesUniques) {
+    if (cours.isVosCours) {
+      this.listecours.push(cours);
+    } else if (cours.isActif) {
+      this.actif.push(cours);
+    } else if (cours.isFinis) {
+      this.done.push(cours);
+    }
+  }
+  return coursAvecProprietesUniques;
 }
 
       
