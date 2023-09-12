@@ -34,4 +34,7 @@ En cours :
 Recuperer l'idCours du cours deplacé 
 
 
+
+si carteEtat est vide alors listecours
+else ....
 gestion Store ngrx

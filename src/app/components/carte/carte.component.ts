@@ -23,7 +23,7 @@ export class CarteComponent implements OnInit {
   connectedAs3: number | null = null; //idSpecialite du Consultant
   connectedAs5: number | null = null; //score du Consultant
   connectedAs6: any | null = null; //idConsultant du Consultant
-  ensembleDesCours : Cours [] = [];
+  infoCours : Cours [] = [];
   listecours: Cours[] = [];
   actif: Cours[] = [];
   done: Cours[] = [];
@@ -52,7 +52,7 @@ ngOnInit(): void {
 
   // Recupere l'idSpecialite du Consultant connecté
   if (this.connectedAs3 !== null) {
-    // this.afficherTousLesCoursFiltre(this.connectedAs3);
+    //  this.afficherTousLesCoursFiltre(this.connectedAs3);
   } else {
     console.log("L'ID de spécialité est null.");
   }
@@ -75,8 +75,8 @@ ngOnInit(): void {
   } else {
     console.log("L'idConsultant est null.");
   }
+  // this.afficherTousLesCours();
   this.afficherTousLesEtatsFiltre(this.connectedAs6);
-
 }
 
 afficherTousLesEtatsFiltre(connectedAs6: number) {
@@ -93,6 +93,12 @@ afficherTousLesEtatsFiltre(connectedAs6: number) {
       carteEtats.scoreEtat
     ));
     
+    if (this.carteEtats.length === 0){
+      if (this.connectedAs3 !== null) {
+      this.afficherTousLesCoursFiltre(this.connectedAs3)
+      }
+    }
+
     console.log('Chargement des carteEtats:', this.carteEtats);
 
     const coursAvecProprietesUniques = this.getUniqueCoursProperties(this.carteEtats);
@@ -107,10 +113,10 @@ afficherTousLesEtatsFiltre(connectedAs6: number) {
 }
 
 
-public afficherTousLesCoursFiltre(idSpecialite: number) {
+public afficherTousLesCoursFiltre(connectedAs3: number) {
   this.coursService.getCours().subscribe((result: any[]) => {
     this.listecours = result
-      .filter(coursData => coursData.idSpecialite === idSpecialite)
+      .filter(coursData => coursData.idSpecialite === connectedAs3)
       .map(coursData => new Cours(
         coursData.idCours,
         coursData.nomCours,
@@ -126,6 +132,22 @@ public afficherTousLesCoursFiltre(idSpecialite: number) {
   });
 }
 
+afficherTousLesCours() {
+  this.coursService.getCours().subscribe((result: any[]) => {
+    this.infoCours = result.map(infoCoursData => new Cours(
+      infoCoursData.idCours,
+      infoCoursData.nomCours,
+      infoCoursData.lienVersCours,
+      infoCoursData.videoVersCours,
+      infoCoursData.exercice,
+      infoCoursData.avancement,
+      infoCoursData.dateDebutCours,
+      infoCoursData.dateFinCours,
+      infoCoursData.commentaire,
+      infoCoursData.idSpecialite
+    ));
+});
+}
 
 // Créez une méthode pour obtenir les propriétés idCours, isVosCours, isActif, et isFinis uniques tout en excluant idCours = 0
 getUniqueCoursProperties(carteEtats: any[]): any[] {
