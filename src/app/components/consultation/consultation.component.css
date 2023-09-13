@@ -17,6 +17,7 @@
     text-align: center;
     width: auto;
     margin: auto;
+    margin-right: 7px;
   }
   
 .btn-add:hover {
@@ -32,6 +33,7 @@
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
+    margin-right: 10px;
   }
   
 .btn-delete:hover {
@@ -48,6 +50,7 @@
     text-decoration: none;
   }
   
+
 .btn-update:hover {
     background-color: #592240;
   }
@@ -69,11 +72,9 @@
 .mat-paginator-style{
   margin-top: 20px;
 }
-  .mat-accordion .mat-header-row {
-    padding-left: 1.5rem;
-    padding-right: 2rem;
-    border-bottom: none;
-   
+
+  .mat-table{
+    box-shadow: #0056b3 0px 5px 15px;
   }
 
   .mat-mdc-paginator {
@@ -103,6 +104,9 @@
     border-radius: 10px;
 }
 
+.mat-expansion-panel:hover {
+  background-color: #D1E7C5; /* Couleur pour les lignes impaires */
+}
 
 .mat-expansion-panel:nth-child(odd) {
   background-color: #93dcf7; /* Couleur pour les lignes impaires */
@@ -160,7 +164,6 @@
 .mat-header-row {
   display: flex;
   border-bottom-width: 1px;
-  border-bottom-style: solid;
   align-items: center;
   padding: 0 --mat-row-horizontal-padding;
   box-sizing: border-box;
@@ -171,6 +174,7 @@
 .mat-header-row::after {
   content: '';
   display: inline-block;
+  border: none;
   min-height: inherit;
   position: absolute;
   bottom: 0;
@@ -180,10 +184,37 @@
 
 }
 
+.mat-elevation-z2{
+background-color: #1E527C ;
+border-bottom: 1px solid #000000;
+}
+
 .mat-cell,
 .mat-header-cell {
   flex: 1;
   overflow: hidden;
   word-wrap: break-word;
   justify-content: space-between;
+  
+}
+
+.mat-header-cell2 {
+  flex: 1;
+  overflow: hidden;
+  word-wrap: break-word;
+  justify-content: space-between;
+  
+}
+
+.mat-header-cell{
+  font-size: 1rem;
+  line-height: 1.5;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  text-align: inherit;
+  padding: .75rem;
+  vertical-align: bottom;
+  color:white; /*  Couleur police en tete */
+  background: #1E527C; /* Couleur en tete*/
+  border-color: #000000; /* Couleur bordure*/
 }
