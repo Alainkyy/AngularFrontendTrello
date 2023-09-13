@@ -73,10 +73,6 @@
   margin-top: 20px;
 }
 
-  .mat-table{
-    box-shadow: #0056b3 0px 5px 15px;
-  }
-
   .mat-mdc-paginator {
     display: block;
     -moz-osx-font-smoothing: grayscale;
@@ -150,6 +146,11 @@
 .mat-table {
   display: block;
   background-color: inherit;
+  box-shadow: #0056b3 0px 5px 15px;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .mat-header-row {
