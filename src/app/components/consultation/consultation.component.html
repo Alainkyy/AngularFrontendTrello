@@ -30,8 +30,8 @@
     <span><button routerLink="/addConsultant" class="btn-add">Ajouter</button></span>
   </section>
 
-  <mat-expansion-panel *ngFor="let consultant of consultants">
-    <mat-expansion-panel-header class="mat-row">
+  <mat-expansion-panel *ngFor="let consultant of consultants" hideToggle>
+    <mat-expansion-panel-header class="mat-row" hideToggle>
       <span class="mat-cell">{{consultant.idConsultant}}</span>
       <span class="mat-cell">{{consultant.nomConsultant}}</span>
       <span class="mat-cell">{{consultant.codeConsultant}}</span>
