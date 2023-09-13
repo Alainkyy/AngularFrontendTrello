@@ -18,21 +18,22 @@
 
 <mat-accordion displayMode="flat" background-color = "#57c4eb" multi class="mat-table">
   <section matSort class="mat-elevation-z2 mat-header-row">
-    <span class="mat-header-cell" mat-sort-header="consultant.idConsultant">Id</span>
-    <span class="mat-header-cell" mat-sort-header="consultant.nomConsultant">Nom</span>
-    <span class="mat-header-cell" mat-sort-header="consultant.codeConsultant">Code</span>
-    <span class="mat-header-cell" mat-sort-header="consultant.statutConsultant">Statut</span>
-    <span class="mat-header-cell" mat-sort-header="consultant.mdpConsultant">Mdp</span>
-    <span class="mat-header-cell" mat-sort-header="consultant.idAxe">Axe</span>
-    <span class="mat-header-cell" mat-sort-header="consultant.idSpecialite">Specialite</span>
-    <span class="mat-header-cell" mat-sort-header="consultant.score">Score</span>
+    <span class="mat-header-cell">Id</span>
+    <span class="mat-header-cell">Nom</span>
+    <span class="mat-header-cell">Code</span>
+    <span class="mat-header-cell">Statut</span>
+    <span class="mat-header-cell">Mdp</span>
+    <span class="mat-header-cell">Axe</span>
+    <span class="mat-header-cell">Specialite</span>
+    <span class="mat-header-cell">Score</span>
     <span class="mat-header-cell2"></span>
     <span><button routerLink="/addConsultant" class="btn-add">Ajouter</button></span>
+    <span class="mat-header-cell2"></span>
   </section>
 
   <mat-expansion-panel *ngFor="let consultant of consultants" hideToggle>
     <mat-expansion-panel-header class="mat-row" hideToggle>
-      <span class="mat-cell">{{consultant.idConsultant}}</span>
+      <span class="mat-cell" >{{consultant.idConsultant}}</span>
       <span class="mat-cell">{{consultant.nomConsultant}}</span>
       <span class="mat-cell">{{consultant.codeConsultant}}</span>
       <span class="mat-cell">{{consultant.statutConsultant}}</span>
@@ -42,9 +43,30 @@
       <span class="mat-cell">{{consultant.score}}</span>
       <span><button (click)="supprimerConsultant(consultant.idConsultant)" class="btn-delete">Supprimer</button></span>
       <span><button (click)="modifierConsultant(consultant.idConsultant)" class="btn-update">Modifier</button></span>
+      <span><button (click)="afficherToutesLesCartesEtatsParConsultant(consultant.idConsultant)" class="btn-view">Details</button></span>
     </mat-expansion-panel-header>
   
-    <div><pre>{{consultant | json}}</pre></div>
+    <div (click)="afficherToutesLesCartesEtatsParConsultant(consultant.idConsultant)">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Cours</th>
+            <th>Vos cours</th>
+            <th>Actif</th>
+            <th>Terminé</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let carteEtat of this.carteEtats">
+              <td>{{carteEtat.idCours}}</td>
+              <td>{{carteEtat.isVosCours}}</td>
+              <td>{{carteEtat.isActif}}</td>
+              <td>{{carteEtat.isFinis}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </mat-expansion-panel>
   
 </mat-accordion>
