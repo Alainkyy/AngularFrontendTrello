@@ -18,22 +18,22 @@ import { ConsultationService } from '../../services/consultation.service';
 export class CarteComponent implements OnInit {
 
   title = 'Trello Like';
-  carteEtats: CarteEtat[] = [];
-  connectedAs4: string | null = null; //codeConsultant
-  connectedAs3: number | null = null; //idSpecialite du Consultant
-  connectedAs5: number | null = null; //score du Consultant
-  connectedAs6: any | null = null; //idConsultant du Consultant
-  infoCours : Cours [] = [];
-  listecours: Cours[] = [];
-  actif: Cours[] = [];
-  done: Cours[] = [];
+  public carteEtats: CarteEtat[] = [];
+  public connectedAs4: string | null = null; //codeConsultant
+  public connectedAs3: number | null = null; //idSpecialite du Consultant
+  public connectedAs5: number | null = null; //score du Consultant
+  public connectedAs6: any | null = null; //idConsultant du Consultant
+  public infoCours : Cours [] = [];
+  public listecours: Cours[] = [];
+  public actif: Cours[] = [];
+  public done: Cours[] = [];
   
-  score: number = 0;
-  idCoursMoved : number = 0;
+  public score: number = 0;
+  public idCoursMoved : number = 0;
   public consultants: Consultant[] = [];
-  idCarte: number = 0;
+  public idCarte: number = 0;
   public carteEtatToAdd: CarteEtat = new CarteEtat();
-  modifications: CarteEtat[] = [];
+  public modifications: CarteEtat[] = [];
     
   constructor(
     private coursService: CoursService,
@@ -80,6 +80,7 @@ ngOnInit(): void {
 }
 
 afficherTousLesEtatsFiltre(connectedAs6: number) {
+  this.afficherTousLesCours();
   this.coursService.GetCarteEtat().subscribe((result: any[]) => {
     this.carteEtats = result
     .filter(carteEtats => carteEtats.idConsultant === this.connectedAs6)
@@ -98,12 +99,12 @@ afficherTousLesEtatsFiltre(connectedAs6: number) {
       this.afficherTousLesCoursFiltre(this.connectedAs3)
       }
     }
-
+    console.log('Chargement des infoCours:', this.infoCours);
     console.log('Chargement des carteEtats:', this.carteEtats);
+ 
 
     const coursAvecProprietesUniques = this.getUniqueCoursProperties(this.carteEtats, this.infoCours);
     this.associerCoursAuxListes(coursAvecProprietesUniques);
-
 
     const totalCours = this.listecours.length + this.done.length + this.actif.length;
     const finishedCours = this.done.length;
@@ -310,24 +311,21 @@ EnregistrerModifications() {
 }
 
 OuEstLeCours(){
-var coursTrouveListeCours = this.listecours.find(cours => cours.idCours === this.idCoursMoved);
 
-var coursTrouveActif = this.actif.find(cours => cours.idCours === this.idCoursMoved);
+  if (this.listecours.find(cours => cours.idCours === this.idCoursMoved)) {
+    this.carteEtatToAdd.isVosCours = true;
+    this.carteEtatToAdd.isActif = false;
+    this.carteEtatToAdd.isFinis = false;
 
-var coursTrouveDone = this.done.find(cours => cours.idCours === this.idCoursMoved);
-
-if (coursTrouveListeCours) {
-  this.carteEtatToAdd.isVosCours = true;
-  this.carteEtatToAdd.isActif = false;
-  this.carteEtatToAdd.isFinis = false;
-} else if (coursTrouveActif) {
-  this.carteEtatToAdd.isVosCours = false;
-  this.carteEtatToAdd.isActif = true;
-  this.carteEtatToAdd.isFinis = false;
-} else if (coursTrouveDone) {
-  this.carteEtatToAdd.isVosCours = false;
-  this.carteEtatToAdd.isActif = false;
-  this.carteEtatToAdd.isFinis = true;
-}
-}
+  } else if (this.actif.find(cours => cours.idCours === this.idCoursMoved)) {
+    this.carteEtatToAdd.isVosCours = false;
+    this.carteEtatToAdd.isActif = true;
+    this.carteEtatToAdd.isFinis = false;
+    
+  } else if (this.done.find(cours => cours.idCours === this.idCoursMoved)) {
+    this.carteEtatToAdd.isVosCours = false;
+    this.carteEtatToAdd.isActif = false;
+    this.carteEtatToAdd.isFinis = true;
+  }
+  }
 }
