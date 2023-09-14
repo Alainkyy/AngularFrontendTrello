@@ -354,13 +354,13 @@ EnregistrerModifications() {
     modification.isActif = isActif;
     modification.isFinis = isFinis;
 
-    this.coursService.PostCarteEtat(modification).subscribe(
-      (carteEtatToAdd: CarteEtat) => {
-        console.log('Valeurs de carte après enregistrement :', carteEtatToAdd);
+    this.coursService.PostCarteEtat(this.carteEtatToAdd).subscribe(
+      (carteEtats: CarteEtat) => {
+        console.log('Valeurs de carte après enregistrement :', carteEtats);
+        this.carteEtats.push({ ...this.carteEtatToAdd }); // Ajoutez la mise à jour à carteEtats
       },
       (error) => {
-        console.error('Erreur lors de l\'enregistrement de la carte :', error);
-        console.log('Valeurs de carte lors de l\'erreur :', modification);
+        console.error('Erreur lors de l\'ajout de CarteEtat :', error);
       }
     );
   });
@@ -424,16 +424,16 @@ OuEstLeCours(idCoursMoved: number){
         this.carteEtatToAdd2.isFinis = false;
         this.carteEtatToAdd2.scoreEtat = 0;
 
-    // Effectuer un POST pour chaque enregistrement CarteEtat
     this.coursService.PostCarteEtat(this.carteEtatToAdd2).subscribe(
-      (carteEtatToAdd2: CarteEtat) => {
-        console.log('Valeurs de carte après enregistrement :', carteEtatToAdd2);
-        this.carteEtatToAdd2 = new CarteEtat();
+      (carteEtats: CarteEtat) => {
+        console.log('Valeurs de carte après enregistrement :', carteEtats);
+        this.carteEtats.push({ ...this.carteEtatToAdd2}); // Ajoutez la mise à jour à carteEtats
       },
       (error) => {
         console.error('Erreur lors de l\'ajout de CarteEtat :', error);
       }
-  )});
+    );
+  });
   
 
   this.carteEtats.push({ ...this.carteEtatToAdd2 });
@@ -442,8 +442,6 @@ console.log(this.carteEtats);
 
 
   recharger(){ 
-
     this.ngOnInit();
-
   }
 }
