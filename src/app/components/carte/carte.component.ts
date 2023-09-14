@@ -23,8 +23,8 @@ export class CarteComponent implements OnInit {
   public connectedAs3: number | null = null; //idSpecialite du Consultant
   public connectedAs5: number | null = null; //score du Consultant
   public connectedAs6: any | null = null; //idConsultant du Consultant
-  public infoCours : Cours [] = [];
-  public listecours: Cours[] = [];
+  public infoCours : Cours [] = []; // Tout les cours
+  public listecours: Cours[] = []; // Cours filtré
   public actif: Cours[] = [];
   public done: Cours[] = [];
   
@@ -96,9 +96,10 @@ afficherTousLesEtatsFiltre(connectedAs6: number) {
     
     if (this.carteEtats.length === 0){
       if (this.connectedAs3 !== null) {
+        console.log("Premiere Connexion !");
       this.afficherTousLesCoursFiltre(this.connectedAs3)
       }
-    }
+    } else {
     console.log('Chargement des infoCours:', this.infoCours);
     console.log('Chargement des carteEtats:', this.carteEtats);
  
@@ -109,7 +110,7 @@ afficherTousLesEtatsFiltre(connectedAs6: number) {
     const totalCours = this.listecours.length + this.done.length + this.actif.length;
     const finishedCours = this.done.length;
     this.score = totalCours !== 0 ? Math.floor((finishedCours / totalCours) * 100) : 0;
-
+  }
     return this.carteEtats;
   });
 }
