@@ -83,6 +83,11 @@ ngOnInit(): void {
 
 afficherTousLesEtatsFiltre(connectedAs6: number) {
   this.afficherTousLesCours();
+
+  
+  if (!this.carteEtatToAdd && !this.carteEtatToAdd2) {
+
+  
   this.coursService.GetCarteEtat().subscribe((result: any[]) => {
     this.carteEtats = result
     .filter(carteEtats => carteEtats.idConsultant === this.connectedAs6)
@@ -114,7 +119,44 @@ afficherTousLesEtatsFiltre(connectedAs6: number) {
     this.score = totalCours !== 0 ? Math.floor((finishedCours / totalCours) * 100) : 0;
   }
     return this.carteEtats;
-  });
+  });}
+  else {
+    this.carteEtats.push({ ...this.carteEtatToAdd });
+    this.carteEtats.push({ ...this.carteEtatToAdd2 });
+
+    this.coursService.GetCarteEtat().subscribe((result: any[]) => {
+      this.carteEtats = result
+      .filter(carteEtats => carteEtats.idConsultant === this.connectedAs6)
+      .map(carteEtats => new CarteEtat(
+        carteEtats.idCarte,
+        carteEtats.idConsultant,
+        carteEtats.idCours,
+        carteEtats.isVosCours,
+        carteEtats.isActif,
+        carteEtats.isFinis,
+        carteEtats.scoreEtat
+      ));
+      
+      if (this.carteEtats.length === 0){
+        if (this.connectedAs3 !== null) {
+          console.log("Premiere Connexion !");
+        this.afficherTousLesCoursFiltre(this.connectedAs3)
+        }
+      } else {
+      console.log('Chargement des infoCours:', this.infoCours);
+      console.log('Chargement des carteEtats:', this.carteEtats);
+   
+  
+      const coursAvecProprietesUniques = this.getUniqueCoursProperties(this.carteEtats, this.infoCours);
+      this.associerCoursAuxListes(coursAvecProprietesUniques);
+  
+      const totalCours = this.listecours.length + this.done.length + this.actif.length;
+      const finishedCours = this.done.length;
+      this.score = totalCours !== 0 ? Math.floor((finishedCours / totalCours) * 100) : 0;
+    }
+      return this.carteEtats;
+    });
+  }
 }
 
 public afficherTousLesCoursFiltre(connectedAs3: number) {
@@ -276,7 +318,7 @@ ajouterModification(carteEtat: CarteEtat) {
 }
 
 AjoutCarteEtat() {
-  this.OuEstLeCours();
+  this.OuEstLeCours(this.idCoursMoved);
 
   this.carteEtatToAdd = new CarteEtat(
     this.idCarte,
@@ -292,16 +334,26 @@ AjoutCarteEtat() {
 }
 
 EnregistrerModifications() {
-
+  // Ajoutez la logique pour localiser le cours ici en utilisant la même logique qu'OuEstLeCours
+  this.carteEtats.push({ ...this.carteEtatToAdd });
+  this.carteEtats.push({ ...this.carteEtatToAdd2 });
   this.AjoutCarteEtat();
+  this.carteEtats.push({ ...this.carteEtatToAdd });
+  this.carteEtats.push({ ...this.carteEtatToAdd2 });
   const dernieresModifications: Map<number, CarteEtat> = new Map();
-  
 
   for (const modification of this.modifications) {
     dernieresModifications.set(modification.idCours, modification);
   }
 
   dernieresModifications.forEach((modification) => {
+    // Utilisez modification.idCours pour localiser le cours en cours de traitement
+    const { isVosCours, isActif, isFinis } = this.OuEstLeCours(modification.idCours);
+
+    modification.isVosCours = isVosCours;
+    modification.isActif = isActif;
+    modification.isFinis = isFinis;
+
     this.coursService.PostCarteEtat(modification).subscribe(
       (carteEtatToAdd: CarteEtat) => {
         console.log('Valeurs de carte après enregistrement :', carteEtatToAdd);
@@ -312,10 +364,15 @@ EnregistrerModifications() {
       }
     );
   });
+
   this.modifications = [];
 }
 
-OuEstLeCours(){
+
+OuEstLeCours(idCoursMoved: number){
+  let isVosCours = false;
+  let isActif = false;
+  let isFinis = false;
 
   if (this.listecours.find(cours => cours.idCours === this.idCoursMoved)) {
     this.carteEtatToAdd.isVosCours = true;
@@ -332,6 +389,8 @@ OuEstLeCours(){
     this.carteEtatToAdd.isActif = false;
     this.carteEtatToAdd.isFinis = true;
   }
+  this.carteEtats.push({ ...this.carteEtatToAdd });
+  return { isVosCours, isActif, isFinis };
   }
 
   resetCours() {
@@ -377,17 +436,14 @@ OuEstLeCours(){
   )});
   
 
-  this.carteEtats.push({ ...this.carteEtatToAdd });
+  this.carteEtats.push({ ...this.carteEtatToAdd2 });
 console.log(this.carteEtats);
 }
 
 
   recharger(){ 
-    // Vider les listes
-    this.listecours = [];
-    this.actif = [];
-    this.done = [];
-    this.score = 0;
+
     this.ngOnInit();
+
   }
 }
