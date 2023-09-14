@@ -27,8 +27,7 @@ export class ConsultationComponent implements OnInit{
   public axes: any[] = [];
   public specialites: any[] = [];
   public carteEtats: CarteEtat[] = [];
-  public cours: Cours[] = [];
-  public coursAvecProprietesUniques: any[] = [];
+  public carteAvecProprietesUniques: any[] = [];
 
   constructor(
     private consultationService: ConsultationService,
@@ -62,7 +61,7 @@ export class ConsultationComponent implements OnInit{
     })
   
     this.chargerToutesLesCartesEtats();
-    this.chargerTousLesCours();
+    // this.chargerTousLesCours();
   
   };
 
@@ -81,24 +80,6 @@ export class ConsultationComponent implements OnInit{
         console.log('Liste des carteEtat:', this.carteEtats);
     });
   }
-
-  chargerTousLesCours() {
-    this.coursService.getCours().subscribe((result: Cours[]) => {
-      this.cours = result.map(coursData => new Cours(
-        coursData.idCours,
-        coursData.nomCours,
-        coursData.lienVersCours,
-        coursData.videoVersCours,
-        coursData.exercice,
-        coursData.avancement,
-        coursData.dateDebutCours,
-        coursData.dateFinCours,
-        coursData.commentaire,
-        coursData.idSpecialite
-      ));
-      console.log('Liste des Cours :', this.cours);
-  });
-}
 
  public afficherTousLesConsultants() {
     this.consultationService.GetConsultant().subscribe((result: any[]) => {
@@ -125,25 +106,32 @@ export class ConsultationComponent implements OnInit{
   }
 
   public afficherToutesLesCartesEtatsParConsultant(idConsultant: number) {
-    this.coursService.GetCarteEtat().subscribe((result: any[]) => {
+    this.coursService.GetCarteEtat().subscribe((result: CarteEtat[]) => {
       this.carteEtats = result
-        .filter(carteEtatData => carteEtatData.idConsultant === idConsultant)
-        .map(carteEtatData => {
-          const cours = this.cours.find(cours => cours.idCours === carteEtatData.idCours);
-          const nomCours = cours ? cours.nomCours : '';
+        .filter(carteEtats => carteEtats.idConsultant === idConsultant)
+        .map(carteEtats => {
   
-          return new CarteEtat(
-            carteEtatData.idCarte,
-            carteEtatData.idConsultant,
-            carteEtatData.idCours,
-            carteEtatData.isVosCours,
-            carteEtatData.isActif,
-            carteEtatData.isFinis,
-            carteEtatData.scoreEtat
+          const nouvelleCarte = new CarteEtat(
+            carteEtats.idCarte,
+            carteEtats.idConsultant,
+            carteEtats.idCours,
+            carteEtats.isVosCours,
+            carteEtats.isActif,
+            carteEtats.isFinis,
+            carteEtats.scoreEtat
           );
+  
+          // Copier les propriétés manuellement
+          Object.assign(nouvelleCarte, {
+            isVosCours: carteEtats.isVosCours,
+            isActif: carteEtats.isActif,
+            isFinis: carteEtats.isFinis,
+          });
+  
+          return nouvelleCarte;
         });
   
-      const coursAvecProprietesUniques: CarteEtat[] = [];
+      const carteAvecProprietesUniques: CarteEtat[] = [];
   
       // Créer un dictionnaire pour stocker les cartes par idCours avec l'idCarte le plus élevé
       const cartesParIdCours: { [idCours: number]: CarteEtat } = {};
@@ -161,7 +149,7 @@ export class ConsultationComponent implements OnInit{
         if (cartesParIdCours.hasOwnProperty(idCours)) {
           const carteMax = cartesParIdCours[idCours];
   
-          coursAvecProprietesUniques.push({
+          carteAvecProprietesUniques.push({
             idCarte: carteMax.idCarte,
             idConsultant: carteMax.idConsultant,
             idCours: Number(idCours),
@@ -173,10 +161,10 @@ export class ConsultationComponent implements OnInit{
         }
       }
   
-      // Maintenant, coursAvecProprietesUniques contient les propriétés uniques par idCours
-      console.log('Liste des cours avec propriétés uniques:', coursAvecProprietesUniques);
+      // Maintenant, carteAvecProprietesUniques contient les propriétés uniques par idCours
+      console.log('cartes uniquesX:', carteAvecProprietesUniques);
       // Vous pouvez stocker les résultats dans une propriété de votre composant si nécessaire
-      this.coursAvecProprietesUniques = coursAvecProprietesUniques;
+      this.carteAvecProprietesUniques = carteAvecProprietesUniques;
     });
   }
   

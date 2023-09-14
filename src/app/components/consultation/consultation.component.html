@@ -55,22 +55,22 @@
         </thead>
         <tbody>
          
-          <tr *ngFor="let cours of coursAvecProprietesUniques">
-            <ng-container *ngIf="convertirIdCoursEnLettre(cours.idCours) !== 'Not Found'">
-              <td>{{ convertirIdCoursEnLettre(cours.idCours) }}</td>
+          <tr *ngFor="let carteEtats of carteAvecProprietesUniques">
+            <ng-container *ngIf="convertirIdCoursEnLettre(carteEtats.idCours) !== 'Not Found'">
+              <td>{{ convertirIdCoursEnLettre(carteEtats.idCours) }}</td>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
-              <ng-container *ngIf="cours.isActif && !cours.isFinis">
+              <ng-container *ngIf="carteEtats.isActif && !carteEtats.isFinis">
                 ⌛ Le cours est en cours d'apprentissage
               </ng-container>
-              <ng-container *ngIf="!cours.isActif && cours.isFinis">
+              <ng-container *ngIf="!carteEtats.isActif && carteEtats.isFinis">
                 ✅ Le cours est terminé
               </ng-container>
-              <ng-container *ngIf="cours.isVosCours">
+              <ng-container *ngIf="carteEtats.isVosCours">
                 ❌ Le cours n'a pas encore commencé
               </ng-container>
             </ng-container>

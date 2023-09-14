@@ -435,11 +435,9 @@ OuEstLeCours(idCoursMoved: number){
     );
   });
   
-
   this.carteEtats.push({ ...this.carteEtatToAdd2 });
 console.log(this.carteEtats);
 }
-
 
   recharger(){ 
     this.ngOnInit();
