@@ -46,7 +46,7 @@
       <span><button (click)="afficherToutesLesCartesEtatsParConsultant(consultant.idConsultant)" class="btn-view">Details</button></span>
     </mat-expansion-panel-header>
   
-    <div (click)="afficherToutesLesCartesEtatsParConsultant(consultant.idConsultant)">
+    <div (click)="afficherToutesLesCartesEtatsParConsultant(consultant.idConsultant)"> 
       <table class="table">
         <thead>
           <tr>
@@ -54,26 +54,28 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let carteEtat of this.carteEtats">
-            <ng-container *ngIf="convertirIdCoursEnLettre(carteEtat.idCours) !== 'Not Found'">
-              <td>{{ convertirIdCoursEnLettre(carteEtat.idCours) }}</td>
+         
+          <tr *ngFor="let cours of coursAvecProprietesUniques">
+            <ng-container *ngIf="convertirIdCoursEnLettre(cours.idCours) !== 'Not Found'">
+              <td>{{ convertirIdCoursEnLettre(cours.idCours) }}</td>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
-              <ng-container *ngIf="carteEtat.isActif && !carteEtat.isFinis">
+              <ng-container *ngIf="cours.isActif && !cours.isFinis">
                 ⌛ Le cours est en cours d'apprentissage
               </ng-container>
-              <ng-container *ngIf="!carteEtat.isActif && carteEtat.isFinis">
+              <ng-container *ngIf="!cours.isActif && cours.isFinis">
                 ✅ Le cours est terminé
               </ng-container>
-              <ng-container *ngIf="carteEtat.isVosCours">
+              <ng-container *ngIf="cours.isVosCours">
                 ❌ Le cours n'a pas encore commencé
               </ng-container>
             </ng-container>
           </tr>
+
 
         </tbody>
       </table>

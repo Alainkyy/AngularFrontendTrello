@@ -13,7 +13,6 @@ import { Specialite } from '../../models/Specialite';
 import { AxeService } from 'src/app/services/axe.service'; // inclus Axe & Specialite
 
 import { Cours } from '../../models/Cours';
-
 import { CarteEtat } from '../../models/CarteEtat';
 import { CoursService } from 'src/app/services/cours.service';
 
@@ -29,6 +28,7 @@ export class ConsultationComponent implements OnInit{
   public specialites: any[] = [];
   public carteEtats: CarteEtat[] = [];
   public cours: Cours[] = [];
+  public coursAvecProprietesUniques: any[] = [];
 
   constructor(
     private consultationService: ConsultationService,
@@ -126,29 +126,61 @@ export class ConsultationComponent implements OnInit{
 
   public afficherToutesLesCartesEtatsParConsultant(idConsultant: number) {
     this.coursService.GetCarteEtat().subscribe((result: any[]) => {
-    this.carteEtats = result.
-     filter(carteEtatData => carteEtatData.idConsultant === idConsultant).
-     map(carteEtatData => {
-
-
+      this.carteEtats = result
+        .filter(carteEtatData => carteEtatData.idConsultant === idConsultant)
+        .map(carteEtatData => {
           const cours = this.cours.find(cours => cours.idCours === carteEtatData.idCours);
           const nomCours = cours ? cours.nomCours : '';
-          
-          return new CarteEtat(
-          carteEtatData.idCarte,
-          carteEtatData.idConsultant,
-          carteEtatData.idCours,
-          carteEtatData.isVosCours,
-          carteEtatData.isActif,
-          carteEtatData.isFinis,
-          carteEtatData.scoreEtat
-          )});
-    });
-    console.log(this.carteEtats);
-  };
-
   
-
+          return new CarteEtat(
+            carteEtatData.idCarte,
+            carteEtatData.idConsultant,
+            carteEtatData.idCours,
+            carteEtatData.isVosCours,
+            carteEtatData.isActif,
+            carteEtatData.isFinis,
+            carteEtatData.scoreEtat
+          );
+        });
+  
+      const coursAvecProprietesUniques: CarteEtat[] = [];
+  
+      // Créer un dictionnaire pour stocker les cartes par idCours avec l'idCarte le plus élevé
+      const cartesParIdCours: { [idCours: number]: CarteEtat } = {};
+  
+      // Parcourez les carteEtats existants pour conserver ceux avec idCarte le plus élevé
+      this.carteEtats.forEach(carteEtat => {
+        const idCours = carteEtat.idCours;
+        if (!cartesParIdCours[idCours] || carteEtat.idCarte > cartesParIdCours[idCours].idCarte) {
+          cartesParIdCours[idCours] = carteEtat;
+        }
+      });
+  
+      // Transformez le dictionnaire en un tableau d'objets
+      for (const idCours in cartesParIdCours) {
+        if (cartesParIdCours.hasOwnProperty(idCours)) {
+          const carteMax = cartesParIdCours[idCours];
+  
+          coursAvecProprietesUniques.push({
+            idCarte: carteMax.idCarte,
+            idConsultant: carteMax.idConsultant,
+            idCours: Number(idCours),
+            isVosCours: carteMax.isVosCours,
+            isActif: carteMax.isActif,
+            isFinis: carteMax.isFinis,
+            scoreEtat: carteMax.scoreEtat
+          });
+        }
+      }
+  
+      // Maintenant, coursAvecProprietesUniques contient les propriétés uniques par idCours
+      console.log('Liste des cours avec propriétés uniques:', coursAvecProprietesUniques);
+      // Vous pouvez stocker les résultats dans une propriété de votre composant si nécessaire
+      this.coursAvecProprietesUniques = coursAvecProprietesUniques;
+    });
+  }
+  
+  
   supprimerConsultant(idConsultant: number) {
     if (confirm('Êtes-vous sûr de vouloir supprimer ce consultant ?')) {
       this.consultationService.DeleteConsultant(idConsultant).subscribe(() => {
