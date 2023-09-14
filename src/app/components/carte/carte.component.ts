@@ -52,7 +52,7 @@ ngOnInit(): void {
 
   // Recupere l'idSpecialite du Consultant connecté
   if (this.connectedAs3 !== null) {
-    //  this.afficherTousLesCoursFiltre(this.connectedAs3);
+    // this.afficherTousLesCoursFiltre(this.connectedAs3);
   } else {
     console.log("L'ID de spécialité est null.");
   }
@@ -75,6 +75,7 @@ ngOnInit(): void {
   } else {
     console.log("L'idConsultant est null.");
   }
+
   this.afficherTousLesCours();
   this.afficherTousLesEtatsFiltre(this.connectedAs6);
 }
@@ -135,7 +136,7 @@ public afficherTousLesCoursFiltre(connectedAs3: number) {
 }
 
 afficherTousLesCours() {
-  this.coursService.getCours().subscribe((result: any[]) => {
+  this.coursService.getCours().subscribe((result: Cours[]) => {
     this.infoCours = result.map(infoCoursData => new Cours(
       infoCoursData.idCours,
       infoCoursData.nomCours,
@@ -291,7 +292,9 @@ AjoutCarteEtat() {
 
 EnregistrerModifications() {
 
+  this.AjoutCarteEtat();
   const dernieresModifications: Map<number, CarteEtat> = new Map();
+  
 
   for (const modification of this.modifications) {
     dernieresModifications.set(modification.idCours, modification);
@@ -328,5 +331,62 @@ OuEstLeCours(){
     this.carteEtatToAdd.isActif = false;
     this.carteEtatToAdd.isFinis = true;
   }
+  }
+
+  resetCours() {
+
+    // Vider les listes
+    this.listecours = [];
+    this.actif = [];
+    this.done = [];
+
+    this.coursService.DeleteCarteEtat(this.connectedAs6).subscribe(() => {
+      console.log("Cartes Etat supprimées avec succès !");
+    }, (error) => {
+      console.error("Erreur lors de la suppression des cartesEtats :", error);
+    });
+  
+    
+  
+    // Recharger les cours sur listecours
+    if (this.connectedAs3 !== null) {
+      console.log("Reset Success !");
+      this.afficherTousLesCoursFiltre(this.connectedAs3);
+    }
+  
+    // Créer et ajouter les enregistrements CarteEtat pour chaque cours
+  this.listecours.forEach(cours => {
+    const carteEtatToAdd: CarteEtat = {
+      idCarte: this.idCarte + 1,
+      idConsultant: this.connectedAs6, 
+      idCours: cours.idCours,
+      isVosCours: true,
+      isActif: false,
+      isFinis: false,
+      scoreEtat: 0
+    };
+
+    // Effectuer un POST pour chaque enregistrement CarteEtat
+    this.coursService.PostCarteEtat(carteEtatToAdd).subscribe(
+      (carteEtatToAdd: CarteEtat) => {
+        console.log('Valeurs de carte après enregistrement :', carteEtatToAdd);
+      },
+      (error) => {
+        console.error('Erreur lors de l\'enregistrement de la carte :', error);
+      }
+    );
+  });
+
+  this.carteEtats.push({ ...this.carteEtatToAdd });
+console.log(this.carteEtats);
+}
+
+  recharger(){ 
+    // Vider les listes
+    this.listecours = [];
+    this.actif = [];
+    this.done = [];
+    this.score = 0;
+    this.ngOnInit();
   }
 }
