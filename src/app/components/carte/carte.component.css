@@ -116,3 +116,82 @@ body {
 }
 
 
+
+.style-btn{
+text-align: center;
+justify-content: space-between;
+margin-top: 2%;
+}
+
+.btn-add {
+  background-color: #007bff; 
+  color: #fff; 
+  border: none; 
+  padding: 8px 16px; 
+  border-radius: 4px;
+  cursor: pointer; 
+  text-decoration: none; 
+  justify-content: center;
+  box-sizing: content-box;
+  text-align: center;
+  width: auto;
+  margin: auto;
+  margin-right: 20px;
+}
+
+.btn-add:hover {
+  background-color: #0056b3; 
+}
+
+.btn-delete {
+  background-color: #F19937;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 10px;
+  pointer-events: visible;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+.btn-update {
+  background-color: #C94B91;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 10px;
+  pointer-events: visible;
+  cursor: pointer;
+}
+
+
+.btn-update:hover {
+  background-color: #592240;
+}
+
+.btn-view {
+  background-color: #6BB346;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  pointer-events: visible;
+  cursor: pointer;
+}
+
+.btn-view:hover {
+  background-color: #233B17;
+}
+
+

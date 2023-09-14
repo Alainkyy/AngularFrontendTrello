@@ -6,6 +6,12 @@
 </head>
 <body>
   <app-header-section></app-header-section>
+  
+  <div class="style-btn">
+    <button class ="btn-add" (click)="EnregistrerModifications()">Enregistrer les modifications</button>
+    <button class ="btn-delete" (click)="recharger()">Recharger</button>
+    <button class ="btn-view" (click)="resetCours()">Réinitialiser</button>
+  </div>
 
   <div cdkDropListGroup>
 
@@ -49,8 +55,5 @@
     </div>
   </div>
 
-  <button (click)="EnregistrerModifications()">Enregistrer les modifications</button>
-  <button (click)="recharger()">Recharger</button>
-  <button (click)="resetCours()">Réinitialiser</button>
 </body>
 </html>
