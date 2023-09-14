@@ -162,4 +162,67 @@ export class ConsultationComponent implements OnInit{
   modifierConsultant(idConsultant: number) {
     this.router.navigate(['/editConsultant', idConsultant]);
   }
+
+  convertirIdCoursEnLettre(idCours: number): string {
+    switch (idCours) {
+      case 0:
+        return "Not Found";
+      case 1:
+        return "Not Found";
+      case 2:
+        return "Not Found";
+      case 3:
+        return "Not Found";
+      case 4:
+        return "Introduction à JAVA";
+      case 5:
+        return "Programmation Orientée Objet";
+      case 6:
+        return "Gestion des exceptions en JAVA";
+      case 7:
+        return "Fondamentaux de .NET";
+      case 8:
+        return "Création d applications Web avec ASP.NET";
+      case 9:
+        return "Développement d applications Windows avec C#";
+      case 10:
+        return "Introduction à Python";
+      case 11:
+        return "Manipulation de données avec Pandas";
+      case 12:
+        return "Création d applications Web avec Flask";
+      case 13:
+        return "Introduction to Data Analytics";
+      case 14:
+        return "Data Mining Techniques";
+      case 15:
+        return "Big Data Analysis";
+      case 16:
+        return "Introduction to Data Visualization";
+      case 17:
+        return "Creating Effective Data Visualizations";
+      case 18:
+        return "Interactive Data Dashboards";
+      case 19:
+        return "Introduction to Database Administration";
+      case 20:
+        return "Database Performance Tuning";
+      case 21:
+        return "Data Backup and Recovery";
+      case 22:
+        return "Introduction to Data Governance";
+      case 23:
+        return "Data Privacy and Security";
+      case 24:
+        return "Data Quality Management";
+      case 25:
+        return "Introduction to Financial Analysis";
+      case 26:
+        return "Financial Reporting and Statements";
+      case 27:
+        return "Risk Assessment and Management";
+      default:
+        return ""; 
+    }
+  }
   }

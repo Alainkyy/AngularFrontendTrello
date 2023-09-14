@@ -24,6 +24,10 @@
     background-color: #0056b3; 
   }
   
+  .disable-row-click {
+    pointer-events: none; /* Empêche le clic sur toute la ligne */
+    cursor: default; /* Change le curseur pour indiquer que la ligne n'est pas cliquable */
+  }
   
 .btn-delete {
     background-color: #F19937;
@@ -34,6 +38,8 @@
     cursor: pointer;
     text-decoration: none;
     margin-right: 10px;
+    pointer-events: visible;
+    cursor: pointer;
   }
   
 .btn-delete:hover {
@@ -49,6 +55,8 @@
     cursor: pointer;
     text-decoration: none;
     margin-right: 10px;
+    pointer-events: visible;
+    cursor: pointer;
   }
   
 
@@ -64,6 +72,8 @@
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
+    pointer-events: visible;
+    cursor: pointer;
   }
   
 .btn-view:hover {
