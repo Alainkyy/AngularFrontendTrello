@@ -34,6 +34,7 @@ export class CarteComponent implements OnInit {
   public idCarte: number = 0;
   public carteEtatToAdd: CarteEtat = new CarteEtat();
   public modifications: CarteEtat[] = [];
+  public carteEtatToAdd2: CarteEtat = new CarteEtat();
     
   constructor(
     private coursService: CoursService,
@@ -355,31 +356,31 @@ OuEstLeCours(){
     }
   
     // Créer et ajouter les enregistrements CarteEtat pour chaque cours
-  this.listecours.forEach(cours => {
-    const carteEtatToAdd: CarteEtat = {
-      idCarte: this.idCarte + 1,
-      idConsultant: this.connectedAs6, 
-      idCours: cours.idCours,
-      isVosCours: true,
-      isActif: false,
-      isFinis: false,
-      scoreEtat: 0
-    };
+    this.listecours.forEach(cours => {
+        this.carteEtatToAdd2.idCarte = this.idCarte + 1;
+        this.carteEtatToAdd2.idConsultant = this.connectedAs6;
+        this.carteEtatToAdd2.idCours = cours.idCours;
+        this.carteEtatToAdd2.isVosCours = true;
+        this.carteEtatToAdd2.isActif = false;
+        this.carteEtatToAdd2.isFinis = false;
+        this.carteEtatToAdd2.scoreEtat = 0;
 
     // Effectuer un POST pour chaque enregistrement CarteEtat
-    this.coursService.PostCarteEtat(carteEtatToAdd).subscribe(
-      (carteEtatToAdd: CarteEtat) => {
-        console.log('Valeurs de carte après enregistrement :', carteEtatToAdd);
+    this.coursService.PostCarteEtat(this.carteEtatToAdd2).subscribe(
+      (carteEtatToAdd2: CarteEtat) => {
+        console.log('Valeurs de carte après enregistrement :', carteEtatToAdd2);
+        this.carteEtatToAdd2 = new CarteEtat();
       },
       (error) => {
-        console.error('Erreur lors de l\'enregistrement de la carte :', error);
+        console.error('Erreur lors de l\'ajout de CarteEtat :', error);
       }
-    );
-  });
+  )});
+  
 
   this.carteEtats.push({ ...this.carteEtatToAdd });
 console.log(this.carteEtats);
 }
+
 
   recharger(){ 
     // Vider les listes
