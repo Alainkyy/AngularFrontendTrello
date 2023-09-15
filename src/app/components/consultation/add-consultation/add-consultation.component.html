@@ -42,10 +42,18 @@
           <option *ngIf="consultantToAdd.idAxe == 4" value="8">Financial Analysis</option>
         </select>
       </div>
-      <div class="form-group">
-        <label for="score">Score:</label>
-        <input type="number" class="form-control" id="score" [(ngModel)]="consultantToAdd.score" name="score" required>
-      </div>
+      
+
+        <div class="form-group">
+          <label for="score">Score :</label>
+          <select class="form-control" id="score" [(ngModel)]="consultantToAdd.score" name="score" required>
+            <option *ngIf="consultantToAdd.statutConsultant == 'Formation'" value="Formation">0</option>
+            <option *ngIf="consultantToAdd.statutConsultant == 'Admin'" value="Admin">100</option>
+          </select>
+        </div>
+
+
+        
       <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
     <button routerLink="/listeConsultant">Retour</button>
