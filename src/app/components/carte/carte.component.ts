@@ -366,6 +366,8 @@ EnregistrerModifications() {
   });
 
   this.modifications = [];
+  this.simulerClic(); // Premier clic
+  this.simulerClic(); // Deuxième clic
 }
 
 
@@ -441,5 +443,14 @@ console.log(this.carteEtats);
 
   recharger(){ 
     this.ngOnInit();
+  }
+
+  
+  simulerClic() {
+    const bouton = document.getElementById('enregistrer-button');
+    
+    if (bouton !== null) {
+      bouton.click();
+    }
   }
 }
