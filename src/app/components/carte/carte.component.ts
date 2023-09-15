@@ -332,9 +332,9 @@ public AjoutCarteEtat() {
     this.idCarte,
     this.connectedAs6,
     this.idCoursMoved,
-    coursInfo.isVosCours,
-    coursInfo.isActif,
-    coursInfo.isFinis,
+    this.carteEtatToAdd.isVosCours,
+    this.carteEtatToAdd.isActif,
+    this.carteEtatToAdd.isFinis,
     this.score
   );
 
@@ -354,7 +354,6 @@ EnregistrerModifications() {
     // Utilisez modification.idCours pour localiser le cours en cours de traitement
     const { isVosCours, isActif, isFinis } = this.OuEstLeCours(modification.idCours);
 
-    
     modification.isVosCours = isVosCours;
     modification.isActif = isActif;
     modification.isFinis = isFinis;
@@ -366,6 +365,8 @@ EnregistrerModifications() {
     } else if (this.NIKMOK === 3) {
       modification.isFinis = true;
     }
+
+    console.log("Boolean :" + modification.isVosCours + "-" + modification.isActif + "-" + modification.isFinis);
 
     // Effectuer un POST pour chaque modification
     this.coursService.PostCarteEtat(modification).subscribe(
@@ -386,36 +387,34 @@ EnregistrerModifications() {
 
 
 
-public OuEstLeCours(idCoursMoved: number){
+public OuEstLeCours(idCoursMoved: number) {
   let isVosCours = false;
   let isActif = false;
   let isFinis = false;
   let NIKMOK = 0;
 
-  if (this.listecours.find(cours => cours.idCours === this.idCoursMoved)) {
-    this.carteEtatToAdd.isVosCours = true;
-    this.carteEtatToAdd.isActif = false;
-    this.carteEtatToAdd.isFinis = false;
-    console.log("Le cours se trouve dans 1");
+  if (this.listecours.find(cours => cours.idCours === idCoursMoved)) {
+    isVosCours = true;
+    isActif = false;
+    isFinis = false;
+    console.log("Le cours se trouve dans 1" + isVosCours + "-" + isActif + "-" + isFinis);
     NIKMOK = 1;
-
-  } else if (this.actif.find(cours => cours.idCours === this.idCoursMoved)) {
-    this.carteEtatToAdd.isVosCours = false;
-    this.carteEtatToAdd.isActif = true;
-    this.carteEtatToAdd.isFinis = false;
-    console.log("Le cours se trouve dans 2");
+  } else if (this.actif.find(cours => cours.idCours === idCoursMoved)) {
+    isVosCours = false;
+    isActif = true;
+    isFinis = false;
+    console.log("Le cours se trouve dans 2" + isVosCours + "-" + isActif + "-" + isFinis);
     NIKMOK = 2;
-    
-  } else if (this.done.find(cours => cours.idCours === this.idCoursMoved)) {
-    this.carteEtatToAdd.isVosCours = false;
-    this.carteEtatToAdd.isActif = false;
-    this.carteEtatToAdd.isFinis = true;
-    console.log("Le cours se trouve dans 3");
+  } else if (this.done.find(cours => cours.idCours === idCoursMoved)) {
+    isVosCours = false;
+    isActif = false;
+    isFinis = true;
+    console.log("Le cours se trouve dans 3" + isVosCours + "-" + isActif + "-" + isFinis);
     NIKMOK = 3;
   }
-  this.carteEtats.push({ ...this.carteEtatToAdd });
+  
   return { isVosCours, isActif, isFinis };
-  }
+}
 
   deleteCartesByIdConsultant(idConsultant: number) {
     const cartesASupprimer = this.carteEtats.filter(carte => carte.idConsultant === idConsultant);
