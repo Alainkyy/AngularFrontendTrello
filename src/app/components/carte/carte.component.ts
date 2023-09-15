@@ -349,6 +349,12 @@ EnregistrerModifications() {
   // Ajouter les nouvelles cartes
   this.carteEtats.push(this.carteEtatToAdd);
 
+  // Compter le nombre total de cours
+  const nbTotalDesCours = this.listecours.length + this.done.length + this.actif.length;
+
+  // Créer un ensemble de cartes ajoutées pour suivre les idCours déjà ajoutés
+  const cartesAjoutees = new Set<number>();
+
   // Ajouter les modifications à partir de la liste modifications
   this.modifications.forEach((modification) => {
     // Utilisez modification.idCours pour localiser le cours en cours de traitement
@@ -360,13 +366,20 @@ EnregistrerModifications() {
 
     if (this.NIKMOK === 1) {
       modification.isVosCours = true;
+      modification.isVosCours = false;
+      modification.isVosCours = false;
     } else if (this.NIKMOK === 2) {
-      modification.isActif = true;
+      modification.isActif = false;
+      modification.isVosCours = true;
+      modification.isVosCours = false;
     } else if (this.NIKMOK === 3) {
-      modification.isFinis = true;
+      modification.isFinis = false;
+      modification.isVosCours = false;
+      modification.isVosCours = true;
     }
 
-    console.log("Boolean :" + modification.isVosCours + "-" + modification.isActif + "-" + modification.isFinis);
+    // Ajouter l'idCours à l'ensemble des cartes ajoutées
+    cartesAjoutees.add(modification.idCours);
 
     // Effectuer un POST pour chaque modification
     this.coursService.PostCarteEtat(modification).subscribe(
@@ -380,9 +393,40 @@ EnregistrerModifications() {
     );
   });
 
+  // Vérifier si toutes les cartes de cours ont été ajoutées
+  for (const carteCours of this.listecours) {
+    if (!cartesAjoutees.has(carteCours.idCours)) {
+      console.log(`La carte du cours ${carteCours.idCours} n'a pas été touchée`);
+      const { isVosCours, isActif, isFinis } = this.OuEstLeCours(carteCours.idCours);
+
+      // Créer une nouvelle CarteEtat avec les informations manquantes
+      const nouvelleCarte = new CarteEtat(
+        this.idCarte, // Vous pouvez définir l'idCarte comme vous le souhaitez
+        this.connectedAs6,
+        carteCours.idCours,
+        isVosCours,
+        isActif,
+        isFinis,
+        this.score
+      );
+
+      // Effectuer un POST pour ajouter la carte manquante
+      this.coursService.PostCarteEtat(nouvelleCarte).subscribe(
+        (carteEtats: CarteEtat) => {
+          console.log(`Carte ajoutée pour le cours ${carteCours.idCours}`);
+          this.carteEtats.push(carteEtats); // Ajoutez la mise à jour à carteEtats
+        },
+        (error) => {
+          console.error(`Erreur lors de l'ajout de la carte pour le cours ${carteCours.idCours}:`, error);
+        }
+      );
+    }
+  }
+
   // Effacer les modifications après l'ajout
   this.modifications = [];
 }
+
 
 
 
@@ -474,10 +518,7 @@ public OuEstLeCours(idCoursMoved: number) {
         this.carteEtatToAdd2.scoreEtat = 0;
 
         if (this.carteEtatToAdd2.idCours == 0 ){
-          this.supprimerles0(this.idCours0);
-        } 
-        if (this.carteEtatToAdd2.idCarte == 0 ){
-          this.supprimerles0(this.idCarte);
+          this.supprimerles0(this.carteEtatToAdd2.idCours);
         } 
 
     this.coursService.PostCarteEtat(this.carteEtatToAdd2).subscribe(
