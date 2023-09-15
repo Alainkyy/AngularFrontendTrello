@@ -496,6 +496,10 @@ console.log(this.carteEtats);
 }
 
   recharger(){ 
+     // Vider les listes
+     this.listecours = [];
+     this.actif = [];
+     this.done = [];
     this.ngOnInit();
   }
 
