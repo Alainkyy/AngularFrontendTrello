@@ -395,6 +395,22 @@ OuEstLeCours(idCoursMoved: number){
   return { isVosCours, isActif, isFinis };
   }
 
+  deleteCartesByIdConsultant(idConsultant: number) {
+    const cartesASupprimer = this.carteEtats.filter(carte => carte.idConsultant === idConsultant);
+    
+    for (const carte of cartesASupprimer) {
+      this.coursService.DeleteCarteEtat(carte.idCarte).subscribe(
+        () => {
+          // Suppression réussie, vous pouvez effectuer des actions supplémentaires si nécessaire
+          console.log(`CarteEtat avec idCarte ${carte.idCarte} supprimée avec succès.`);
+        },
+        (error) => {
+          console.error(`Erreur lors de la suppression de CarteEtat avec idCarte ${carte.idCarte}:`, error);
+        }
+      );
+    }
+  }
+
   resetCours() {
 
     // Vider les listes
@@ -402,13 +418,7 @@ OuEstLeCours(idCoursMoved: number){
     this.actif = [];
     this.done = [];
 
-    this.coursService.DeleteCarteEtat(this.connectedAs6).subscribe(() => {
-      console.log("Cartes Etat supprimées avec succès !");
-    }, (error) => {
-      console.error("Erreur lors de la suppression des cartesEtats :", error);
-    });
-  
-    
+    this.deleteCartesByIdConsultant(this.connectedAs6);
   
     // Recharger les cours sur listecours
     if (this.connectedAs3 !== null) {
