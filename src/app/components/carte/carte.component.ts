@@ -35,6 +35,9 @@ export class CarteComponent implements OnInit {
   public carteEtatToAdd: CarteEtat = new CarteEtat();
   public modifications: CarteEtat[] = [];
   public carteEtatToAdd2: CarteEtat = new CarteEtat();
+
+  public idCours0 : number = 0;
+  public NIKMOK = 0;
     
   constructor(
     private coursService: CoursService,
@@ -160,7 +163,7 @@ afficherTousLesEtatsFiltre(connectedAs6: number) {
 }
 
 public afficherTousLesCoursFiltre(connectedAs3: number) {
-  this.coursService.getCours().subscribe((result: any[]) => {
+  this.coursService.getCours().subscribe((result: Cours[]) => {
     this.listecours = result
       .filter(coursData => coursData.idSpecialite === connectedAs3)
       .map(coursData => new Cours(
@@ -284,10 +287,13 @@ drop(event: CdkDragDrop<Cours[]>) {
 }
 
 calculateScore() {
-  const totalCours = this.listecours.length + this.done.length + this.actif.length; // Le nombre total de cours dans "Vos Cours"
-  const finishedCours = this.done.length; // Le nombre de cours dans "Finis"
+  // On calcule le Score
+  const totalCours = this.listecours.length + this.done.length + this.actif.length; 
+  const finishedCours = this.done.length; 
   this.score = Math.floor((finishedCours / totalCours) * 100);
 
+
+  // Et on met a jour sur le table Consultant
   this.editConsultationComponent.consultationService.GetConsultant().subscribe(
   (consultants: Consultant[]) => {
 
@@ -313,51 +319,59 @@ calculateScore() {
 this.AjoutCarteEtat();
 }
 
-ajouterModification(carteEtat: CarteEtat) {
-  this.modifications.push(carteEtat);
+ajouterModification(carteEtatToAdd: CarteEtat) {
+  this.modifications.push(carteEtatToAdd);
 }
 
-AjoutCarteEtat() {
-  this.OuEstLeCours(this.idCoursMoved);
+public AjoutCarteEtat() {
+  // j'appelle OuEstLeCours qui a la localisation du cours et je stock dans coursInfo
+  const coursInfo = this.OuEstLeCours(this.idCoursMoved);
 
+  // Créer un nouvel objet CarteEtat en ajoutant les valeurs obtenues
   this.carteEtatToAdd = new CarteEtat(
     this.idCarte,
     this.connectedAs6,
     this.idCoursMoved,
-    this.carteEtatToAdd.isVosCours,
-    this.carteEtatToAdd.isActif,
-    this.carteEtatToAdd.isFinis,
+    coursInfo.isVosCours,
+    coursInfo.isActif,
+    coursInfo.isFinis,
     this.score
   );
 
+  // Ajouter la modification
   this.ajouterModification(this.carteEtatToAdd);
 }
 
 EnregistrerModifications() {
-  // Ajoutez la logique pour localiser le cours ici en utilisant la même logique qu'OuEstLeCours
-  this.carteEtats.push({ ...this.carteEtatToAdd });
-  this.carteEtats.push({ ...this.carteEtatToAdd2 });
-  this.AjoutCarteEtat();
-  this.carteEtats.push({ ...this.carteEtatToAdd });
-  this.carteEtats.push({ ...this.carteEtatToAdd2 });
-  const dernieresModifications: Map<number, CarteEtat> = new Map();
+  // Supprimer les ajouts précédents des cartes si nécessaire
+  this.carteEtats = [];
 
-  for (const modification of this.modifications) {
-    dernieresModifications.set(modification.idCours, modification);
-  }
+  // Ajouter les nouvelles cartes
+  this.carteEtats.push(this.carteEtatToAdd);
 
-  dernieresModifications.forEach((modification) => {
+  // Ajouter les modifications à partir de la liste modifications
+  this.modifications.forEach((modification) => {
     // Utilisez modification.idCours pour localiser le cours en cours de traitement
     const { isVosCours, isActif, isFinis } = this.OuEstLeCours(modification.idCours);
 
+    
     modification.isVosCours = isVosCours;
     modification.isActif = isActif;
     modification.isFinis = isFinis;
 
-    this.coursService.PostCarteEtat(this.carteEtatToAdd).subscribe(
+    if (this.NIKMOK === 1) {
+      modification.isVosCours = true;
+    } else if (this.NIKMOK === 2) {
+      modification.isActif = true;
+    } else if (this.NIKMOK === 3) {
+      modification.isFinis = true;
+    }
+
+    // Effectuer un POST pour chaque modification
+    this.coursService.PostCarteEtat(modification).subscribe(
       (carteEtats: CarteEtat) => {
-        console.log('Valeurs de carte après enregistrement :', carteEtats);
-        this.carteEtats.push({ ...this.carteEtatToAdd }); // Ajoutez la mise à jour à carteEtats
+        console.log('Valeurs de carte après enregistrement :', modification);
+        this.carteEtats.push(modification); // Ajoutez la mise à jour à carteEtats
       },
       (error) => {
         console.error('Erreur lors de l\'ajout de CarteEtat :', error);
@@ -365,31 +379,39 @@ EnregistrerModifications() {
     );
   });
 
+  // Effacer les modifications après l'ajout
   this.modifications = [];
-  this.simulerClic(); // Premier clic
-  this.simulerClic(); // Deuxième clic
 }
 
 
-OuEstLeCours(idCoursMoved: number){
+
+
+public OuEstLeCours(idCoursMoved: number){
   let isVosCours = false;
   let isActif = false;
   let isFinis = false;
+  let NIKMOK = 0;
 
   if (this.listecours.find(cours => cours.idCours === this.idCoursMoved)) {
     this.carteEtatToAdd.isVosCours = true;
     this.carteEtatToAdd.isActif = false;
     this.carteEtatToAdd.isFinis = false;
+    console.log("Le cours se trouve dans 1");
+    NIKMOK = 1;
 
   } else if (this.actif.find(cours => cours.idCours === this.idCoursMoved)) {
     this.carteEtatToAdd.isVosCours = false;
     this.carteEtatToAdd.isActif = true;
     this.carteEtatToAdd.isFinis = false;
+    console.log("Le cours se trouve dans 2");
+    NIKMOK = 2;
     
   } else if (this.done.find(cours => cours.idCours === this.idCoursMoved)) {
     this.carteEtatToAdd.isVosCours = false;
     this.carteEtatToAdd.isActif = false;
     this.carteEtatToAdd.isFinis = true;
+    console.log("Le cours se trouve dans 3");
+    NIKMOK = 3;
   }
   this.carteEtats.push({ ...this.carteEtatToAdd });
   return { isVosCours, isActif, isFinis };
@@ -399,6 +421,22 @@ OuEstLeCours(idCoursMoved: number){
     const cartesASupprimer = this.carteEtats.filter(carte => carte.idConsultant === idConsultant);
     
     for (const carte of cartesASupprimer) {
+      this.coursService.DeleteCarteEtat(carte.idCarte).subscribe(
+        () => {
+          // Suppression réussie, vous pouvez effectuer des actions supplémentaires si nécessaire
+          console.log(`CarteEtat avec idCarte ${carte.idCarte} supprimée avec succès.`);
+        },
+        (error) => {
+          console.error(`Erreur lors de la suppression de CarteEtat avec idCarte ${carte.idCarte}:`, error);
+        }
+      );
+    }
+  }
+
+  supprimerles0(idCours0 : number){
+    const cartesBuggerASupprimer = this.carteEtats.filter(carte => carte.idCours === idCours0);
+
+    for (const carte of cartesBuggerASupprimer) {
       this.coursService.DeleteCarteEtat(carte.idCarte).subscribe(
         () => {
           // Suppression réussie, vous pouvez effectuer des actions supplémentaires si nécessaire
@@ -435,6 +473,13 @@ OuEstLeCours(idCoursMoved: number){
         this.carteEtatToAdd2.isActif = false;
         this.carteEtatToAdd2.isFinis = false;
         this.carteEtatToAdd2.scoreEtat = 0;
+
+        if (this.carteEtatToAdd2.idCours == 0 ){
+          this.supprimerles0(this.idCours0);
+        } 
+        if (this.carteEtatToAdd2.idCarte == 0 ){
+          this.supprimerles0(this.idCarte);
+        } 
 
     this.coursService.PostCarteEtat(this.carteEtatToAdd2).subscribe(
       (carteEtats: CarteEtat) => {

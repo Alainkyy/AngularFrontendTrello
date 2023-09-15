@@ -18,7 +18,7 @@
     <div class="example-container">
       <h2 class ="style_h2">Liste des Cours</h2>
         <div cdkDropList [cdkDropListData]="listecours" class="listeDdCoursCss" (cdkDropListDropped)="drop($event)" #listeDdCours (cdkDropListDropped)="calculateScore()">
-          <div class="example-box" *ngFor="let coursItem of listecours" cdkDrag (cdkDragEnded)="calculateScore()">
+          <div class="example-box" *ngFor="let coursItem of listecours" cdkDrag >
             <h3>{{ coursItem.nomCours }}</h3>
             <p>ID du cours : {{ coursItem.idCours }}</p>
             <p>Lien vers le cours : {{ coursItem.lienVersCours }}</p>
@@ -32,7 +32,7 @@
     <div class="example-container">
       <h2 class ="style_h2">Actif</h2>
         <div cdkDropList [cdkDropListData]="actif" class="listeDdActifCss" (cdkDropListDropped)="drop($event)" #listeDdActif (cdkDropListDropped)="calculateScore()">
-          <div class="example-box" *ngFor="let coursItem of actif" cdkDrag (cdkDragEnded)="calculateScore()">
+          <div class="example-box" *ngFor="let coursItem of actif" cdkDrag >
             <h3>{{ coursItem.nomCours }}</h3>
             <p>ID du cours : {{ coursItem.idCours }}</p>
             <p>Lien vers le cours : {{ coursItem.lienVersCours }}</p>
@@ -47,7 +47,7 @@
     <div class="example-container">
       <h2 class ="style_h2">Finis ({{ score }}%)</h2>
         <div cdkDropList [cdkDropListData]="done" class="listeDdFinisCss" (cdkDropListDropped)="drop($event)" #listeDdFinis (cdkDropListDropped)="calculateScore()">
-          <div class="example-box" *ngFor="let coursItem of done" cdkDrag (cdkDragEnded)="calculateScore()">
+          <div class="example-box" *ngFor="let coursItem of done" cdkDrag >
             <h3>{{ coursItem.nomCours }}</h3>
             <p>ID du cours : {{ coursItem.idCours }}</p>
           </div>
