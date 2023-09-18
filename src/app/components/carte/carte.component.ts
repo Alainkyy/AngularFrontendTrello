@@ -423,6 +423,69 @@ EnregistrerModifications() {
     }
   }
 
+
+
+  // Vérifier si toutes les cartes de cours ont été ajoutées
+  for (const carteCours of this.actif) {
+    if (!cartesAjoutees.has(carteCours.idCours)) {
+      console.log(`La carte du cours ${carteCours.idCours} n'a pas été touchée`);
+      const { isVosCours, isActif, isFinis } = this.OuEstLeCours(carteCours.idCours);
+
+      // Créer une nouvelle CarteEtat avec les informations manquantes
+      const nouvelleCarte = new CarteEtat(
+        this.idCarte, // Vous pouvez définir l'idCarte comme vous le souhaitez
+        this.connectedAs6,
+        carteCours.idCours,
+        isVosCours,
+        isActif,
+        isFinis,
+        this.score
+      );
+
+      // Effectuer un POST pour ajouter la carte manquante
+      this.coursService.PostCarteEtat(nouvelleCarte).subscribe(
+        (carteEtats: CarteEtat) => {
+          console.log(`Carte ajoutée pour le cours ${carteCours.idCours}`);
+          this.carteEtats.push(carteEtats); // Ajoutez la mise à jour à carteEtats
+        },
+        (error) => {
+          console.error(`Erreur lors de l'ajout de la carte pour le cours ${carteCours.idCours}:`, error);
+        }
+      );
+    }
+  }
+
+  // Vérifier si toutes les cartes de cours ont été ajoutées
+  for (const carteCours of this.done) {
+    if (!cartesAjoutees.has(carteCours.idCours)) {
+      console.log(`La carte du cours ${carteCours.idCours} n'a pas été touchée`);
+      const { isVosCours, isActif, isFinis } = this.OuEstLeCours(carteCours.idCours);
+
+      // Créer une nouvelle CarteEtat avec les informations manquantes
+      const nouvelleCarte = new CarteEtat(
+        this.idCarte, // Vous pouvez définir l'idCarte comme vous le souhaitez
+        this.connectedAs6,
+        carteCours.idCours,
+        isVosCours,
+        isActif,
+        isFinis,
+        this.score
+      );
+
+      // Effectuer un POST pour ajouter la carte manquante
+      this.coursService.PostCarteEtat(nouvelleCarte).subscribe(
+        (carteEtats: CarteEtat) => {
+          console.log(`Carte ajoutée pour le cours ${carteCours.idCours}`);
+          this.carteEtats.push(carteEtats); // Ajoutez la mise à jour à carteEtats
+        },
+        (error) => {
+          console.error(`Erreur lors de l'ajout de la carte pour le cours ${carteCours.idCours}:`, error);
+        }
+      );
+    }
+  }
+
+
   // Effacer les modifications après l'ajout
   this.modifications = [];
 }
