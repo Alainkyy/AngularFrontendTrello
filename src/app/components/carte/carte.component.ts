@@ -49,6 +49,7 @@ export class CarteComponent implements OnInit {
   ) {}
     
 ngOnInit(): void {
+  this.afficherTousLesCours();
   this.connectedAs4 = this.loginService.getCodeConsultantConnecte();
   this.connectedAs3 = this.loginService.getIdSpecialiteConsultantConnecte();
   this.connectedAs5 = this.loginService.getScoreConsultantConnecte();
@@ -79,7 +80,7 @@ ngOnInit(): void {
   } else {
     console.log("L'idConsultant est null.");
   }
-
+  this.afficherTousLesCours();
   this.afficherTousLesCours();
   this.afficherTousLesEtatsFiltre(this.connectedAs6);
 }
@@ -195,10 +196,13 @@ afficherTousLesCours() {
       infoCoursData.commentaire,
       infoCoursData.idSpecialite
     ));
-});
-}
+}); 
+console.log("Chargement Cours Success !");
+return this.coursService.getCours();
+} 
 
 getUniqueCoursProperties(carteEtats: any[], cours: any[]): any[] {
+  this.afficherTousLesCours();
   const coursAvecProprietesUniques: any[] = [];
 
   // Créez un dictionnaire pour stocker les informations sur les cours
@@ -236,19 +240,23 @@ getUniqueCoursProperties(carteEtats: any[], cours: any[]): any[] {
       // Récupérez les informations du cours à partir du dictionnaire
       const coursInfoCours = coursInfo[Number(idCours)];
 
-      coursAvecProprietesUniques.push({
-        idCours: Number(idCours),
-        isVosCours: carteMax.isVosCours,
-        isActif: carteMax.isActif,
-        isFinis: carteMax.isFinis,
-        // Jointure Here
-        nomCours: coursInfoCours.nomCours,
-        lienVersCours: coursInfoCours.lienVersCours,
-        commentaire: coursInfoCours.commentaire,
-        videoVersCours: coursInfoCours.videoVersCours,
-        dateDebutCours: coursInfoCours.dateDebutCours,
-        dateFinCours: coursInfoCours.dateFinCours,
-      });
+      if (coursInfoCours) {
+        coursAvecProprietesUniques.push({
+          idCours: Number(idCours),
+          isVosCours: carteMax.isVosCours,
+          isActif: carteMax.isActif,
+          isFinis: carteMax.isFinis,
+          // Jointure Here
+          nomCours: coursInfoCours.nomCours,
+          lienVersCours: coursInfoCours.lienVersCours,
+          commentaire: coursInfoCours.commentaire,
+          videoVersCours: coursInfoCours.videoVersCours,
+          dateDebutCours: coursInfoCours.dateDebutCours,
+          dateFinCours: coursInfoCours.dateFinCours,
+        });
+      } else {
+        console.error(`ID de cours non trouvé dans coursInfo : ${idCours}`);
+      }
     }
   }
 

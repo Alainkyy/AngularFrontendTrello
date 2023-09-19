@@ -56,13 +56,10 @@ export class ConsultationComponent implements OnInit{
     ));
   console.log('Liste des Specialités:', this.specialites);
 });
-    this.route.queryParamMap.subscribe(params => {
-        this.afficherTousLesConsultants();
-    })
-  
-    this.chargerToutesLesCartesEtats();
-    // this.chargerTousLesCours();
-  
+  this.afficherTousLesConsultants();
+  this.chargerToutesLesCartesEtats();
+
+  this.consultants.sort((a, b) => b.score - a.score);
   };
 
 
