@@ -58,8 +58,6 @@ export class ConsultationComponent implements OnInit{
 });
   this.afficherTousLesConsultants();
   this.chargerToutesLesCartesEtats();
-
-  this.consultants.sort((a, b) => b.score - a.score);
   };
 
 
